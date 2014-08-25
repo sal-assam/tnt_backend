@@ -4,6 +4,10 @@ from subprocess import call
 
 import os
 
+from tnt_backend.settings import \
+    BASE_DIR, \
+    json_save_dir
+
 from django.shortcuts import render
 
 # Django rest framework imports
@@ -91,7 +95,14 @@ def run_calculation(request):
     print("calculation_id = ")
     print(calculation_id)
 
-    print("C")
+    print("Saving calculation JSON structure...")
+
+    json_save_filename = BASE_DIR + json_save_dir + calculation_id + '.json'
+
+    print("json_save_filename: ")
+    print(json_save_filename)
+
+    open(json_save_filename, 'w').write(json.dumps({'calculation': calculation}))
 
     matlab_run_str = "/Applications/MATLAB_R2012b.app/bin/matlab -r json2mat('" + calculation_id + "');exit -nodesktop"
 
