@@ -1,5 +1,9 @@
 import json
 
+from subprocess import call
+
+import os
+
 from django.shortcuts import render
 
 # Django rest framework imports
@@ -67,6 +71,10 @@ def run_calculation(request):
     """
     print("A")
 
+    print request.DATA
+
+    request.DATA.get('calculation')
+
     calculation_json = request.DATA.get('calculation')
 
     print("B")
@@ -78,10 +86,27 @@ def run_calculation(request):
 
     print calculation
 
+    calculation_id = calculation['meta_info']['id']
+
+    print("calculation_id = ")
+    print(calculation_id)
+
     print("C")
 
-    print("calculation: ")
-    print calculation
+    matlab_run_str = "/Applications/MATLAB_R2012b.app/bin/matlab -r json2mat('" + calculation_id + "');exit -nodesktop"
+
+    print matlab_run_str
+
+    saved_path = os.getcwd()
+
+    try:
+        os.chdir('matlab-json/')
+        call(matlab_run_str.split(' '))
+    except:
+        os.chdir(saved_path)
+        response = Response('Something went wrong converting JSON to mat file', status=status.HTTP_500_INTERNAL_SERVER_ERROR)    # R1gt
+    
+    os.chdir(saved_path)
 
     response = Response('OK', status=status.HTTP_200_OK)    # R1gt
 

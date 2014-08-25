@@ -3,7 +3,8 @@ function json2mat(calculation_id)
 %initialisation file for loading into the tnt software.
 
 % Load package for reading json files
-addpath('/home/al-assam/Documents/MATLAB/jsonlab');
+% addpath('/home/al-assam/Documents/MATLAB/jsonlab');
+addpath([pwd,'/jsonlab']);
 addpath([pwd,'/tnt_funcs']);
 
 % Load the file containing all the operators and spatial functions
