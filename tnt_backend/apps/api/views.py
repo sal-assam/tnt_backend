@@ -104,7 +104,8 @@ def run_calculation(request):
 
     open(json_save_filename, 'w').write(json.dumps({'calculation': calculation}))
 
-    matlab_run_str = "/Applications/MATLAB_R2012b.app/bin/matlab -r json2mat('" + calculation_id + "');exit -nodesktop"
+    # matlab_run_str = "/Applications/MATLAB_R2012b.app/bin/matlab -r json2mat('" + calculation_id + "');exit -nodesktop"   # 
+    matlab_run_str = "matlab -r json2mat('" + calculation_id + "');exit -nodesktop" # 
 
     print matlab_run_str
 
