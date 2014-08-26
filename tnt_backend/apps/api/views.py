@@ -22,7 +22,7 @@ def api_root(request, format=None):
 	# The API 'root' providing info on available data sources
 
     return Response({
-        
+
         ### START OF API CALLS FOR MANIPULATING AND QUERYING CALCULATIONS DEFINITIONS ###
 
         # 'progress_of_calculation': \
@@ -31,7 +31,7 @@ def api_root(request, format=None):
         # format=format),
 
         ### END OF API CALLS FOR MANIPULATING AND QUERYING CALCULATIONS DEFINITIONS ###
-		
+
     })
 
 ### START OF API CALLS FOR MANIPULATING AND QUERYING CALCULATIONS DEFINITIONS ###
@@ -59,7 +59,7 @@ def results_of_calculation(request, calculation_id):
     results_exist = False
 
     if not results_exist:
-    	
+
     	response = Response('Not found', status=status.HTTP_404_NOT_FOUND)    # R1gt
 
     else:
@@ -104,8 +104,11 @@ def run_calculation(request):
 
     open(json_save_filename, 'w').write(json.dumps({'calculation': calculation}))
 
-    # matlab_run_str = "/Applications/MATLAB_R2012b.app/bin/matlab -r json2mat('" + calculation_id + "');exit -nodesktop"   # 
-    matlab_run_str = "matlab -r json2mat('" + calculation_id + "');exit -nodesktop" # 
+    print("Saved JSON structure to file...")
+
+
+    # matlab_run_str = "/Applications/MATLAB_R2012b.app/bin/matlab -r json2mat('" + calculation_id + "');exit -nodesktop"   #
+    matlab_run_str = "matlab -r json2mat('" + calculation_id + "');exit -nodesktop" #
 
     print matlab_run_str
 
@@ -117,7 +120,7 @@ def run_calculation(request):
     except:
         os.chdir(saved_path)
         response = Response('Something went wrong converting JSON to mat file', status=status.HTTP_500_INTERNAL_SERVER_ERROR)    # R1gt
-    
+
     os.chdir(saved_path)
 
     response = Response('OK', status=status.HTTP_200_OK)    # R1gt
