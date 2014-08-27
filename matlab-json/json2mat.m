@@ -1,9 +1,7 @@
-function json2mat(calculation_id)
+function json2mat(jsonpath,matpath,calculation_id)
 %INIT_JSON2MAT Turns the json file with the id given into a matlab
 %initialisation file for loading into the tnt software.
 
-% Load package for reading json files
-% addpath('/home/al-assam/Documents/MATLAB/jsonlab');
 addpath([pwd,'/jsonlab']);
 addpath([pwd,'/tnt_funcs']);
 
@@ -12,7 +10,7 @@ load('operators.mat','operators');
 load('spat_funcs.mat','funcs')
 
 % Load the correct json file
-loadname = ['json_input/' calculation_id '.json'];
+loadname = [jsonpath '/' calculation_id '.json'];
 pms = loadjson(loadname);
 
 % Load system parameters
@@ -34,9 +32,12 @@ if (strcmp(sys.system_type.name,'spin'))
     else
         TwoS =2;
     end
-    basisop = operators{3,TwoS}{1};
+    basisOp = operators{3,TwoS}{1};
     d = TwoS;
 end
+
+% Leg labels for the operators (all operators will have the same leg labels
+oplabels = [3,4];
 
 % Load the Hamiltonian terms
 terms = pms.calculation.setup.hamiltonian.terms;
@@ -66,8 +67,6 @@ for loop=1:length(terms)
             % load operators
             eval(['h_opnnL_',num2str(h_numnn),'= operators{opid,d}{1,tms};']);
             eval(['h_opnnR_',num2str(h_numnn),'= operators{opid,d}{2,tms};']);
-            
-            
             
             % assign spatial values to position array
             h_prmnn(h_numnn,1:L-1) = spat_params; %#ok<SAGROW>
@@ -115,8 +114,8 @@ for loop=1:length(exops)
                 ex_numnn = ex_numnn + 1;
                 
                 % load operators
-                eval(['ex_opnnL_',num2str(ex_numnn),'= operators{opid,d}{1,tms};']);
-                eval(['ex_opnnR_',num2str(ex_numnn),'= operators{opid,d}{2,tms};']);
+                eval(['ex_opnn_',num2str(2*ex_numnn-1),'= operators{opid,d}{1,tms};']);
+                eval(['ex_opnn_',num2str(2*ex_numnn),'= operators{opid,d}{2,tms};']);
                 eval(['ex_opnnlabel_',num2str(ex_numnn),'= exops{loop}.function_description;']);
             end
         elseif (strcmp(exops{loop}.exp_val_type,'center all other'))
@@ -125,8 +124,8 @@ for loop=1:length(exops)
                 ex_numcs = ex_numcs + 1;
                 
                 % load operators
-                eval(['ex_opcsL_',num2str(ex_numcs),'= operators{opid,d}{1,tms};']);
-                eval(['ex_opcsR_',num2str(ex_numcs),'= operators{opid,d}{2,tms};']);
+                eval(['ex_opcs_',num2str(2*ex_numcs-1),'= operators{opid,d}{1,tms};']);
+                eval(['ex_opcs_',num2str(2*ex_numcs),'= operators{opid,d}{2,tms};']);
                 eval(['ex_opcslabel_',num2str(ex_numcs),'= exops{loop}.function_description;']);
             end
         else
@@ -135,8 +134,8 @@ for loop=1:length(exops)
                 ex_numap = ex_numap + 1;
                 
                 % load operators
-                eval(['ex_opapL_',num2str(ex_numap),'= operators{opid,d}{1,tms};']);
-                eval(['ex_opapR_',num2str(ex_numap),'= operators{opid,d}{2,tms};']);
+                eval(['ex_opap_',num2str(2*ex_numap-1),'= operators{opid,d}{1,tms};']);
+                eval(['ex_opap_',num2str(2*ex_numap),'= operators{opid,d}{2,tms};']);
                 eval(['ex_opaplabel_',num2str(ex_numap),'= exops{loop}.function_description;']);
             end
         end
@@ -156,7 +155,7 @@ end
 clear pms sys terms loop opid tms spat_args spat_prms num_func_params exops d funcs k operators spat_params spatcall TwoS
 
 % save the initialisation file using the calculation id
-savename = ['matlab_input/' calculation_id '.mat'];
+savename = [matpath '/' calculation_id '.mat'];
 save(savename);
 
 end
@@ -175,23 +174,21 @@ end
 % Arrays to load in C:
 % h_prmnn (double array)
 % h_prmos (double array)
+% oplabels (integer array)
 
 % to load only if dotebd=1
 %  numsteps (integer)
 %  dt (double)
 
 % Nodes to load in C
-% basisop (always only one)
+% basisOp (always only one)
 % h_opos_<i> (node array of size h_numos)
 % h_opnnL_<i> (node array of size h_numnn)
 % h_opnnR_<i> (node array of size h_numnn)
 % ex_opos_<i> (node array of size ex_numos)
-% ex_opnnL_<i> (node array of size ex_numnn)
-% ex_opnnR_<i> (node array of size ex_numnn)
-% ex_opcsL_<i> (node array of size ex_numcs)
-% ex_opcsR_<i> (node array of size ex_numcs)
-% ex_opapL_<i> (node array of size ex_numap)
-% ex_opapR_<i> (node array of size ex_numap)
+% ex_opnn_<i> (node array of size 2*ex_numnn)
+% ex_opcs_<i> (node array of size 2*ex_numcs)
+% ex_opap_<i> (node array of size 2*ex_numap)
 
 % Strings to load in C
 % init_config
