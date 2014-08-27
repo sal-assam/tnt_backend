@@ -3,6 +3,7 @@
 
 DIR_TNT=/share/apps/tnt/v0.9.9beta
 DIR_JSON_IP=../jsoninput
+DIR_JSON_OP=../jsonoutput
 DIR_MAT_IP=../matlabinput
 DIR_MAT_OP=../matlaboutput
 
@@ -27,3 +28,13 @@ echo "--------------------------------"
 echo "Running TNT code from initialisation file"
 echo "--------------------------------"
 ${DIR_TNT}/bin/tnt_web $CMDLINE
+
+mkdir --parents $DIR_JSON_OP
+
+# Run matlab to generate output json file
+echo "--------------------------------"
+echo "Generating JSON output file"
+echo "--------------------------------"
+cd ../matlab-json/
+matlab -nodisplay -nosplash -nodesktop -r "mat2json ${DIR_MAT_OP} ${DIR_JSON_IP} ${DIR_JSON_OP} ${1}; exit;"
+cd ../shellscripts

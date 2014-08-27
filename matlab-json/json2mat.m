@@ -106,6 +106,7 @@ exops = pms.calculation.setup.expectation_values.operators;
 ex_numnn = 0; ex_numcs = 0; ex_numap = 0; ex_numos = 0;
 for loop=1:length(exops)
     opid = exops{loop}.operator_id;
+    newlb = strrep(exops{loop}.function_description,' ','_');
     
     if (exops{loop}.two_site)
         if (strcmp(exops{loop}.exp_val_type,'nearest neighbor'))
@@ -116,7 +117,7 @@ for loop=1:length(exops)
                 % load operators
                 eval(['ex_opnn_',num2str(2*ex_numnn-1),'= operators{opid,d}{1,tms};']);
                 eval(['ex_opnn_',num2str(2*ex_numnn),'= operators{opid,d}{2,tms};']);
-                eval(['ex_opnnlabel_',num2str(ex_numnn),'= exops{loop}.function_description;']);
+                eval(['ex_opnnlabel_',num2str(ex_numnn),'= newlb;']);
             end
         elseif (strcmp(exops{loop}.exp_val_type,'center all other'))
             for tms = 1:size(operators{opid,d},2)
@@ -126,7 +127,7 @@ for loop=1:length(exops)
                 % load operators
                 eval(['ex_opcs_',num2str(2*ex_numcs-1),'= operators{opid,d}{1,tms};']);
                 eval(['ex_opcs_',num2str(2*ex_numcs),'= operators{opid,d}{2,tms};']);
-                eval(['ex_opcslabel_',num2str(ex_numcs),'= exops{loop}.function_description;']);
+                eval(['ex_opcslabel_',num2str(ex_numcs),'= newlb;']);
             end
         else
             for tms = 1:size(operators{opid,d},2)
@@ -136,7 +137,7 @@ for loop=1:length(exops)
                 % load operators
                 eval(['ex_opap_',num2str(2*ex_numap-1),'= operators{opid,d}{1,tms};']);
                 eval(['ex_opap_',num2str(2*ex_numap),'= operators{opid,d}{2,tms};']);
-                eval(['ex_opaplabel_',num2str(ex_numap),'= exops{loop}.function_description;']);
+                eval(['ex_opaplabel_',num2str(ex_numap),'= newlb;']);
             end
         end
         
@@ -144,7 +145,7 @@ for loop=1:length(exops)
         for tms = 1:size(operators{opid,d})
             ex_numos = ex_numos + 1;
             eval(['ex_opos_',num2str(ex_numos),'= operators{opid,d}{tms};']);
-            eval(['ex_oposlabel_',num2str(ex_numos),'= exops{loop}.function_description;']);
+            eval(['ex_oposlabel_',num2str(ex_numos),'= newlb;']);
         end
         
         

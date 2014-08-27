@@ -174,7 +174,7 @@ int main(int argc, char **argv)
         tntMpsExpecOutput(wf_gs, &ExOp, 0, 1, 1, saveprefix, 0);
         
         /* Save the final network, and the energy at each iteration */
-        tntSaveNetwork(saveprefix,"",wf_gs,"wf_gs");
+        tntSaveNetwork(saveprefix,"_operators",wf_gs,"wf_gs");
         tntSaveArrays(saveprefix,"", 0, 1, 0, &E, "E");
         
         /*  Free all the dynamically allocated nodes and associated dynamically allocated arrays. */
@@ -203,7 +203,7 @@ int main(int argc, char **argv)
         printf("---------------------------------------\n");
         
         /* Allocate memory to hold the evolved time each time the expectation value is taken */
-        extimes = tntDoubleArrayAlloc(numsteps/tbigstep+((numsteps%tbigstep)?1:0));
+        extimes = tntDoubleArrayAlloc(numsteps/tbigstep+((numsteps%tbigstep)?2:1));
         
         /* Calculate initial expectation values */
         tntMpsExpecOutput(wf_evolved, &ExOp, 0, 1, 1, saveprefix, bigsteps);
@@ -231,7 +231,10 @@ int main(int argc, char **argv)
         }
         
         /*  Save the wave function */
-        tntSaveNetwork(saveprefix,"", wf_evolved, "wf_evolved");
+        tntSaveNetwork(saveprefix,"_operators", wf_evolved, "wf_evolved");
+        
+        /* Save the time at each iteration */
+        tntSaveArrays(saveprefix,"",0,1,0, &extimes, "extimes");
         
         /*  Free all the dynamically allocated nodes and associated dynamically allocated arrays. */
         tntNetworkFree(&wf_evolved);
