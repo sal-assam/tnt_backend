@@ -2,10 +2,10 @@
 # Wrapper shell script for running the TNT backend code
 
 DIR_TNT=/share/apps/tnt/v0.9.9beta
-DIR_JSON_IP=../jsoninput
-DIR_JSON_OP=../jsonoutput
-DIR_MAT_IP=../matlabinput
-DIR_MAT_OP=../matlaboutput
+DIR_JSON_IP=../matlab-json/json_input
+DIR_JSON_OP=../matlab-json/json_output
+DIR_MAT_IP=../matlab-json/matlab_input
+DIR_MAT_OP=../matlab-json/matlab_output
 
 # Set the environment variables required for the simulation
 . /share/apps/tnt/scripts/set_tnt_vars.sh
