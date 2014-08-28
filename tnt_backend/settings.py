@@ -80,8 +80,27 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 
+STATIC_ROOT = os.path.join(BASE_DIR, 'collectedstatic/')
+
 STATIC_URL = '/static/'
 
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+)
+
+# List of finder classes that know how to find static files in
+# various locations.
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+#    'django.contrib.staticfiles.finders.DefaultStorageFinder',
+)
+
 # TNT backend specific settings
-json_save_dir = '/matlab-json/json_input/'
-mat_save_dir = '/matlab-json/matlab_input/'
+json_input_save_dir = '/matlab-json/json_input/'
+mat_input_save_dir = '/matlab-json/matlab_input/'
+
+json_output_save_dir = '/matlab-json/json_input/'
+mat_output_save_dir = '/matlab-json/matlab_input/'
+
+

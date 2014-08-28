@@ -6,7 +6,10 @@ import os
 
 from tnt_backend.settings import \
     BASE_DIR, \
-    json_save_dir
+    json_input_save_dir, \
+    mat_input_save_dir, \
+    json_output_save_dir, \
+    mat_output_save_dir
 
 from django.shortcuts import render
 
@@ -22,7 +25,7 @@ def api_root(request, format=None):
 	# The API 'root' providing info on available data sources
 
     return Response({
-        
+
         ### START OF API CALLS FOR MANIPULATING AND QUERYING CALCULATIONS DEFINITIONS ###
 
         # 'progress_of_calculation': \
@@ -31,7 +34,7 @@ def api_root(request, format=None):
         # format=format),
 
         ### END OF API CALLS FOR MANIPULATING AND QUERYING CALCULATIONS DEFINITIONS ###
-		
+
     })
 
 ### START OF API CALLS FOR MANIPULATING AND QUERYING CALCULATIONS DEFINITIONS ###
@@ -55,16 +58,25 @@ def results_of_calculation(request, calculation_id):
 
     print("Fetching results of calculation " + str(calculation_id))
 
-    # Check if the results file exists
     results_exist = False
 
+    calculation_results_json_path = BASE_DIR + json_output_save_dir + calculation_id + '.json'
+
+    # Check if the results file exists
+    if os.path.exists(calculation_results_json_path):
+        
+        results_exist = True
+
     if not results_exist:
-    	
+
     	response = Response('Not found', status=status.HTTP_404_NOT_FOUND)    # R1gt
 
     else:
 
-    	response = Response({'results': 'some_results'}, status=status.HTTP_200_OK)    # R1gt
+        results_json = open(calculation_results_json_path, 'r').read()
+        results = json.loads(results_json)
+        
+    	response = Response({'results': results}, status=status.HTTP_200_OK)    # R1gt
 
     return response
 
@@ -72,23 +84,14 @@ def results_of_calculation(request, calculation_id):
 def run_calculation(request):
     """
     Create MATLAB init file and run the TNT library on calculation which is POSTed to this URL ###
+    First we need to take the JSON and dump it to a file named according to the calculation id
+    then we want to call sarah's script which takes that name / ID as input and generates a MATLAB init file, and then calls the TNT library on that file
     """
-    print("A")
-
-    print request.DATA
-
-    request.DATA.get('calculation')
 
     calculation_json = request.DATA.get('calculation')
 
-    print("B")
-
-    print calculation_json
-
     if calculation_json is not None:
         calculation = json.loads(calculation_json)
-
-    print calculation
 
     calculation_id = calculation['meta_info']['id']
 
@@ -97,27 +100,28 @@ def run_calculation(request):
 
     print("Saving calculation JSON structure...")
 
-    json_save_filename = BASE_DIR + json_save_dir + calculation_id + '.json'
+    json_save_filename = BASE_DIR + json_input_save_dir + calculation_id + '.json'
 
     print("json_save_filename: ")
     print(json_save_filename)
 
     open(json_save_filename, 'w').write(json.dumps({'calculation': calculation}))
 
-    # matlab_run_str = "/Applications/MATLAB_R2012b.app/bin/matlab -r json2mat('" + calculation_id + "');exit -nodesktop"   # 
-    matlab_run_str = "matlab -r json2mat('" + calculation_id + "');exit -nodesktop" # 
+    print("Saved JSON structure to file...")
 
-    print matlab_run_str
+    # Now call Sarah's script:
+
+    run_script_str = "./runtnt.sh " + calculation_id
 
     saved_path = os.getcwd()
 
+    # Change into the appropriate directory
     try:
-        os.chdir('matlab-json/')
-        call(matlab_run_str.split(' '))
+        os.chdir('shellscripts/')
+        call(run_script_str.split(' '))
     except:
         os.chdir(saved_path)
-        response = Response('Something went wrong converting JSON to mat file', status=status.HTTP_500_INTERNAL_SERVER_ERROR)    # R1gt
-    
+
     os.chdir(saved_path)
 
     response = Response('OK', status=status.HTTP_200_OK)    # R1gt
