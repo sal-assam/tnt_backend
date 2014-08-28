@@ -1,6 +1,6 @@
 import json
 
-from subprocess import call
+from subprocess import call, Popen
 
 import os
 
@@ -64,7 +64,7 @@ def results_of_calculation(request, calculation_id):
 
     # Check if the results file exists
     if os.path.exists(calculation_results_json_path):
-        
+
         results_exist = True
 
     if not results_exist:
@@ -75,7 +75,7 @@ def results_of_calculation(request, calculation_id):
 
         results_json = open(calculation_results_json_path, 'r').read()
         results = json.loads(results_json)
-        
+
     	response = Response({'results': results}, status=status.HTTP_200_OK)    # R1gt
 
     return response
@@ -118,7 +118,7 @@ def run_calculation(request):
     # Change into the appropriate directory
     try:
         os.chdir('shellscripts/')
-        call(run_script_str.split(' '))
+        Popen(run_script_str.split(' '))
     except:
         os.chdir(saved_path)
 
