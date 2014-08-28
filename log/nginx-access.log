@@ -55,3 +55,4 @@
 163.1.18.241 - - [27/Aug/2014:10:50:41 +0100] "GET /static/rest_framework/js/default.js HTTP/1.1" 304 0 "http://bose.physics.ox.ac.uk:8080/api/v1.0/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/36.0.1985.143 Safari/537.36"
 163.1.18.241 - - [27/Aug/2014:10:50:50 +0100] "GET /api/v1.0/ HTTP/1.1" 200 1405 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/36.0.1985.143 Safari/537.36"
 163.1.18.241 - - [27/Aug/2014:10:50:51 +0100] "-" 400 0 "-" "-"
+163.1.18.249 - - [27/Aug/2014:22:26:13 +0100] "POST /api/v1.0/calculation/run HTTP/1.1" 200 14 "-" "python-requests/1.1.0 CPython/2.7.5 Darwin/13.1.0"

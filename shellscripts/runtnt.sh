@@ -2,10 +2,10 @@
 # Wrapper shell script for running the TNT backend code
 
 DIR_TNT=/share/apps/tnt/v0.9.9beta
-DIR_JSON_IP=../matlab-json/json_input
-DIR_JSON_OP=../matlab-json/json_output
-DIR_MAT_IP=../matlab-json/matlab_input
-DIR_MAT_OP=../matlab-json/matlab_output
+DIR_JSON_IP=/home/tntweb/tnt_backend/matlab-json/json_input
+DIR_JSON_OP=/home/tntweb/tnt_backend/matlab-json/json_output
+DIR_MAT_IP=/home/tntweb/tnt_backend/matlab-json/matlab_input
+DIR_MAT_OP=/home/tntweb/tnt_backend/matlab-json/matlab_output
 
 # Set the environment variables required for the simulation
 . /share/apps/tnt/scripts/set_tnt_vars.sh
@@ -16,11 +16,11 @@ mkdir --parents $DIR_MAT_IP
 echo "--------------------------------"
 echo "Generating MATLAB initialisation file"
 echo "--------------------------------"
-cd ../matlab-json/
+cd /home/tntweb/tnt_backend/matlab-json/
 matlab -nodisplay -nosplash -nodesktop -r "json2mat ${DIR_JSON_IP} ${DIR_MAT_IP} ${1}; exit;"
-cd ../shellscripts
+cd /home/tntweb/tnt_backend/shellscripts/
 
-CMDLINE="-i ../matlabinput/${1}.mat -d ${DIR_MAT_OP}/${1}"
+CMDLINE="-i /home/tntweb/tnt_backend/matlab-json/matlab_input/${1}.mat -d ${DIR_MAT_OP}/${1}"
 
 mkdir --parents $DIR_MAT_OP
 
@@ -35,6 +35,6 @@ mkdir --parents $DIR_JSON_OP
 echo "--------------------------------"
 echo "Generating JSON output file"
 echo "--------------------------------"
-cd ../matlab-json/
+cd /home/tntweb/tnt_backend/matlab-json/
 matlab -nodisplay -nosplash -nodesktop -r "mat2json ${DIR_MAT_OP} ${DIR_JSON_IP} ${DIR_JSON_OP} ${1}; exit;"
-cd ../shellscripts
+cd /home/tntweb/tnt_backend/shellscripts/
