@@ -41,22 +41,22 @@ if (dotebd)
  
     for loop=1:length(exops)
         
-        data.evolved.operator_id = exops{loop}.operator_id;
-        data.evolved.two_site = exops{loop}.two_site;
+        data.evolved.operators{loop}.operator_id = exops{loop}.operator_id;
+        data.evolved.operators{loop}.two_site = exops{loop}.two_site;
         if (exops{loop}.two_site)
-            data.evolved.exp_val_type = exops{loop}.exp_val_type;
+            data.evolved.operators{loop}.exp_val_type = exops{loop}.exp_val_type;
         end
-        data.evolved.function_description = exops{loop}.function_description;
+        data.evolved.operators{loop}.function_description = exops{loop}.function_description;
         newlb = strrep(exops{loop}.function_description,' ','_');
         
-        for loop=1:length(extimes) 
-            strloop = num2str(loop);
-            tval.time_step = loop;
-            tval.time = extimes(loop);
+        for loopt=1:length(extimes) 
+            strloop = num2str(loopt);
+            tval.time_step = loopt;
+            tval.time = extimes(loopt);
             eval(['tval.re = real(' newlb '_' strloop ');']);
             eval(['tval.im = imag(' newlb '_' strloop ');']);
 
-            data.evolved.vals{loop} = tval;
+            data.evolved.operators{loop}.vals{loopt} = tval;
         end
         
         
