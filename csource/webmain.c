@@ -30,6 +30,7 @@ int main(int argc, char **argv)
     tntNetwork wf_evolved; /* The wave function evolved in time under system hamiltonian */
     char init_config[TNT_STRLEN]; 
     unsigned L; /* Length of the network */
+    unsigned U1symm; /* Flag to specify whether symmetry information is turned on */
     
     /* Network for the mpo */
     tntNetwork mpo; /* The network representing the matrix product operator for finding the ground state */
@@ -56,7 +57,7 @@ int main(int argc, char **argv)
     tntNodeArray Uarr; /* Arrays that make up the propagator */
     double err = 0.0; /* Truncation error from SVDs */
     unsigned bigsteps = 1; /* Number of 'bigsteps' or expectation values taken */
-    unsigned tbigstep = 10; /* number of time steps per big step */
+    unsigned tbigstep = 20; /* number of time steps per big step */
     tntDoubleArray extimes; /* evolved time at each bigstep */
     unsigned loop; /* loop over time steps */
     
@@ -81,11 +82,14 @@ int main(int argc, char **argv)
     /* Get the load name and save name from the command line parameters. All the other parameters will be loaded from the initialisation file. */
     tntProcessCLOptions(argc,argv,loadname,NULL,saveprefix,&chi,NULL);
     
+    /* Set the truncation tolerance. This avoids minimisation errors in the ARPACk routines when finding ground states which require a much smaller internal dimension than chi */
+    tntSVDTruncTolSet(1e-12);
+    
     /* Load the calculation id */
     tntLoadStrings(loadname, 1, calc_id, "calculation_id");
     
     /* Load general simulation parameters  */
-    tntLoadParams(loadname, 4, 0, 0, &dotebd, "dotebd", 0, &dodmrg, "dodmrg", 0, &chi, "chi", 0, &L, "L", 0);
+    tntLoadParams(loadname, 5, 0, 0, &dotebd, "dotebd", 0, &dodmrg, "dodmrg", 0, &chi, "chi", 0, &L, "L", 0, &U1symm, "U1symm", 0);
     
     /* Load parameters specifying number of operators */
     tntLoadParams(loadname, 6, 0, 0, &numos, "h_numos", 0, &numnn, "h_numnn", 0, &ex_numos, "ex_numos", 0, 
@@ -142,8 +146,11 @@ int main(int argc, char **argv)
         
         /* Create random start state */
         wf_gs = tntMpsCreateRandom(L, D);
+        
         /* Create the MPO */
         mpo = tntMpsCreateMpo(L, nnL, nnR, nnparam, os, osparam);
+        
+        tntSaveNetwork(saveprefix,"_operators",mpo,"mpo");
         
         /* Allocate memory for array to hold the energy values after each iteration */
         E = tntDoubleArrayAlloc(i_max+1);
@@ -159,6 +166,7 @@ int main(int argc, char **argv)
         for (i = 1; i<=i_max; i++) {
             /* Perform a minimization sweep from left to right then right to left */
             E.vals[i] = tntMpsDmrgSweep(wf_gs, TNT_MPS_R, chi, mpo, &HeffL, &HeffR, &err);
+            
             E.vals[i] = tntMpsDmrgSweep(wf_gs, TNT_MPS_L, chi, mpo, &HeffL, &HeffR, &err);
 
             printf("Iteration %d: Energy is %4.4g, difference is %4.4g.\n", i, E.vals[i],(E.vals[i - 1] - E.vals[i]));
@@ -191,6 +199,43 @@ int main(int argc, char **argv)
     /***********************************************************************************************/    
     
     if (dotebd) {
+        
+        /* If quantum number conservation is turned on, set the quantum numbers for the basis operator. This should ensure that any other functions create invariant operators */
+        if (U1symm) {
+            /* Load array for quantum number labels */
+            tntIntArray qnums;
+            tntLoadArrays(loadname, 1, 0, 0, &qnums, "qnums");
+            
+            /* Set symmetry type for system */
+            tntSymmTypeSet("U(1)", 1);
+            
+            /* Set quanutm numbers on basis operators */
+            tntNodeSetQN(basisOp, TNT_MPS_U, &qnums, TNT_QN_OUT);
+            tntNodeSetQN(basisOp, TNT_MPS_D, &qnums, TNT_QN_IN);
+            
+            /* Set quantum numbers on all the expectation value operators */
+            for (i = 0; i < ExOp.ExOpOs.sz; i++) {
+                tntNodeSetQN(ExOp.ExOpOs.vals[i], TNT_MPS_U, &qnums, TNT_QN_OUT);
+                tntNodeSetQN(ExOp.ExOpOs.vals[i], TNT_MPS_D, &qnums, TNT_QN_IN);
+            }
+            for (i = 0; i < ExOp.ExOp2nn.sz; i++) {
+                tntNodeSetQN(ExOp.ExOp2nn.vals[i], TNT_MPS_U, &qnums, TNT_QN_OUT);
+                tntNodeSetQN(ExOp.ExOp2nn.vals[i], TNT_MPS_D, &qnums, TNT_QN_IN);
+            }
+            for (i = 0; i < ExOp.ExOp2cs.sz; i++) {
+                tntNodeSetQN(ExOp.ExOp2cs.vals[i], TNT_MPS_U, &qnums, TNT_QN_OUT);
+                tntNodeSetQN(ExOp.ExOp2cs.vals[i], TNT_MPS_D, &qnums, TNT_QN_IN);
+            }
+            for (i = 0; i < ExOp.ExOp2ap.sz; i++) {
+                tntNodeSetQN(ExOp.ExOp2ap.vals[i], TNT_MPS_U, &qnums, TNT_QN_OUT);
+                tntNodeSetQN(ExOp.ExOp2ap.vals[i], TNT_MPS_D, &qnums, TNT_QN_IN);
+            }
+            
+            /* Free the quantum numbers */
+            tntIntArrayFree(&qnums);
+        }
+        tntSysBasisOpSet(basisOp);
+        
         /* Create a starting state from the initial configuration */
         wf_start = tntMpsCreateConfig(L, init_config);
         wf_evolved = tntNetworkCopy(wf_start);
@@ -208,6 +253,9 @@ int main(int argc, char **argv)
         /* Calculate initial expectation values */
         tntMpsExpecOutput(wf_evolved, &ExOp, 0, 1, 1, saveprefix, bigsteps);
         extimes.vals[0] = 0.0;
+        
+        /* Set error to zero */
+        err = 0;
         
         /* Run the simulation for all the time steps. */
         for (loop = 1; loop <= numsteps; loop++) {

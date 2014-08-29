@@ -13,4 +13,4 @@ $(DIR_TNT)/bin/tnt_web: ../obj/webload.o ../obj/webmain.o
 	$(CC) -c -o $@ $< $(CFLAGS) 
 
 clean:
-	rm ../obj/* ../bin/*
+	rm ../obj/* $(DIR_TNT)/bin/tnt_web

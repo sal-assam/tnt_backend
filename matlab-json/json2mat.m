@@ -20,6 +20,7 @@ dotebd = sys.calculate_time_evolution;
 dodmrg = sys.calculate_ground_state;
 chi = sys.chi;
 L = sys.system_size;
+U1symm = sys.number_conservation;
 
 if (dotebd)
     numsteps = sys.num_time_steps;
@@ -29,8 +30,10 @@ end
 if (strcmp(sys.system_type.name,'spin'))
     if (strcmp(sys.system_type.extra_info.spin_magnitude,'half'))
         TwoS = 1;
+        qnums = [1,-1];
     else
-        TwoS =2;
+        TwoS = 2;
+        qnums = [2, 0, -2];
     end
     basisOp = operators{3,TwoS}{1};
     d = TwoS;
