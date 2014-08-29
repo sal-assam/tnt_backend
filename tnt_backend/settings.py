@@ -100,7 +100,7 @@ STATICFILES_FINDERS = (
 json_input_save_dir = '/matlab-json/json_input/'
 mat_input_save_dir = '/matlab-json/matlab_input/'
 
-json_output_save_dir = '/matlab-json/json_input/'
-mat_output_save_dir = '/matlab-json/matlab_input/'
+json_output_save_dir = '/matlab-json/json_output/'
+mat_output_save_dir = '/matlab-json/matlab_output/'
 
 
