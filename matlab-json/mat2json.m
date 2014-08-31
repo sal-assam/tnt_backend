@@ -92,6 +92,9 @@ if (dotebd)
         end
         
         fname = [imageoutputpath '/' calculation_id '_' num2str(exops{loop}.operator_id) '_evolved.png'];
+
+        print(fname);
+
         figure('Visible','off');
         pcolor(dataset);
         set(gca,'FontSize',axesfontsize);
