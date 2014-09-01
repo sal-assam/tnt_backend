@@ -3,5 +3,6 @@ matlab-json/json_input
 matlab-json/matlab_input
 matlab-json/json_output
 matlab-json/matlab_output
+matlab-json/pngout
 log/
 log/gunicorn_supervisor.log
