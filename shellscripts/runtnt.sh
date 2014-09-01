@@ -33,4 +33,17 @@ echo "--------------------------------"
 STARTTIME=$(date +%s)
 ${DIR_TNT}/bin/tnt_web $CMDLINE
 ENDTIME=$(date +%s)
-echo "It took $(($ENDTIME - $STARTTIME)) seconds to com
+echo "It took $(($ENDTIME - $STARTTIME)) seconds to complete this task"
+
+mkdir --parents $DIR_JSON_OP
+mkdir --parents $DIR_IMG_OP
+
+# Run matlab to generate output json file
+echo "--------------------------------"
+echo "Generating JSON output file and images"
+echo "--------------------------------"
+
+cd ../matlab-json/
+./mat2json.sh ${DIR_MAT_OP} ${DIR_JSON_IP} ${DIR_JSON_OP} ${DIR_IMG_OP} ${1}
+cd ../shellscripts
+
