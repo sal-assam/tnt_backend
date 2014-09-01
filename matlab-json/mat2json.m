@@ -98,11 +98,14 @@ if (dotebd)
         print(fname);
 
         figure('Visible','off');
-        pcolor(dataset);
+        h = pcolor(dataset);
         set(gca,'FontSize',axesfontsize);
         xlabel('Site number');
         ylabel('Big time step');
         title(['Expectation of ' exops{loop}.function_description ' as a function of time']);
+        axis square;
+        colorbar;
+        set(h,'EdgeColor','none');
         print('-dpng',fname);
         
         
