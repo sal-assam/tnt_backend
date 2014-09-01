@@ -6,3 +6,5 @@ matlab-json/matlab_output
 matlab-json/pngout
 log/
 log/gunicorn_supervisor.log
+pngoutput/
+*.dyn
