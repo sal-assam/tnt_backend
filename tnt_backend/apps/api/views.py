@@ -4,8 +4,11 @@ from subprocess import call, Popen
 
 import os
 
+import glob
+
 from tnt_backend.settings import \
     BASE_DIR, \
+    MEDIA_ROOT, \
     json_input_save_dir, \
     mat_input_save_dir, \
     json_output_save_dir, \
@@ -76,7 +79,13 @@ def results_of_calculation(request, calculation_id):
         results_json = open(calculation_results_json_path, 'r').read()
         results = json.loads(results_json)
 
-    	response = Response({'results': results}, status=status.HTTP_200_OK)    # R1gt
+
+        # Now we also want to return the names of the images for the expectation value calculations
+        this_calculation_absolute_filenames = glob.glob(MEDIA_ROOT + calculation_id + '*')
+
+        this_calculation_relative_filenames = ['http://bose.physics.ox.ac.uk:8080/media/' + filename.split('/')[-1] for filename in this_calculation_absolute_filenames]
+
+        response = Response({'results': results, 'expectation_value_plots': this_calculation_relative_filenames}, status=status.HTTP_200_OK)    # R1gt
 
     return response
 

@@ -107,4 +107,4 @@ mat_input_save_dir = '/matlab-json/matlab_input/'
 json_output_save_dir = '/matlab-json/json_output/'
 mat_output_save_dir = '/matlab-json/matlab_output/'
 
-
+my_own_base_media_URL = 'http://bose.physics.ox.ac.uk:8080/media/'
