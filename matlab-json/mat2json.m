@@ -78,7 +78,7 @@ if (dotebd)
         data.evolved.operators{loop}.function_description = exops{loop}.function_description;
         newlb = strrep(exops{loop}.function_description,' ','_');
         
-        eval(['numcols = length(' newlb '_1);']); 
+        eval(['numcols = size(' newlb '_1,1)*size(' newlb '_1,2);']); 
         dataset = zeros(length(extimes),numcols);
         
         for loopt=1:length(extimes) 
@@ -94,8 +94,6 @@ if (dotebd)
         end
         
         fname = [imageoutputpath '/' calculation_id '_' num2str(exops{loop}.operator_id) '_evolved.png'];
-
-        print(fname);
 
         figure('Visible','off');
         h = pcolor(dataset);
