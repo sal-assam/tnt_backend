@@ -1,0 +1,2 @@
+# Java classpath entries for shared_rptgen
+$matlabroot/java/jar/toolbox/rptgencore.jar

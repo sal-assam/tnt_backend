@@ -1,6 +1,8 @@
 function mat2json(matoutpath,jsoninpath,jsonoutpath,imageoutputpath,calculation_id)
 
-addpath([pwd,'/jsonlab']);
+if (~isdeployed)
+    addpath([pwd,'/jsonlab']);
+end
 
 % Load initial json structure
 loadname = [jsoninpath '/' calculation_id '.json'];
@@ -76,7 +78,7 @@ if (dotebd)
         data.evolved.operators{loop}.function_description = exops{loop}.function_description;
         newlb = strrep(exops{loop}.function_description,' ','_');
         
-        eval(['numcols = length(' newlb '_1);']); 
+        eval(['numcols = size(' newlb '_1,1)*size(' newlb '_1,2);']); 
         dataset = zeros(length(extimes),numcols);
         
         for loopt=1:length(extimes) 
@@ -94,11 +96,14 @@ if (dotebd)
         fname = [imageoutputpath '/' calculation_id '_' num2str(exops{loop}.operator_id) '_evolved.png'];
 
         figure('Visible','off');
-        pcolor(dataset);
+        h = pcolor(dataset);
         set(gca,'FontSize',axesfontsize);
         xlabel('Site number');
         ylabel('Big time step');
         title(['Expectation of ' exops{loop}.function_description ' as a function of time']);
+        axis square;
+        colorbar;
+        set(h,'EdgeColor','none');
         print('-dpng',fname);
         
         

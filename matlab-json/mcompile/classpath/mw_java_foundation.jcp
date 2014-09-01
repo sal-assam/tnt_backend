@@ -1,0 +1,12 @@
+# Java classpath entries for mw_java_foundation
+$matlabroot/java/jar/util.jar
+$matlabroot/java/jar/common.jar
+$matlabroot/java/jar/mwswing.jar
+$matlabroot/java/jar/beans.jar
+$matlabroot/java/jar/mwt.jar
+$matlabroot/java/jar/xml.jar
+$matlabroot/java/jar/desktop.jar
+$matlabroot/java/jar/toolstrip.jar
+$matlabroot/java/jar/org/netbeans.jar
+$matlabroot/java/jar/org/openide.jar
+$matlabroot/java/jarext/saxon.jar

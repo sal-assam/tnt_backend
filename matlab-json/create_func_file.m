@@ -1,17 +1,19 @@
 % Creates all the spatial variation functions required for generating an initialisation
 % script.
 
+function fhandles = create_func_file()
+
 % Number of functions currently defined
-numfunc = 14;
+numfunc = 5;
 
 % strings representing function names. The functions themselves are stored
 % in the tnt_funcs directory.
-funcs = cell(numfunc,1);
+fhandles = cell(1, numfunc);
 
-funcs{1} = 'tnt_constant';
-funcs{2} = 'tnt_linear';
-funcs{3} = 'tnt_quadratic';
-funcs{4} = 'tnt_sin';
-funcs{5} = 'tnt_step';
+fhandles{1} = @tnt_constant;
+fhandles{2} = @tnt_linear;
+fhandles{3} = @tnt_quadratic;
+fhandles{4} = @tnt_sin;
+fhandles{5} = @tnt_step;
 
-save('spat_funcs.mat','funcs');
+end
