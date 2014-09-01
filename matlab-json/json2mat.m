@@ -2,12 +2,17 @@ function json2mat(jsonpath,matpath,calculation_id)
 %INIT_JSON2MAT Turns the json file with the id given into a matlab
 %initialisation file for loading into the tnt software.
 
-addpath([pwd,'/jsonlab']);
-addpath([pwd,'/tnt_funcs']);
+if (~isdeployed)
+    addpath([pwd,'/jsonlab']);
+    addpath([pwd,'/tnt_funcs']);
+end
 
 % Load the file containing all the operators and spatial functions
 load('operators.mat','operators');
-load('spat_funcs.mat','funcs')
+%load('spat_funcs.mat','funcs')
+
+% Create function handles
+fhandles = create_func_file();
 
 % Load the correct json file
 loadname = [jsonpath '/' calculation_id '.json'];
@@ -51,18 +56,15 @@ for loop=1:length(terms)
     opid = terms{loop}.operator_id;
     
     num_func_params = size(terms{loop}.spatial_function.parameters,2);
-    spat_args = '';
+    spat_args = zeros(num_func_params);
     % load spatial functions for operator
     for k=1:num_func_params
-        spat_args = [spat_args,',',terms{loop}.spatial_function.parameters{k}.value];
+        spat_args(k) = str2double(terms{loop}.spatial_function.parameters{k}.value);
     end
     
     if (terms{loop}.two_site)
-        % L-1 terms needed for nn operators
-        spat_args = [spat_args,',L-1'];
-        spatcall = [funcs{terms{loop}.spatial_function.spatial_fn_id},'( ' spat_args(2:end), ');'];
         % Call function to get parameters
-        spat_params = eval(spatcall);
+        spat_params = fhandles{terms{loop}.spatial_function.spatial_fn_id}(spat_args,L-1);
         for tms = 1:size(operators{opid,d},2)
             % update number of operators
             h_numnn = h_numnn + 1;

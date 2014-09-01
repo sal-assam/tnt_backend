@@ -1,6 +1,8 @@
 function mat2json(matoutpath,jsoninpath,jsonoutpath,imageoutputpath,calculation_id)
 
-addpath([pwd,'/jsonlab']);
+if (~isdeployed)
+    addpath([pwd,'/jsonlab']);
+end
 
 % Load initial json structure
 loadname = [jsoninpath '/' calculation_id '.json'];

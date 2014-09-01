@@ -1,0 +1,354 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    ! @(#)TC.xml    Tab Completion Table   Sat Oct  2 10:00:32 2004
+  -->
+
+<TC xmlns="urn:mathworks.interpreter.tabcompletion"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="urn:mathworks.interpreter.tabcompletion TC.xsd">
+
+  <!-- Multi argument description bindings -->
+
+  <binding name="addpath"    ctype="DIR"/>
+  <binding name="rmpath"     ctype="DIR"/>
+  <binding name="copyfile"   ctype="FILE"/>
+  <binding name="delete"     ctype="FILE"/>
+  <binding name="ls"         ctype="FILE"/>
+  <binding name="mbuild"     ctype="FILE"/>
+  <binding name="mcc"        ctype="FILE"/>
+  <binding name="deploytool" ctype="FILE"/>
+  <binding name="mex"        ctype="FILE"/>
+  <binding name="dir"        ctype="FILE"/>
+  <binding name="pcode"      ctype="FUN MCOSCLASS"/>
+  <binding name="depfun"     ctype="FUN MCOSCLASS"/>
+  <binding name="depdir"     ctype="FUN"/>
+  <binding name="dbstop"     ctype="FUN SUBFUN"/>
+  <binding name="help"       ctype="FUN SUBFUN MCOSPKG MCOSCLASS"/>
+  <binding name="helpwin"    ctype="FUN SUBFUN MCOSPKG MCOSCLASS"/>
+  <binding name="type"       ctype="FILE FUN MCOSPKG MCOSCLASS"/>
+  <binding name="dbtype"     ctype="FILE FUN MCOSPKG MCOSCLASS"/>
+  <binding name="clear"      ctype="FUN VAR"/>
+  <binding name="edit"       ctype="FILE FUN MCOSPKG MCOSCLASS"/>
+  <binding name="what"       ctype="MCOSPKG"/>
+  <binding name="message">
+      <arg argn="1" ctype="MESSAGEID"/>
+  </binding>
+
+  <binding name="whos"       ctype="VAR">
+    <arg previous="-file" ctype= "MATFILE"/>
+  </binding>
+
+  <binding name="runsuite"   ctype="DIR MFILE"/>
+
+  <!-- Specific argument description bindings -->
+
+  <binding name="cd">
+    <arg argn="1" ctype="DIR"/>
+  </binding>
+
+  <binding name="docroot">
+    <arg argn="1" ctype="DIR"/>
+  </binding>
+
+  <binding name="fopen">
+    <arg argn="1" ctype="FILE"/>
+  </binding>
+
+  <binding name="fileattrib">
+    <arg argn="1" ctype="FILE"/>
+  </binding>
+
+  <binding name="load">
+    <arg argn="1" ctype="MATFILE FILE"/>
+  </binding>
+
+  <binding name="open">
+    <arg argn="1" ctype="VAR MATFILE FIGFILE MFILE MDLFILE SLXFILE FILE"/>
+  </binding>
+
+  <binding name="open_system">
+    <arg argn="1" ctype="MDLFILE SLXFILE"/>
+  </binding>
+
+  <binding name="publish">
+    <arg argn="1" ctype="FILE FUN"/>
+  </binding>
+
+  <binding name="save" ctype="VAR">
+    <arg argn="1" ctype="MATFILE FILE"/>
+  </binding>
+
+  <binding name="hgload">
+    <arg argn="1" ctype="FIGFILE FILE"/>
+  </binding>
+
+  <binding name="guide">
+    <arg argn="1" ctype="FIGFILE FILE"/>
+  </binding>
+
+  <binding name="run">
+    <arg argn="1" ctype="FILE"/>
+  </binding>
+
+  <binding name="uiimport">
+    <arg argn="1" ctype="FILE"/>
+  </binding>
+
+  <binding name="importdata">
+    <arg argn="1" ctype="FILE"/>
+  </binding>
+
+  <binding name="doc">
+    <arg argn="1" ctype="FUN SUBFUN MCOSPKG MCOSCLASS"/>
+  </binding>
+
+  <binding name="dbstatus">
+    <arg argn="1" ctype="FUN SUBFUN MCOSPKG MCOSCLASS"/>
+  </binding>
+
+  <binding name="which">
+    <arg argn="1:2" ctype="FILE FUN VAR MDLFILE SLXFILE"/>
+  </binding>
+
+  <binding name="sim">
+    <arg argn="1" ctype="MDLFILE SLXFILE"/>
+  </binding>
+
+  <binding name="sldebug">
+    <arg argn="1" ctype="MDLFILE SLXFILE"/>
+  </binding>
+
+  <binding name="sedebug">
+    <arg argn="1" ctype="MDLFILE SLXFILE"/>
+    <arg argn="2" ctype="VAR"/>
+  </binding>
+  
+  <binding name="winopen" platform="PC">
+    <arg argn="1" ctype="DIR FILE"/>
+  </binding>
+
+  <binding name="xlsread">
+    <arg argn="1" ctype="FILE"/>
+    <arg argn="2:4" ctype="VAR" value="range basic"/>
+  </binding>
+
+  <binding name="diary">
+    <arg argn="1" ctype="FILE" value="off on"/>
+  </binding>
+
+  <binding name="eig">
+    <arg argn="1" ctype="VAR"/>
+    <arg argn="2" ctype="VAR" value="nobalance"/>
+    <arg argn="3" ctype="VAR" value="chol qz"/>
+  </binding>
+
+  <binding name="c2d">
+    <arg argn="1:2 4" ctype="VAR"/>
+    <arg argn="3" ctype="VAR" value="zoh foh tustin prewarp matched"/>
+  </binding>
+
+  <binding name="regexp">
+    <arg argn="1:2" ctype="VAR"/>
+    <arg argn="3:10" ctype="VAR" value="once start end tokenExtents match tokens names"/>
+  </binding>
+
+  <binding name="movefile">
+    <arg argn="1:2" ctype="DIR FILE"/>
+  </binding>
+
+  <binding name="mkdir">
+    <arg argn="1:2" ctype="DIR"/>
+  </binding>
+
+  <binding name="rmdir"    ctype="DIR"/>
+
+  <binding name="mlint">
+    <arg argn="1:10" ctype="FILE VAR" value="-struct -string -id -config -notok -fullpath -cyc -eml -codegen"/>
+  </binding>
+  
+  <binding name="checkcode">
+      <arg argn="1:10" ctype="FILE VAR" value="-struct -string -id -config -notok -fullpath -cyc -eml -codegen"/>
+  </binding>
+
+  <binding name="matfile">
+    <arg argn="1" ctype="MATFILE"/>
+    <arg argn="2" ctype="VAR" value="Writable"/>
+  </binding>
+  
+  <binding name="MatFile">
+    <arg argn="1" ctype="MATFILE"/>
+    <arg argn="2" ctype="VAR" value="Writable"/>
+  </binding>
+
+  <binding name="csvread">
+    <arg argn="1" ctype="FILE"/>
+  </binding>
+
+  <binding name="dlmread">
+    <arg argn="1" ctype="FILE"/>
+  </binding>
+
+  <binding name="xmlread">
+    <arg argn="1" ctype="FILE"/>
+  </binding>
+
+  <binding name="textscan">
+    <arg argn="1" ctype="FILE"/>
+  </binding>
+
+  <binding name="openfig">
+    <arg argn="1" ctype="FIGFILE"/>
+    <arg argn="2" ctype="VAR" value="new visible invisible reuse"/>
+  </binding>
+
+  <binding name="mmreader">
+    <arg argn="1" ctype="FILE"/>
+  </binding>
+
+  <binding name="VideoReader">
+    <arg argn="1" ctype="FILE"/>
+  </binding>
+
+  <binding name="VideoWriter">
+    <arg argn="1" ctype="FILE"/>
+  </binding>
+
+
+  <!-- Image and Scientific data (imagesci)  file name tab completion list -->
+
+  <binding name="imread">
+    <arg argn="1" ctype="FILE"/>
+  </binding>
+
+  <binding name="imwrite">
+    <arg argn="1" ctype="VAR"/>
+    <arg argn="2:3" ctype="FILE"/>
+  </binding>
+
+  <binding name="imfinfo">
+    <arg argn="1" ctype="FILE"/>
+  </binding>
+
+
+  <binding name="fitsread">
+    <arg argn="1" ctype="FILE"/>
+  </binding>
+
+  <binding name="fitsinfo">
+    <arg argn="1" ctype="FILE"/>
+  </binding>
+
+
+  <binding name="ncdisp">
+    <arg argn="1" ctype="FILE"/>
+  </binding>
+
+  <binding name="ncinfo">
+    <arg argn="1" ctype="FILE"/>
+  </binding>
+
+  <binding name="nccreate">
+    <arg argn="1" ctype="FILE"/>
+  </binding>
+
+  <binding name="ncwriteschema">
+    <arg argn="1" ctype="FILE"/>
+  </binding>
+
+  <binding name="ncwrite">
+    <arg argn="1" ctype="FILE"/>
+  </binding>
+
+  <binding name="ncwriteatt">
+    <arg argn="1" ctype="FILE"/>
+  </binding>
+
+  <binding name="ncread">
+    <arg argn="1" ctype="FILE"/>
+  </binding>
+
+  <binding name="ncreadatt">
+    <arg argn="1" ctype="FILE"/>
+  </binding>
+
+
+
+  <binding name="h5create">
+    <arg argn="1" ctype="FILE"/>
+  </binding>
+
+  <binding name="h5readatt">
+    <arg argn="1" ctype="FILE"/>
+  </binding>
+
+  <binding name="h5read">
+    <arg argn="1" ctype="FILE"/>
+  </binding>
+
+  <binding name="h5write">
+    <arg argn="1" ctype="FILE"/>
+  </binding>
+
+  <binding name="h5writeatt">
+    <arg argn="1" ctype="FILE"/>
+  </binding>
+
+  <binding name="h5info">
+    <arg argn="1" ctype="FILE"/>
+  </binding>
+
+  <binding name="h5disp">
+    <arg argn="1" ctype="FILE"/>
+  </binding>
+
+
+  <binding name="Tiff">
+    <arg argn="1" ctype="FILE"/>
+  </binding>
+
+
+  <binding name="javaaddpath">
+    <arg argn="1" ctype="FILE"/>
+  </binding>
+
+  <binding name="javarmpath">
+    <arg argn="1" ctype="FILE"/>
+  </binding>
+
+<!-- Code Generation with MATLAB Coder-->
+
+  <binding name="codegen" ctype="MFILE">
+    <arg argn="1" ctype="MFILE" value="-config -config:mex -config:lib
+    -config:dll -config:exe -c -g -d -o -report -globals -I -O -v"/>
+    <arg argn="2:10" ctype="MFILE" value="-args -config -config:mex -config:lib
+    -config:dll -config:exe -c -g -d -o -report -globals -I -O -v"/>
+    <arg previous="-args" ctype="VAR"/>
+    <arg previous="-config" ctype="VAR"/>
+    <arg previous="-o" ctype="FILE"/>
+    <arg previous="-d" ctype="DIR"/>
+    <arg previous="-I" ctype="DIR"/>
+    <arg previous="-O" ctype="VAR" value="enable:inline disable:inline
+    enable:blas disable:blas enable:openmp disable:openmp"/>
+  </binding>
+
+  <binding name="coder" ctype="FILE">
+    <arg argn="1:10" ctype="FILE" value="-new -ecoder -build"/>
+    <arg previous="-new" ctype="FILE"/>
+    <arg previous="-ecoder" ctype="VAR"/>
+    <arg previous="-build" ctype="FILE"/>
+  </binding>
+
+  <binding name="fiaccel" ctype="MFILE">
+    <arg argn="1" ctype="MFILE" value="-config -g -d -o -report -globals -I -O -v"/>
+    <arg argn="2:10" ctype="MFILE" value="-args -config -g -d -o -report -globals -I -O -v"/>
+    <arg previous="-args" ctype="VAR"/>
+    <arg previous="-config" ctype="VAR"/>
+    <arg previous="-o" ctype="FILE"/>
+    <arg previous="-d" ctype="DIR"/>
+    <arg previous="-I" ctype="DIR"/>
+    <arg previous="-O" ctype="VAR" value="enable:inline disable:inline
+    enable:blas disable:blas"/>
+  </binding>
+
+</TC>

@@ -3,11 +3,11 @@
 
 DIR_TNT=/share/apps/tnt/v0.9.9beta
 
-DIR_JSON_IP=/home/tntweb/tnt_backend/matlab-json/jsoninput
-DIR_JSON_OP=/home/tntweb/tnt_backend/matlab-json/jsonoutput
-DIR_MAT_IP=/home/tntweb/tnt_backend/matlab-json/matlabinput
-DIR_MAT_OP=/home/tntweb/tnt_backend/matlab-json/matlaboutput
-DIR_IMG_OP=/home/tntweb/tnt_backend/matlab-json/pngoutput
+DIR_JSON_IP=../matlab-json/jsoninput
+DIR_JSON_OP=../matlab-json/jsonoutput
+DIR_MAT_IP=../matlab-json/matlabinput
+DIR_MAT_OP=../matlab-json/matlaboutput
+DIR_IMG_OP=../matlab-json/pngoutput
 
 # Set the environment variables required for the simulation
 . /share/apps/tnt/scripts/set_tnt_vars.sh
@@ -19,7 +19,7 @@ echo "--------------------------------"
 echo "Generating MATLAB initialisation file"
 echo "--------------------------------"
 cd ../matlab-json/
-matlab -nodisplay -nosplash -nodesktop -r "json2mat ${DIR_JSON_IP} ${DIR_MAT_IP} ${1}; exit;"
+./json2mat.sh ${DIR_JSON_IP} ${DIR_MAT_IP} ${1}
 cd ../shellscripts/
 
 CMDLINE="-i ${DIR_MAT_IP}/${1}.mat -d ${DIR_MAT_OP}/${1}"
@@ -43,5 +43,5 @@ echo "Generating JSON output file and images"
 echo "--------------------------------"
 
 cd ../matlab-json/
-matlab -nodisplay -nosplash -nodesktop -r "mat2json ${DIR_MAT_OP} ${DIR_JSON_IP} ${DIR_JSON_OP} ${DIR_IMG_OP} ${1}; exit;"
+./mat2json.sh ${DIR_MAT_OP} ${DIR_JSON_IP} ${DIR_JSON_OP} ${DIR_IMG_OP} ${1}
 cd ../shellscripts
