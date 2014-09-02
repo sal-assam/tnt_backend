@@ -15,7 +15,7 @@ disp(['Compiling: ' mfile '...']);
 disp(['(Use compile_mt to compile with multithreading support)']);
 
 % Run the Matlab C Compiler (mcc).
-eval(['mcc -v -N -R -nodisplay -I /home/alassam/tnt_backend/matlab-json/jsonlab -I /home/alassam/tnt_backend/matlab-json/tnt_funcs -R -singleCompThread -m ' mfile]); % Use eval() since mcc must be ran from the command line.
+eval(['mcc -v -N -R -nodisplay -I /home/tntweb/tnt_backend/matlab-json/jsonlab -I /home/tntweb/tnt_backend/matlab-json/tnt_funcs -R -singleCompThread -m ' mfile]); % Use eval() since mcc must be ran from the command line.
 % (SJD) Options:: -v: verbose, -R nojvm: don't include java, -N: use on clear out path, -m: standalone
 % (SJD) enabled -singleCompThread so that the underlying math libraries don't use as many threads as there are cores on the machine.  For multithreading, use compile-mt.m
 

@@ -47,7 +47,7 @@ int main(int argc, char **argv)
     struct dbl_arr E; /* Array to hold value of the energy for each iteration, and array of the size of the number of iterations */
     tntNodeArray HeffL, HeffR; /* Precontracted nodes for the right and left sides of the network. */
     unsigned i, i_max=50; /* iteration counter, maximum number of iterations */
-    double prec = 1.0e-6; /* default precision for ground state calculation */
+    double prec = 1.0e-12; /* default precision for ground state calculation */
     
     /* Variables needed for creating the propagotors for time evolution */
     /* (currently just same operators as for ground state) */
@@ -59,6 +59,7 @@ int main(int argc, char **argv)
     unsigned bigsteps = 1; /* Number of 'bigsteps' or expectation values taken */
     unsigned tbigstep = 20; /* number of time steps per big step */
     tntDoubleArray extimes; /* evolved time at each bigstep */
+    tntDoubleArray truncerrs; /* truncation error at each bigstep */
     unsigned loop; /* loop over time steps */
     
     /* Variables needed for calculating expectation values */
@@ -153,7 +154,7 @@ int main(int argc, char **argv)
         tntSaveNetwork(saveprefix,"_operators",mpo,"mpo");
         
         /* Allocate memory for array to hold the energy values after each iteration */
-        E = tntDoubleArrayAlloc(i_max+1);
+        E = tntDoubleArrayAlloc(2*i_max+1);
 
         /* Initialise the nodes that will be needed for the DMRG sweep */
         tntMpsDmrgInit(wf_gs, mpo, &HeffL, &HeffR);
@@ -165,15 +166,17 @@ int main(int argc, char **argv)
                 
         for (i = 1; i<=i_max; i++) {
             /* Perform a minimization sweep from left to right then right to left */
-            E.vals[i] = tntMpsDmrgSweep(wf_gs, TNT_MPS_R, chi, mpo, &HeffL, &HeffR, &err);
+            E.vals[2*i-1] = tntMpsDmrgSweep(wf_gs, TNT_MPS_R, chi, mpo, &HeffL, &HeffR, &err);
             
-            E.vals[i] = tntMpsDmrgSweep(wf_gs, TNT_MPS_L, chi, mpo, &HeffL, &HeffR, &err);
+            printf("Iteration %d: Energy is %4.4g, difference is %4.4g.\n", 2*i-1, E.vals[2*i-1],(E.vals[2*i-2] - E.vals[2*i-1]));
+            
+            E.vals[2*i] = tntMpsDmrgSweep(wf_gs, TNT_MPS_L, chi, mpo, &HeffL, &HeffR, &err);
 
-            printf("Iteration %d: Energy is %4.4g, difference is %4.4g.\n", i, E.vals[i],(E.vals[i - 1] - E.vals[i]));
+            printf("Iteration %d: Energy is %4.4g, difference is %4.4g.\n", 2*i, E.vals[2*i],(E.vals[2*i-1] - E.vals[2*i]));
             
-            if (fabs(E.vals[i - 1] - E.vals[i]) < prec) {
+            if (fabs(E.vals[2*i - 1] - E.vals[2*i]) < prec) {
                 /* Change the size of the array contaiting the energy each iteration */
-                E.sz = i+1;
+                E.sz = 2*i+1;
                 break;
             }
         }
@@ -199,6 +202,8 @@ int main(int argc, char **argv)
     /***********************************************************************************************/    
     
     if (dotebd) {
+        
+        tntTruncType("sumsquares");
         
         /* If quantum number conservation is turned on, set the quantum numbers for the basis operator. This should ensure that any other functions create invariant operators */
         if (U1symm) {
@@ -249,13 +254,15 @@ int main(int argc, char **argv)
         
         /* Allocate memory to hold the evolved time each time the expectation value is taken */
         extimes = tntDoubleArrayAlloc(numsteps/tbigstep+((numsteps%tbigstep)?2:1));
+        truncerrs = tntDoubleArrayAlloc(numsteps/tbigstep+((numsteps%tbigstep)?2:1));
         
         /* Calculate initial expectation values */
         tntMpsExpecOutput(wf_evolved, &ExOp, 0, 1, 1, saveprefix, bigsteps);
         extimes.vals[0] = 0.0;
+        truncerrs.vals[0] = 0.0;
         
         /* Set error to zero */
-        err = 0;
+        err = 0.0;
         
         /* Run the simulation for all the time steps. */
         for (loop = 1; loop <= numsteps; loop++) {
@@ -267,6 +274,7 @@ int main(int argc, char **argv)
             if ((0 == loop%tbigstep)||(loop == numsteps)) {
                 /* take the current evolved time */
                 extimes.vals[bigsteps] = loop*dtc.re;
+                truncerrs.vals[bigsteps] = err;
                 
                 /* increment counter of number of big steps */
                 bigsteps++;
@@ -282,7 +290,7 @@ int main(int argc, char **argv)
         tntSaveNetwork(saveprefix,"_operators", wf_evolved, "wf_evolved");
         
         /* Save the time at each iteration */
-        tntSaveArrays(saveprefix,"",0,1,0, &extimes, "extimes");
+        tntSaveArrays(saveprefix,"",0,2,0, &extimes, "extimes",&truncerrs,"truncerrs");
         
         /*  Free all the dynamically allocated nodes and associated dynamically allocated arrays. */
         tntNetworkFree(&wf_evolved);

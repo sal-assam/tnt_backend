@@ -78,10 +78,7 @@ for loop=1:length(terms)
         end
     else
         % L terms needed for onsite operators
-        spat_args = [spat_args,',L'];
-        spatcall = [funcs{terms{loop}.spatial_function.spatial_fn_id},'( ', spat_args(2:end), ');'];
-        % Call function to get parameters
-        spat_params = eval(spatcall);
+        spat_params = fhandles{terms{loop}.spatial_function.spatial_fn_id}(spat_args,L);
         
         for tms = 1:size(operators{opid,d})
             h_numos = h_numos + 1;

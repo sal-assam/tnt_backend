@@ -13,6 +13,9 @@ exops = pms.calculation.setup.expectation_values.operators;
 dotebd = pms.calculation.setup.system.calculate_time_evolution;
 dodmrg = pms.calculation.setup.system.calculate_ground_state;
 
+% Load system size
+L = pms.calculation.setup.system.system_size;
+
 % Load results of calculations
 loadname = [matoutpath '/' calculation_id '.mat'];
 load(loadname);
@@ -35,8 +38,8 @@ if (dodmrg)
     set(gca,'XTickLabel',0:(length(E)-1));
     set(gca,'FontSize',axesfontsize);
     xlabel('Iteration');
-    ylabel('E - E_gs');
-    title('DMRG convergence');
+    ylabel('E - E_{gs}');
+    title(['Convergence to energy density ',num2str(E(end)/L,'%12.12f')]);
     print('-dpng',fname);
     
     for loop=1:length(exops)
@@ -67,9 +70,19 @@ if (dodmrg)
 end
 
 if (dotebd)
- 
+
+    fname = [imageoutputpath '/' calculation_id '_0_evolved.png'];
+
+    figure('Visible','off');
+    semilogy(extimes,truncerrs,'--ro','MarkerFaceColor','k');;
+    set(gca,'FontSize',axesfontsize);
+    xlabel('Time');
+    ylabel('Truncation error');
+    title('Truncation error (sum of squares of all discarded singular values) as a function of time');
+    print('-dpng',fname);
+
     for loop=1:length(exops)
-        
+
         data.evolved.operators{loop}.operator_id = exops{loop}.operator_id;
         data.evolved.operators{loop}.two_site = exops{loop}.two_site;
         if (exops{loop}.two_site)
@@ -96,10 +109,10 @@ if (dotebd)
         fname = [imageoutputpath '/' calculation_id '_' num2str(exops{loop}.operator_id) '_evolved.png'];
 
         figure('Visible','off');
-        h = pcolor(dataset);
+        h = pcolor(1:numcols,extimes,dataset);
         set(gca,'FontSize',axesfontsize);
         xlabel('Site number');
-        ylabel('Big time step');
+        ylabel('Time');
         title(['Expectation of ' exops{loop}.function_description ' as a function of time']);
         axis square;
         colorbar;
