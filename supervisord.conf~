@@ -1,6 +1,5 @@
 ; Sample supervisor config file.
 ;
-;
 ; For more information on the config file, please see:
 ; http://supervisord.org/configuration.html
 ;
