@@ -56,7 +56,7 @@ for loop=1:length(terms)
     opid = terms{loop}.operator_id;
     
     num_func_params = size(terms{loop}.spatial_function.parameters,2);
-    spat_args = zeros(num_func_params);
+    spat_args = zeros(num_func_params,1);
     % load spatial functions for operator
     for k=1:num_func_params
         spat_args(k) = str2double(terms{loop}.spatial_function.parameters{k}.value);

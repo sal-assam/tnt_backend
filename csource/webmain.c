@@ -46,7 +46,7 @@ int main(int argc, char **argv)
     unsigned dodmrg; /* flag to specify whether to run DMRG simulation */
     struct dbl_arr E; /* Array to hold value of the energy for each iteration, and array of the size of the number of iterations */
     tntNodeArray HeffL, HeffR; /* Precontracted nodes for the right and left sides of the network. */
-    unsigned i, i_max=50; /* iteration counter, maximum number of iterations */
+    unsigned i, i_max=30; /* iteration counter, maximum number of iterations */
     double prec = 1.0e-12; /* default precision for ground state calculation */
     
     /* Variables needed for creating the propagotors for time evolution */
@@ -174,9 +174,12 @@ int main(int argc, char **argv)
 
             printf("Iteration %d: Energy is %4.4g, difference is %4.4g.\n", 2*i, E.vals[2*i],(E.vals[2*i-1] - E.vals[2*i]));
             
+            /* Change the size of the array containing the energy each iteration */
+            E.sz = 2*i+1;
+            tntSaveArrays(saveprefix,"", 0, 1, 0, &E, "E");
+            
             if (fabs(E.vals[2*i - 1] - E.vals[2*i]) < prec) {
-                /* Change the size of the array contaiting the energy each iteration */
-                E.sz = 2*i+1;
+                
                 break;
             }
         }

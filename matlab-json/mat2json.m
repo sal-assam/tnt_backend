@@ -46,24 +46,30 @@ if (dodmrg)
         
         data.groundstate.operators{loop}.operator_id = exops{loop}.operator_id;
         newlb = strrep(exops{loop}.function_description,' ','_');
-        eval(['dataset = ' newlb ';']);
         
-        data.groundstate.operators{loop}.two_site = exops{loop}.two_site;
-        data.groundstate.operators{loop}.vals.re = real(dataset);
-        data.groundstate.operators{loop}.vals.im = imag(dataset);
-        if (exops{loop}.two_site)
-            data.groundstate.operators{loop}.exp_val_type = exops{loop}.exp_val_type;
+        if (exist(newlb,'var'))
+            eval(['datasetall = ' newlb ';']);
+
+            data.groundstate.operators{loop}.two_site = exops{loop}.two_site;
+            data.groundstate.operators{loop}.vals.re = real(datasetall);
+            data.groundstate.operators{loop}.vals.im = imag(datasetall);
+            if (exops{loop}.two_site)
+                data.groundstate.operators{loop}.exp_val_type = exops{loop}.exp_val_type;
+            end
+            data.groundstate.operators{loop}.function_description = exops{loop}.function_description;
+            errstr='';
+        else
+            datasetall = zeros(1,L);
+            errstr='\newline !!Early exit due to error in calculation!!';
         end
-        data.groundstate.operators{loop}.function_description = exops{loop}.function_description;
-        
         fname = [imageoutputpath '/' calculation_id '_' num2str(exops{loop}.operator_id) '_gs.png'];
         figure('Visible','off');
-        plot(dataset);
-        set(gca,'XTick',1:4:length(dataset))
+        plot(datasetall);
+        set(gca,'XTick',1:4:length(datasetall))
         set(gca,'FontSize',axesfontsize);
         xlabel('Site number');
         ylabel(exops{loop}.function_description);
-        title(['Ground state expectation of ' exops{loop}.function_description]);
+        title(['Ground state expectation of ' exops{loop}.function_description errstr]);
         print('-dpng',fname);
         
     end
@@ -71,15 +77,32 @@ end
 
 if (dotebd)
 
-    fname = [imageoutputpath '/' calculation_id '_0_evolved.png'];
+    % if this variable doesn't exist it means the program ended early
+    if (~exist('extimes','var'))
+        bigstep=20; % default bigstep
+        dt=pms.calculation.setup.system.time_step;
+        % Find the final available output file 
+        newlb = strrep(exops{1}.function_description,' ','_');
+        numit = 1;
+            while (exist([newlb '_' num2str(numit)],'var'))
+                numit = numit+1;
+            end
+            numit = numit-2; 
+        extimes = (0:numit)*bigstep*dt;
+        errstr = '\newline !!Early exit due to error in calculation!!';
+    else
+        fname = [imageoutputpath '/' calculation_id '_0_evolved.png'];
 
-    figure('Visible','off');
-    semilogy(extimes,truncerrs,'--ro','MarkerFaceColor','k');;
-    set(gca,'FontSize',axesfontsize);
-    xlabel('Time');
-    ylabel('Truncation error');
-    title('Truncation error (sum of squares of all discarded singular values) as a function of time');
-    print('-dpng',fname);
+        figure('Visible','off');
+        semilogy(extimes,truncerrs,'--ro','MarkerFaceColor','k');
+        set(gca,'FontSize',axesfontsize);
+        xlabel('Time');
+        ylabel('Truncation error');
+        title('Truncation error (sum of squares of all discarded singular values) as a function of time');
+        print('-dpng',fname);
+        
+        errstr = '';
+    end
 
     for loop=1:length(exops)
 
@@ -92,7 +115,7 @@ if (dotebd)
         newlb = strrep(exops{loop}.function_description,' ','_');
         
         eval(['numcols = size(' newlb '_1,1)*size(' newlb '_1,2);']); 
-        dataset = zeros(length(extimes),numcols);
+        datasetall = zeros(length(extimes),numcols);
         
         for loopt=1:length(extimes) 
             strloop = num2str(loopt);
@@ -103,17 +126,17 @@ if (dotebd)
             tval.im = imag(datasetstep);
 
             data.evolved.operators{loop}.vals{loopt} = tval;
-            dataset(loopt,:) = datasetstep(:);
+            datasetall(loopt,:) = datasetstep(:);
         end
         
         fname = [imageoutputpath '/' calculation_id '_' num2str(exops{loop}.operator_id) '_evolved.png'];
 
         figure('Visible','off');
-        h = pcolor(1:numcols,extimes,dataset);
+        h = pcolor(1:numcols,extimes,datasetall);
         set(gca,'FontSize',axesfontsize);
         xlabel('Site number');
         ylabel('Time');
-        title(['Expectation of ' exops{loop}.function_description ' as a function of time']);
+        title(['Expectation of ' exops{loop}.function_description ' as a function of time' errstr]);
         axis square;
         colorbar;
         set(h,'EdgeColor','none');

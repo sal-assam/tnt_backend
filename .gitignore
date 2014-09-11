@@ -8,3 +8,7 @@ log/
 log/gunicorn_supervisor.log
 pngoutput/
 *.dyn
+matlab-json/*.log
+matlab-json/*.log
+shellscripts/sge_output*
+
