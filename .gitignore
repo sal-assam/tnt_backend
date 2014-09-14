@@ -13,3 +13,5 @@ matlab-json/*.log
 shellscripts/sge_output*
 *.log
 *.err
+shellscripts/errors/*.err
+shellscripts/logs/*.log
