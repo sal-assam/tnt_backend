@@ -2,6 +2,8 @@ import json
 
 from subprocess import call, Popen
 
+from shutil import copyfile
+
 import os
 
 import glob
@@ -12,7 +14,8 @@ from tnt_backend.settings import \
     json_input_save_dir, \
     mat_input_save_dir, \
     json_output_save_dir, \
-    mat_output_save_dir
+    mat_output_save_dir, \
+    error_log_dir
 
 from django.shortcuts import render
 
@@ -63,7 +66,20 @@ def results_of_calculation(request, calculation_id):
 
     results_exist = False
 
+    # The file path at which the results json file will exist
     calculation_results_json_path = BASE_DIR + json_output_save_dir + calculation_id + '.json'
+
+    # The file path at which an error log file exists, if any
+    calculation_error_path = BASE_DIR + error_log_dir + calculation_id + '.err'
+
+    # Let's check if the calculation resulted in an error (this is indicated by a non-empty error file)
+    if os.path.exists(calculation_error_path):
+
+        if os.stat(calculation_error_path).st_size > 0:
+
+            response = Response('Internal Error', status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+            return response
 
     # Check if the results file exists
     if os.path.exists(calculation_results_json_path):
@@ -79,13 +95,28 @@ def results_of_calculation(request, calculation_id):
         results_json = open(calculation_results_json_path, 'r').read()
         results = json.loads(results_json)
 
-
         # Now we also want to return the names of the images for the expectation value calculations
         this_calculation_absolute_filenames = glob.glob(MEDIA_ROOT + calculation_id + '*')
 
         this_calculation_relative_filenames = ['http://bose.physics.ox.ac.uk:8080/media/' + filename.split('/')[-1] for filename in this_calculation_absolute_filenames]
 
-        response = Response({'results': results, 'expectation_value_plots': this_calculation_relative_filenames}, status=status.HTTP_200_OK)    # R1gt
+
+        # We also want to return the MAT location of the MAT files for download...
+        # First we need to copy the results MAT file to the MEDIA directory
+        calculation_mat_results_file_path = BASE_DIR + mat_output_save_dir + calculation_id + '.mat'
+
+        calculation_mat_results_media_root_filename = MEDIA_ROOT + calculation_id + '.mat'
+
+        copyfile(calculation_mat_results_file_path, calculation_mat_results_media_root_filename)
+
+        # Now we want to construct the URL at which these results can be found
+        this_calculation_mat_results_URL = 'http://bose.physics.ox.ac.uk:8080/media/' + calculation_id + '.mat'
+
+        response = Response({ \
+            'results': results, \
+            'expectation_value_plots': this_calculation_relative_filenames, \
+            'mat_results_URL': this_calculation_mat_results_URL \
+        }, status=status.HTTP_200_OK)    # R1gt
 
     return response
 

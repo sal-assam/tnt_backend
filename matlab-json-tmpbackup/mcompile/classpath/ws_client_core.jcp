@@ -1,0 +1,2 @@
+# Java classpath entries for ws_client_core
+$matlabroot/java/jarext/webservices/ws_client_core/mw-service-client-core.jar

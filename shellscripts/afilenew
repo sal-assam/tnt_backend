@@ -1,0 +1,19 @@
+--------------------------------
+Generating MATLAB initialisation file
+--------------------------------
+--------------------------------
+Running TNT code from initialisation file
+--------------------------------
+/home/tntweb/tnt_backend/shellscripts/jobtnt.sh: line 29: 24500 Segmentation fault      (core dumped) ${DIR_TNT}/bin/tnt_web $CMDLINE
+It took 0 seconds to complete this task
+--------------------------------
+Generating JSON output file and images
+--------------------------------
+Error using load
+Unable to read file /home/tntweb/tnt_backend/matlab-json/matlab_output/1707c589-e8b0-4d0b-a86e-1aaf01925bae.mat: No such file or directory.
+
+Error in mat2json (line 21)
+
+
+
+MATLAB:load:couldNotReadFile

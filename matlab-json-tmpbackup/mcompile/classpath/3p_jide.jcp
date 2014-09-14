@@ -1,0 +1,9 @@
+# Java classpath entries for 3p/jide
+$matlabroot/java/jarext/jide/jide-action.jar
+$matlabroot/java/jarext/jide/jide-common.jar
+$matlabroot/java/jarext/jide/jide-components.jar
+$matlabroot/java/jarext/jide/jide-dialogs.jar
+$matlabroot/java/jarext/jide/jide-dock.jar
+$matlabroot/java/jarext/jide/jide-properties.jar
+$matlabroot/java/jarext/jide/jide-grids.jar
+$matlabroot/java/jarext/jide/jide-shortcut.jar

@@ -1,0 +1,6 @@
+# Java classpath entries for ws_clients
+$matlabroot/java/jarext/mwaws_client.jar
+$matlabroot/java/jarext/dws_client.jar
+$matlabroot/java/jarext/webservices/loginws_client.jar
+$matlabroot/java/jarext/webservices/service_request_client.jar
+$matlabroot/java/jarext/webservices/dws_client.jar

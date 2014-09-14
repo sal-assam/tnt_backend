@@ -1,0 +1,31 @@
+{
+	"data": {
+		"groundstate": {
+			"energy": {
+				"iterations": 4,
+				"vals": [0.7550656151,-9.999994114,-10,-10,-10]
+			},
+			"operators": [
+						{
+					"operator_id": 3,
+					"two_site": 0,
+					"vals": {
+						"re": [-0.5,-0.5,-0.5,-0.5,-0.5,-0.5,-0.5,-0.5,-0.5,-0.5],
+						"im": [0,0,0,0,0,0,0,0,0,0]
+					},
+					"function_description": "Sz"
+				},
+						{
+					"operator_id": 6,
+					"two_site": 1,
+					"vals": {
+						"re": [0.25,0.25,0.25,0.25,0.25,0.25,0.25,0.25,0.25],
+						"im": [0,0,0,0,0,0,0,0,0]
+					},
+					"exp_val_type": "nearest neighbor",
+					"function_description": "ZZ Coupling"
+				}
+			]
+		}
+	}
+}

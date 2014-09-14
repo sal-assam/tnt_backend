@@ -1,0 +1,3 @@
+# Java classpath entries for 3p/apache-felixv1
+$matlabroot/java/jarext/felix.jar
+$matlabroot/java/jarext/scr.jar

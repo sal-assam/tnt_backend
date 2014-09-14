@@ -1,0 +1,9 @@
+/home/tntweb/tnt_backend/shellscripts/jobtnt.sh: line 29:  3726 Segmentation fault      (core dumped) ${DIR_TNT}/bin/tnt_web $CMDLINE
+Error using load
+Unable to read file /home/tntweb/tnt_backend/matlab-json/matlab_output/95bf014b-2967-4487-956b-fadf36df92f1.mat: No such file or directory.
+
+Error in mat2json (line 21)
+
+
+
+MATLAB:load:couldNotReadFile

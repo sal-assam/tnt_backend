@@ -97,9 +97,62 @@ if (h_numnn), h_prmnn = h_prmnn(:); end
 if (h_numos), h_prmos = h_prmos(:); end
 
 % set initial configuration
-init_config = create_base_states(pms.calculation.setup.initial_state.base_state.initial_base_state_id,L);
+if (dotebd)
+    basestate = pms.calculation.setup.initial_state.base_state.initial_base_state_id;
+    if (0 == basestate)
+        usegsfortebd = 1;
+        dodmrg = 1;
+    else
+        usegsfortebd = 0;
+        init_config = create_base_states(basestate,L);
+    end
+end
+    
 
-% TODO: Set operators to apply to initial base state
+% Set operators to apply to initial base state
+modifiers = pms.calculation.setup.initial_state.applied_operators;
+modifybasestate = ~isempty(modifiers);
+%initialise number of each type of term to zero
+if (modifybasestate)
+    mod_numnn = 0; mod_numnn_numos = 0;
+    for loop=1:length(modifiers)
+        opid = modifiers{loop}.operator_id;
+        
+        num_func_params = size(modifiers{loop}.spatial_function.parameters,2);
+        spat_args = zeros(num_func_params,1);
+        % load spatial functions for operator
+        for k=1:num_func_params
+            spat_args(k) = str2double(modifiers{loop}.spatial_function.parameters{k}.value);
+        end
+        
+        if (modifiers{loop}.two_site)
+            % Call function to get parameters
+            spat_params = fhandles{modifiers{loop}.spatial_function.spatial_fn_id}(spat_args,L-1);
+            for tms = 1:size(operators{opid,d},2)
+                % update number of operators
+                mod_numnn = mod_numnn + 1;
+                
+                % load operators
+                eval(['mod_opnnL_',num2str(mod_numnn),'= operators{opid,d}{1,tms};']);
+                eval(['mod_opnnR_',num2str(mod_numnn),'= operators{opid,d}{2,tms};']);
+                
+                % assign spatial values to position array
+                mod_prmnn(mod_numnn,1:L-1) = spat_params; %#ok<SAGROW>
+            end
+        else
+            % L terms needed for onsite operators
+            spat_params = fhandles{modifiers{loop}.spatial_function.spatial_fn_id}(spat_args,L);
+            
+            for tms = 1:size(operators{opid,d})
+                mod_numos = mod_numos + 1;
+                eval(['mod_opos_',num2str(mod_numos),'= operators{opid,d}{tms};']);
+                
+                % assign spatial values to position array
+                mod_prmos(mod_numos,1:L) = spat_params; %#ok<SAGROW,*AGROW>
+            end
+        end
+    end
+end
 
 % Load the expectation value terms
 exops = pms.calculation.setup.expectation_values.operators;
@@ -165,6 +218,7 @@ end
 % Parameter variables to load in C:
 %   dotebd (0 or 1)
 %   dodmrg (0 or 1)
+%   usegsfortebd (0 or 1) - if set dodmrg is always set
 %   chi (iinteger)
 %   L (integer)
 %   h_numos (integer)

@@ -1,0 +1,2 @@
+# Java classpath entries for mwlic_client
+$matlabroot/java/jarext/webservices/mwlic_client/mw-license-server-client.jar

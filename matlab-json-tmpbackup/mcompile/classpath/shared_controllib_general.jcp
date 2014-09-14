@@ -1,0 +1,2 @@
+# Java classpath entries for shared_controllib_general
+$matlabroot/java/jar/toolbox/shared/controllib.jar

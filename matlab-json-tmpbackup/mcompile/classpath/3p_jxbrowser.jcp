@@ -1,0 +1,10 @@
+# Java classpath entries for 3p/jxbrowser
+$matlabroot/java/jarext/jxbrowser/engine-gecko.jar
+$matlabroot/java/jarext/jxbrowser/engine-ie.jar
+$matlabroot/java/jarext/jxbrowser/engine-webkit.jar
+$matlabroot/java/jarext/jxbrowser/jxbrowser.jar
+$matlabroot/java/jarext/jxbrowser/MozillaInterfaces.jar
+$matlabroot/java/jarext/jxbrowser/runtime.jar
+$matlabroot/java/jarext/jxbrowser/slf4j-api.jar
+$matlabroot/java/jarext/jxbrowser/slf4j-log4j12.jar
+$matlabroot/java/jarext/jxbrowser/winpack.jar
