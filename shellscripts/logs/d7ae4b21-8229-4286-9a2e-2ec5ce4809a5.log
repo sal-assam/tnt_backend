@@ -1,0 +1,78 @@
+--------------------------------
+Generating MATLAB initialisation file
+--------------------------------
+--------------------------------
+Running TNT code from initialisation file
+--------------------------------
+TNT library, version 0.9.9.b1044
+Input file : <<</home/tntweb/tnt_backend/matlab-json/matlab_input/d7ae4b21-8229-4286-9a2e-2ec5ce4809a5.mat>>>
+Save directory : <<</home/tntweb/tnt_backend/matlab-json/matlab_output/d7ae4b21-8229-4286-9a2e-2ec5ce4809a5>>>
+Chi : default <<<-1>>> i.e. no truncation. 
+Loading string calculation_id = 'd7ae4b21-8229-4286-9a2e-2ec5ce4809a5' 
+Loading parameter dotebd = 0
+Loading parameter dodmrg = 1
+Loading parameter chi = 40
+Loading parameter L = 40
+Loading parameter U1symm = 0
+Loading parameter h_numos = 0
+Loading parameter h_numnn = 3
+Loading parameter ex_numos = 0
+Loading parameter ex_numnn = 3
+Loading parameter ex_numcs = 0
+Loading parameter ex_numap = 0
+Loading tntNode basisOp.
+Loading tntNode h_opnnL_1.
+Loading tntNode h_opnnL_2.
+Loading tntNode h_opnnL_3.
+Loading tntNode h_opnnR_1.
+Loading tntNode h_opnnR_2.
+Loading tntNode h_opnnR_3.
+Loading h_prmnn[117] = { 1.0+0.0i, 1.0+0.0i, 1.0+0.0i, 1.0+0.0i, 1.0+0.0i, 1.0+0.0i, 1.0+0.0i, 1.0+0.0i, 1.0+0.0i, 1.0+0.0i, 1.0+0.0i, 1.0+0.0i, 1.0+0.0i, 1.0+0.0i, 1.0+0.0i,..., 1.0+0.0i}
+Loading tntNode ex_opnn_1.
+Loading tntNode ex_opnn_2.
+Loading tntNode ex_opnn_3.
+Loading tntNode ex_opnn_4.
+Loading tntNode ex_opnn_5.
+Loading tntNode ex_opnn_6.
+Loading string ex_opnnlabel_1 = 'XX_Coupling' 
+Loading string ex_opnnlabel_2 = 'YY_Coupling' 
+Loading string ex_opnnlabel_3 = 'ZZ_Coupling' 
+---------------------------------------
+Starting DMRG 
+---------------------------------------
+Saving simulation data to existing file [/home/tntweb/tnt_backend/matlab-json/matlab_output/d7ae4b21-8229-4286-9a2e-2ec5ce4809a5_operators.mat] ...
+Saving network mpo.
+Starting energy for randomly generated MPS is -0.237735. 
+Iteration 1: Energy is -17.48, difference is 17.24.
+Iteration 2: Energy is -17.54, difference is 0.05978.
+Saving simulation data to existing file [/home/tntweb/tnt_backend/matlab-json/matlab_output/d7ae4b21-8229-4286-9a2e-2ec5ce4809a5.mat] ...
+Saving array E.
+Iteration 3: Energy is -17.54, difference is 0.0001908.
+Iteration 4: Energy is -17.54, difference is 6.042e-07.
+Saving array E.
+Iteration 5: Energy is -17.54, difference is 7.559e-10.
+Iteration 6: Energy is -17.54, difference is -7.37e-11.
+Saving array E.
+Iteration 7: Energy is -17.54, difference is -1.769e-12.
+Iteration 8: Energy is -17.54, difference is 3.908e-13.
+Saving array E.
+
+~~~~~~~    Nearest-neighbour expectation values     ~~~~~~~~
+XX_Coupling[39] = {-0.22,-0.099,-0.19,-0.11,-0.18,-0.12,-0.17,-0.12,-0.17,-0.13,-0.17,-0.13,-0.17,-0.13,-0.17,...,-0.22}
+Saving array XX_Coupling.
+YY_Coupling[39] = {-0.22,-0.099,-0.19,-0.11,-0.18,-0.12,-0.17,-0.12,-0.17,-0.13,-0.17,-0.13,-0.17,-0.13,-0.17,...,-0.22}
+Saving array YY_Coupling.
+ZZ_Coupling[39] = {-0.22,-0.099,-0.19,-0.11,-0.18,-0.12,-0.17,-0.12,-0.17,-0.13,-0.17,-0.13,-0.17,-0.13,-0.17,...,-0.22}
+Saving array ZZ_Coupling.
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Saving simulation data to existing file [/home/tntweb/tnt_backend/matlab-json/matlab_output/d7ae4b21-8229-4286-9a2e-2ec5ce4809a5_operators.mat] ...
+Saving network wf_gs.
+Saving simulation data to existing file [/home/tntweb/tnt_backend/matlab-json/matlab_output/d7ae4b21-8229-4286-9a2e-2ec5ce4809a5.mat] ...
+Saving array E.
+It took 130 seconds to complete this task
+--------------------------------
+Generating JSON output file and images
+--------------------------------
+Warning: Objects of graph2d.lineseries class exist - not clearing this class
+or any of its superclasses

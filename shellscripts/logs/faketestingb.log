@@ -1,0 +1,42 @@
+--------------------------------
+Generating MATLAB initialisation file
+--------------------------------
+--------------------------------
+Running TNT code from initialisation file
+--------------------------------
+TNT library, version 1.0.0br642
+Input file : <<</home/tntweb/tnt_backend/matlab-json/matlab_input/faketestingb.mat>>>
+Save directory : <<</home/tntweb/tnt_backend/matlab-json/matlab_output/faketestingb>>>
+Chi : default <<<-1>>> i.e. no truncation. 
+Loading string calculation_id = 'faketestingb' 
+Loading parameter dodmrg = 0
+Loading parameter dotebd = 1
+Loading parameter usegsfortebd = 0
+Loading parameter modifybasestate = 0
+Modify bases state = 0
+Loading parameter chi = 30
+Loading parameter L = 40
+Loading parameter U1symm = 0
+Loading parameter h_numos = 0
+Loading parameter h_numnn = 3
+Loading parameter ex_numos = 1
+Loading parameter ex_numnn = 0
+Loading parameter ex_numcs = 0
+Loading parameter ex_numap = 0
+Loading parameter numsteps = 800
+Loading parameter dt =  0.010
+Loading string init_config = '0000000000000000000011111111111111111111' 
+Loading tntNode basisOp.
+Loading tntNode h_opnnL_1.
+Loading tntNode h_opnnL_2.
+Loading tntNode h_opnnL_3.
+Loading tntNode h_opnnR_1.
+Loading tntNode h_opnnR_2.
+Loading tntNode h_opnnR_3.
+Loading h_prmnn[117,1] = { 1.0+0.0i, 1.0+0.0i, 1.0+0.0i, 1.0+0.0i, 1.0+0.0i, 1.0+0.0i, 1.0+0.0i, 1.0+0.0i, 1.0+0.0i, 1.0+0.0i, 1.0+0.0i, 1.0+0.0i, 1.0+0.0i, 1.0+0.0i, 1.0+0.0i,..., 1.0+0.0i}
+Loading tntNode ex_opos_1.
+Loading string ex_oposlabel_1 = 'Sz' 
+It took 0 seconds to complete this task
+--------------------------------
+Generating JSON output file and images
+--------------------------------

@@ -1,0 +1,9 @@
+# Java classpath entries for 3p/freehepvectorgraphicsv2
+$matlabroot/java/jarext/freehep-graphics2d.jar
+$matlabroot/java/jarext/freehep-graphicsio.jar
+$matlabroot/java/jarext/freehep-graphicsio-pdf.jar
+$matlabroot/java/jarext/freehep-graphicsio-emf.jar
+$matlabroot/java/jarext/freehep-graphicsio-ps.jar
+$matlabroot/java/jarext/freehep-graphicsio-swf.jar
+$matlabroot/java/jarext/freehep-graphicsio-svg.jar
+$matlabroot/java/jarext/freehep-graphics-base.jar

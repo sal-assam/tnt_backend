@@ -11,4 +11,5 @@ pngoutput/
 matlab-json/*.log
 matlab-json/*.log
 shellscripts/sge_output*
-
+*.log
+*.err

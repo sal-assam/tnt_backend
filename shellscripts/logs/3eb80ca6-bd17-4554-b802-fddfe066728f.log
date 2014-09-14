@@ -1,0 +1,111 @@
+--------------------------------
+Generating MATLAB initialisation file
+--------------------------------
+--------------------------------
+Running TNT code from initialisation file
+--------------------------------
+TNT library, version 0.9.9.b1044
+Input file : <<</home/tntweb/tnt_backend/matlab-json/matlab_input/3eb80ca6-bd17-4554-b802-fddfe066728f.mat>>>
+Save directory : <<</home/tntweb/tnt_backend/matlab-json/matlab_output/3eb80ca6-bd17-4554-b802-fddfe066728f>>>
+Chi : default <<<-1>>> i.e. no truncation. 
+Loading string calculation_id = '3eb80ca6-bd17-4554-b802-fddfe066728f' 
+Loading parameter dotebd = 1
+Loading parameter dodmrg = 1
+Loading parameter chi = 20
+Loading parameter L = 10
+Loading parameter U1symm = 0
+Loading parameter h_numos = 1
+Loading parameter h_numnn = 1
+Loading parameter ex_numos = 2
+Loading parameter ex_numnn = 0
+Loading parameter ex_numcs = 0
+Loading parameter ex_numap = 0
+Loading parameter numsteps = 100
+Loading parameter dt =  0.010
+Loading string init_config = '0000011111' 
+Loading tntNode basisOp.
+Loading tntNode h_opos_1.
+Loading h_prmos[10] = { 1.0+0.0i, 1.0+0.0i, 1.0+0.0i, 1.0+0.0i, 1.0+0.0i, 1.0+0.0i, 1.0+0.0i, 1.0+0.0i, 1.0+0.0i, 1.0+0.0i}
+Loading tntNode h_opnnL_1.
+Loading tntNode h_opnnR_1.
+Loading h_prmnn[9] = { 1.0+0.0i, 1.0+0.0i, 1.0+0.0i, 1.0+0.0i, 1.0+0.0i, 1.0+0.0i, 1.0+0.0i, 1.0+0.0i, 1.0+0.0i}
+Loading tntNode ex_opos_1.
+Loading tntNode ex_opos_2.
+Loading string ex_oposlabel_1 = 'Sx' 
+Loading string ex_oposlabel_2 = 'Sz' 
+---------------------------------------
+Starting DMRG 
+---------------------------------------
+Saving simulation data to existing file [/home/tntweb/tnt_backend/matlab-json/matlab_output/3eb80ca6-bd17-4554-b802-fddfe066728f_operators.mat] ...
+Saving network mpo.
+Starting energy for randomly generated MPS is -0.153272. 
+Iteration 1: Energy is -2.75, difference is 2.597.
+Iteration 2: Energy is -2.75, difference is -8.882e-16.
+Saving simulation data to existing file [/home/tntweb/tnt_backend/matlab-json/matlab_output/3eb80ca6-bd17-4554-b802-fddfe066728f.mat] ...
+Saving array E.
+
+~~~~~~~          Onsite expectation values          ~~~~~~~~
+Sx[10] = { 0.0, 0.23, 0.0, 0.091, 0.0, 0.23, 0.0,-0.096,-0.038, 0.0}
+Saving array Sx.
+Sz[10] = {-0.50,-0.44,-0.50,-0.49,-0.50,-0.44,-0.50, 0.35,-0.36,-0.50}
+Saving array Sz.
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Saving simulation data to existing file [/home/tntweb/tnt_backend/matlab-json/matlab_output/3eb80ca6-bd17-4554-b802-fddfe066728f_operators.mat] ...
+Saving network wf_gs.
+Saving simulation data to existing file [/home/tntweb/tnt_backend/matlab-json/matlab_output/3eb80ca6-bd17-4554-b802-fddfe066728f.mat] ...
+Saving array E.
+---------------------------------------
+Starting TEBD 
+---------------------------------------
+
+~~~~~~~          Onsite expectation values          ~~~~~~~~
+Sx[10] = { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0}
+Saving array Sx_1.
+Sz[10] = { 0.50, 0.50, 0.50, 0.50, 0.50,-0.50,-0.50,-0.50,-0.50,-0.50}
+Saving array Sz_1.
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Completed 20 out of 100 steps. The truncation error is 0. 
+Saving array Sx_2.
+Saving array Sz_2.
+Completed 40 out of 100 steps. The truncation error is 0. 
+Saving array Sx_3.
+Saving array Sz_3.
+Completed 60 out of 100 steps. The truncation error is 0. 
+Saving array Sx_4.
+Saving array Sz_4.
+Completed 80 out of 100 steps. The truncation error is 0. 
+Saving array Sx_5.
+Saving array Sz_5.
+Completed 100 out of 100 steps. The truncation error is 0. 
+
+~~~~~~~          Onsite expectation values          ~~~~~~~~
+Sx[10] = { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0}
+Saving array Sx_6.
+Sz[10] = { 0.50, 0.50, 0.50, 0.50, 0.50,-0.50,-0.50,-0.50,-0.50,-0.50}
+Saving array Sz_6.
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Saving simulation data to existing file [/home/tntweb/tnt_backend/matlab-json/matlab_output/3eb80ca6-bd17-4554-b802-fddfe066728f_operators.mat] ...
+Saving network wf_evolved.
+Saving simulation data to existing file [/home/tntweb/tnt_backend/matlab-json/matlab_output/3eb80ca6-bd17-4554-b802-fddfe066728f.mat] ...
+Saving arrays extimes, truncerrs.
+It took 1 seconds to complete this task
+--------------------------------
+Generating JSON output file and images
+--------------------------------
+Warning: Objects of graph2d.lineseries class exist - not clearing this class
+or any of its superclasses
+Warning: Objects of scribe.colorbar class exist - not clearing this class
+or any of its superclasses
+Warning: Objects of graphics.panbehavior class exist - not clearing this class
+or any of its superclasses
+Warning: Objects of graphics.zoombehavior class exist - not clearing this class
+or any of its superclasses
+Warning: Objects of graphics.rotate3dbehavior class exist - not clearing this class
+or any of its superclasses
+Warning: Objects of graphics.datacursorbehavior class exist - not clearing this class
+or any of its superclasses
+Warning: Objects of graphics.ploteditbehavior class exist - not clearing this class
+or any of its superclasses
