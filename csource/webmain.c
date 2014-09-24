@@ -32,7 +32,7 @@ int main(int argc, char **argv)
     unsigned modifybasestate; /* flag to specify whether modifiers have been provided for the initial state */
     char init_config[TNT_STRLEN]; /* initial configuration to use for TEBD if not using ground state */
     unsigned L; /* Length of the network */
-    unsigned U1symm; /* Flag to specify whether symmetry information is turned on */
+    /* unsigned U1symm;*/ /* Flag to specify whether symmetry information is turned on. Currently disabled. */
     
     /* Network for the mpo */
     tntNetwork mpo; /* The network representing the matrix product operator for finding the ground state */
@@ -101,10 +101,8 @@ int main(int argc, char **argv)
     /* Load flags  */
     tntLoadParams(loadname, 4, 0, 0, &dodmrg, "dodmrg", 0, &dotebd, "dotebd", 0, &usegsfortebd, "usegsfortebd", 0, &modifybasestate, "modifybasestate", 0);
     
-    printf("Modify bases state = %d\n",modifybasestate);
-    
     /* Load general simulation parameters  */
-    tntLoadParams(loadname, 3, 0, 0, &chi, "chi", 0, &L, "L", 0, &U1symm, "U1symm", 0);
+    tntLoadParams(loadname, 2, 0, 0, &chi, "chi", 0, &L, "L", 0);
     
     /* Load parameters specifying number of operators */
     tntLoadParams(loadname, 6, 0, 0, &numos, "h_numos", 0, &numnn, "h_numnn", 0, &ex_numos, "ex_numos", 0, 
@@ -113,7 +111,9 @@ int main(int argc, char **argv)
     /* if tebd simulation is required, load the number of time steps and time step size, and the state to start the evolution from. */
     if (dotebd) {
         tntLoadParams(loadname, 1, 1, 0, &numsteps, "numsteps", 0, &(dtc.re), "dt", 0);
-        tntLoadStrings(loadname, 1, init_config, "init_config");
+        if (!usegsfortebd) {
+            tntLoadStrings(loadname, 1, init_config, "init_config");
+        }
     }
     
     /* Load and set the basis operator */
@@ -189,7 +189,7 @@ int main(int argc, char **argv)
             printf("Iteration %d: Energy is %4.4g, difference is %4.4g.\n", 2*i, E.vals[2*i],(E.vals[2*i-1] - E.vals[2*i]));
             
             /* Change the size of the array containing the energy each iteration */
-            E.sz = 2*i+1;
+            E.sz = E.numrows = 2*i+1;
             tntSaveArrays(saveprefix,"", 0, 1, 0, &E, "E");
             
             if (fabs(E.vals[2*i - 1] - E.vals[2*i]) < prec) {
@@ -236,6 +236,11 @@ int main(int argc, char **argv)
         
         /* ------- Apply modifiers to the base state --------------- */
         if (modifybasestate) {
+            
+            printf("---------------------------------------\n");
+            printf("Modifiying basis state before starting TEBD \n");
+            printf("---------------------------------------\n");
+            
             /* Load parameters specifying number of operators */
             tntLoadParams(loadname, 2, 0, 0, &mod_numos, "mod_numos", 0, &mod_numnn, "mod_numnn", 0);
             
@@ -260,7 +265,8 @@ int main(int argc, char **argv)
             mpo = tntMpsCreateMpo(L, mod_nnL, mod_nnR, mod_nnparam, mod_os, mod_osparam);
             
             /* Apply the MPO to the start state, truncating down to chi */
-            tntMpsMpoProduct(wf_start,mpo,chi);
+            err = tntMpsMpoProduct(wf_start,mpo,chi);
+            printf("Truncation error after applying operators to start state with chi = %d is %g.\n",chi,err);
             
             /* Free the MPO */
             tntNetworkFree(&mpo);

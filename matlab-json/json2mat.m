@@ -25,7 +25,7 @@ dotebd = sys.calculate_time_evolution;
 dodmrg = sys.calculate_ground_state;
 chi = sys.chi;
 L = sys.system_size;
-U1symm = sys.number_conservation;
+%U1symm = sys.number_conservation
 
 if (dotebd)
     numsteps = sys.num_time_steps;
@@ -33,13 +33,16 @@ if (dotebd)
 end
 
 if (strcmp(sys.system_type.name,'spin'))
-    if (strcmp(sys.system_type.extra_info.spin_magnitude,'half'))
-        TwoS = 1;
-        qnums = [1,-1];
+
+    if (isfield(sys.system_type.extra_info, 'spin_magnitude'))
+        TwoS = sys.system_type.extra_info.spin_magnitude;
     else
-        TwoS = 2;
-        qnums = [2, 0, -2];
+        TwoS = 1;
+        disp('Warning: No spin magnitude set in configuration, defaulting to S=1/2.');
     end
+    
+    %qnums = -TwoS:2:TwoS;
+
     basisOp = operators{3,TwoS}{1};
     d = TwoS;
 end
@@ -92,18 +95,14 @@ for loop=1:length(terms)
     end
 end
 
-% turn matrices of parameters to vectors
-if (h_numnn), h_prmnn = h_prmnn(:); end
-if (h_numos), h_prmos = h_prmos(:); end
-
 % set initial configuration
+usegsfortebd = 0;
 if (dotebd)
     basestate = pms.calculation.setup.initial_state.base_state.initial_base_state_id;
     if (0 == basestate)
         usegsfortebd = 1;
         dodmrg = 1;
     else
-        usegsfortebd = 0;
         init_config = create_base_states(basestate,L);
     end
 end
@@ -111,10 +110,11 @@ end
 
 % Set operators to apply to initial base state
 modifiers = pms.calculation.setup.initial_state.applied_operators;
-modifybasestate = ~isempty(modifiers);
+modifybasestate = 0;
 %initialise number of each type of term to zero
-if (modifybasestate)
-    mod_numnn = 0; mod_numnn_numos = 0;
+if (~isempty(modifiers))
+    modifybasestate = 1;
+    mod_numnn = 0; mod_numos = 0;
     for loop=1:length(modifiers)
         opid = modifiers{loop}.operator_id;
         

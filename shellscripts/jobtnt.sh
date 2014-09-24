@@ -1,8 +1,6 @@
 #!/bin/bash
 
-DIR_TNT=/share/apps/tnt/v0.9.9beta
-#DIR_TNT=/share/apps/tnt/v1.0.0
-
+DIR_TNT=/share/apps/tnt/v1.0.0
 
 DIR_JSON_IP=/home/tntweb/tnt_backend/matlab-json/json_input
 DIR_JSON_OP=/home/tntweb/tnt_backend/matlab-json/json_output
