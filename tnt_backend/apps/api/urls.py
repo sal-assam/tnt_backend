@@ -10,15 +10,15 @@ urlpatterns = patterns('',
 
     ### START OF API CALLS FOR MANIPULATING AND QUERYING CALCULATIONS DEFINITIONS ###
 
-    ### Info on progress of a given calculation ###
-    url(r'^calculation/progress/(?P<calculation_id>[^/]+)[/]?$', \
-        views.progress_of_calculation, \
-        name='progress_of_calculation'),
-
     ### JSON results structure for a given calculation ###
     url(r'^calculation/results/(?P<calculation_id>[^/]+)[/]?$', \
         views.results_of_calculation, \
         name='results_of_calculation'),
+
+    ### Delete all the results and setup files for a particular calculation if it exists ###
+    url(r'^calculation/delete/(?P<calculation_id>[^/]+)[/]?$', \
+        views.delete_calculation, \
+        name='delete_calculation'),
 
     ### POST a calculation JSON structure to this URL to run it ###
     url(r'^calculation/run[/]?$', \

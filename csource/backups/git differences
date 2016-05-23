@@ -1,0 +1,705 @@
+git diff --staged webmain.c 
+diff --git a/csource/webmain.c b/csource/webmain.c
+index 37b061f..41a8610 100644
+--- a/csource/webmain.c
++++ b/csource/webmain.c
+@@ -14,6 +14,7 @@ Date:    $LastChangedDate$
+ /* helper functions */
+ void twbLoadNodeArray(char *loadname, unsigned numelems, tntNodeArray *arr, const char *var_prefix, const char *nodeid);
+ void twbLoadStringArray(char *loadname, unsigned numelems, tntStringArray *arr, const char *var_prefix);
++tntNetwork twbMpsCreatePmpo(unsigned L, tntNodeArray *op, tntIntArray *sitenum);
+ 
+ int main(int argc, char **argv)
+ {
+@@ -26,18 +27,26 @@ int main(int argc, char **argv)
+     
+     /* Networks and variables for the MPS wave function */
+     tntNetwork wf_start; /* The original network */
+-    tntNetwork wf_gs; /* The ground state wave function */
++    tntNetwork wf_gs=NULL; /* The ground state wave function */
+     tntNetwork wf_evolved; /* The wave function evolved in time under system hamiltonian */
+-    unsigned usegsfortebd; /* flag to specify whether the ground state should be used as a base for the TEBD calculation */
++    unsigned usegsfortebd=0; /* flag to specify whether the ground state should be used as a base for the TEBD calculation */
+     unsigned modifybasestate; /* flag to specify whether modifiers have been provided for the initial state */
+     char init_config[TNT_STRLEN]; /* initial configuration to use for TEBD if not using ground state */
+     unsigned L; /* Length of the network */
+-    /* unsigned U1symm;*/ /* Flag to specify whether symmetry information is turned on. Currently disabled. */
++    tntIntArray qnums; /* quantum numbers for the physical leg */
+     
+-    /* Network for the mpo */
+-    tntNetwork mpo; /* The network representing the matrix product operator for finding the ground state */
++    /* General variables needed */
++    tntNode basisOp; /* Operator that defines the physical basis */
++    int chi; /* Maximum internal dimension for the simulations */
++    char loadname[TNT_STRLEN], saveprefix[TNT_STRLEN]; /* Name of the initialisation and save files */
++    char calc_id[TNT_STRLEN]; /* unique identifier given to the calculation */
++    unsigned D = 5; /* Default starting internal dimension for MPS for DMRG calculations */
++    unsigned i, j; /* Loop counters */
++    
++    /* Variable for the matrix product operators (the same variable is used for both the ground state Hamiltonian and the modifier MPO) */
++    tntNetwork mpo; /* The network representing the MPO */
+     
+-    /* Variables needed for creating the system Hamiltonian */
++    /* Variables needed for creating the system Hamiltonian (the same variables will be used for both dynamical Hamiltonian and ground state Hamiltonian) */
+     unsigned numos, numnn; /* Number of onsite and nearest neighbour operators */
+     tntComplexArray nnparams, osparams; /* parameters for creating the Hamiltonian */
+     tntComplexArray *nnparam=&nnparams, *osparam=&osparams;  /* pointers to the above structures */
+@@ -46,41 +55,52 @@ int main(int argc, char **argv)
+     
+     /* Variables needed for DMRG simulation */
+     unsigned dodmrg; /* flag to specify whether to run DMRG simulation */
++    unsigned U1symm_ground=0; /* Flag to specify whether symmetry information is turned on for ground state calculation */
++    int qn_tot; /* total quantum number of start state */
+     struct dbl_arr E; /* Array to hold value of the energy for each iteration, and array of the size of the number of iterations */
+     tntNodeArray HeffL, HeffR; /* Precontracted nodes for the right and left sides of the network. */
+-    unsigned i, i_max=30; /* iteration counter, maximum number of iterations */
+-    double prec = 1.0e-12; /* default precision for ground state calculation */
++    unsigned i_max=50; /* maximum number of iterations */
++    double precision; /* default precision for ground state calculation */
+     
+     /* Variables needed for creating the base state modifier */
+-    unsigned mod_numos, mod_numnn; /* Number of onsite and nearest neighbour operators */
+-    tntComplexArray mod_nnparams, mod_osparams; /* parameters for creating the modifier */
+-    tntComplexArray *mod_nnparam=&mod_nnparams, *mod_osparam=&mod_osparams;  /* pointers to the above structures */
+-    tntNodeArray mod_nnLs, mod_nnRs, mod_oss;  /* left and right nearest neighbour operators and onsite operators for creating the modifier */
+-    tntNodeArray *mod_nnL=&mod_nnLs, *mod_nnR=&mod_nnRs, *mod_os=&mod_oss;  /* pointers to the above structures */
++    unsigned mod_renorm; /* Flag to state whether the modified state should be renormalised */
++    unsigned mod_num_mpo; /* The number of MPOs that will be applied in sequence */
++    unsigned mod_num; /* Number of operators for this MPO (all onsite) */
++    unsigned modifypmpo; /* Flag to state whether the current MPO is a prodyct or sum MPO */
++    tntComplexArray mod_params; /* parameters for creating the sum modifier */
++    tntComplexArray *mod_param=&mod_params;  /* pointers to the above structure */
++    char mod_params_label[TNT_STRLEN]; /* Label for the variable to load - will have the MPO number as a suffix */
++    tntIntArray mod_sitenums; /* sitenumbers for creating the product modifier */
++    tntIntArray *mod_sitenum=&mod_sitenums;  /* pointers to the above structure */
++    char mod_sitenums_label[TNT_STRLEN]; /* Label for the variable to load - will have the MPO number as a suffix */
++    tntNodeArray mod_ops;  /* left and right nearest neighbour operators and onsite operators for creating the modifier */
++    tntNodeArray *mod_op=&mod_ops;  /* pointers to the above structures */
++    char mod_op_label[TNT_STRLEN]; /* Label for the variable to load - will have the MPO number as a suffix */
+     
+     /* Variables needed for creating the propagators for time evolution */
+-    /* (currently just same operators as for ground state) */
+     unsigned dotebd; /* flag to specify whether to run TEBD simulation */
++    unsigned U1symm_dyn; /* Flag to specify whether symmetry information is turned on for dynamic calculation */
+     unsigned numsteps; /* number of time steps */
+     tntComplex dtc; /* Complex time step */
+     tntNetwork prop; /* Network that makes up the propagator */
+     double err = 0.0; /* Truncation error from SVDs */
+-    unsigned bigsteps = 1; /* Number of 'bigsteps' or expectation values taken */
+-    unsigned tbigstep = 20; /* number of time steps per big step */
++    unsigned bigsteps = 1; /* Counter of the number of 'bigsteps' or expectation values so far taken */
++    unsigned numbigsteps; /* number of big time steps that will be carried out */
++    unsigned tbigstep; /* number of time steps per big step */
++    tntComplexArray nntparams, ostparams; /* parameters for temporal variation in operators */
++    tntComplexArray *nntparam=&nntparams, *ostparam=&ostparams;  /* pointers to parameters for temporal variation in operators */
++    tntComplexArray nnparams_step, osparams_step;  /* spatial parameters for current time step */
++    tntComplexArray *nnparam_step=&nnparams_step, *osparam_step=&osparams_step;  /* pointers to spatial parameters for current time step */
++    unsigned changed_params;
+     tntDoubleArray extimes; /* evolved time at each bigstep */
+     tntDoubleArray truncerrs; /* truncation error at each bigstep */
+     unsigned loop; /* loop over time steps */
++    unsigned calc_ol_gs, calc_ol_is; /* flags for whether or not to calculate overlaps with ground state or initial state */
+     
+     /* Variables needed for calculating expectation values */
+     tntMpsExOp ExOp; /* Structure for holding all the operators for calculating expectation values */
+     unsigned ex_numos, ex_numnn, ex_numcs, ex_numap; /* Number of expectation values to calculate of each type */
+-    
+-    /* General variables needed */
+-    tntNode basisOp; /* Operator that defines the physical basis */
+-    int chi; /* Maximum internal dimension for the simulations */
+-    char loadname[TNT_STRLEN], saveprefix[TNT_STRLEN]; /* Name of the initialisation and save files */
+-    char calc_id[TNT_STRLEN]; /* unique identifier given to the calculation */
+-    unsigned D = 5; /* Default starting internal dimension for MPS for DMRG calculations */
++    tntDoubleArray overlaps_gs, overlaps_is; /* arrays for holding the overlaps at each time step */
+     
+     /***********************************************************************************************/
+     /*                                        Load variables                                       */
+@@ -92,50 +112,21 @@ int main(int argc, char **argv)
+     /* Get the load name and save name from the command line parameters. All the other parameters will be loaded from the initialisation file. */
+     tntProcessCLOptions(argc,argv,loadname,NULL,saveprefix,&chi,NULL);
+     
+-    /* Set the truncation tolerance. This avoids minimisation errors in the ARPACk routines when finding ground states which require a much smaller internal dimension than chi */
++    /* Set the truncation tolerance. This avoids minimisation errors in the ARPACK routines when finding ground states which require a much smaller internal dimension than chi */
+     tntSVDTruncTolSet(1e-12);
+     
+     /* Load the calculation id */
+     tntLoadStrings(loadname, 1, calc_id, "calculation_id");
+     
+     /* Load flags  */
+-    tntLoadParams(loadname, 4, 0, 0, &dodmrg, "dodmrg", 0, &dotebd, "dotebd", 0, &usegsfortebd, "usegsfortebd", 0, &modifybasestate, "modifybasestate", 0);
++    tntLoadParams(loadname, 3, 0, 0, &dodmrg, "dodmrg", 0, &dotebd, "dotebd", 0, &usegsfortebd, "usegsfortebd", 0);
++    tntLoadParams(loadname, 3, 0, 0, &modifybasestate, "modifybasestate", 0, &calc_ol_gs, "calc_ol_gs", 0, &calc_ol_is, "calc_ol_is", 0);
+     
+     /* Load general simulation parameters  */
+     tntLoadParams(loadname, 2, 0, 0, &chi, "chi", 0, &L, "L", 0);
+     
+-    /* Load parameters specifying number of operators */
+-    tntLoadParams(loadname, 6, 0, 0, &numos, "h_numos", 0, &numnn, "h_numnn", 0, &ex_numos, "ex_numos", 0, 
+-                  &ex_numnn, "ex_numnn", 0, &ex_numcs, "ex_numcs", 0, &ex_numap, "ex_numap", 0);
+-    
+-    /* if tebd simulation is required, load the number of time steps and time step size, and the state to start the evolution from. */
+-    if (dotebd) {
+-        tntLoadParams(loadname, 1, 1, 0, &numsteps, "numsteps", 0, &(dtc.re), "dt", 0);
+-        if (!usegsfortebd) {
+-            tntLoadStrings(loadname, 1, init_config, "init_config");
+-        }
+-    }
+-    
+-    /* Load and set the basis operator */
+-    tntLoadNodes(loadname, 1, &basisOp, "basisOp", "oplabels");
+-    tntSysBasisOpSet(basisOp);
+-    
+-    /* Load operators and parameters needed for defining the system Hamiltonian if they exist */
+-    if (numos) {
+-        twbLoadNodeArray(loadname, numos, os, "h_opos", "oplabels");
+-        tntLoadArrays(loadname, 0, 0, 1, osparam, "h_prmos");
+-    } else {
+-        os = NULL; 
+-        osparam = NULL;
+-    }
+-    if (numnn) {
+-        twbLoadNodeArray(loadname, numnn, nnL, "h_opnnL", "oplabels");
+-        twbLoadNodeArray(loadname, numnn, nnR, "h_opnnR", "oplabels");
+-        tntLoadArrays(loadname, 0, 0, 1, nnparam, "h_prmnn");
+-    } else {
+-        nnL = nnR = NULL;
+-        nnparam = NULL;
+-    }
++    /* Load parameters specifying number of expectation value operators */
++    tntLoadParams(loadname, 4, 0, 0, &ex_numos, "ex_numos", 0, &ex_numnn, "ex_numnn", 0, &ex_numcs, "ex_numcs", 0, &ex_numap, "ex_numap", 0);
+     
+     /* Load operators for calculating expectation values */
+     twbLoadNodeArray(loadname, ex_numos, &(ExOp.ExOpOs), "ex_opos", "oplabels");
+@@ -149,6 +140,13 @@ int main(int argc, char **argv)
+     twbLoadStringArray(loadname, ex_numcs, &(ExOp.LbOp2cs), "ex_opcslabel");
+     twbLoadStringArray(loadname, ex_numap, &(ExOp.LbOp2ap), "ex_opaplabel");
+     
++    /* Load and set the basis operator */
++    tntLoadNodes(loadname, 1, &basisOp, "basisOp", "oplabels");
++    tntSysBasisOpSet(basisOp);
++    
++    /* free the basis operator (function makes copy of basis operator above) */
++    tntNodeFree(&basisOp);
++    
+     /***********************************************************************************************/
+     /*                                       DMRG Calculation                                      */
+     /***********************************************************************************************/
+@@ -159,13 +157,84 @@ int main(int argc, char **argv)
+         printf("Starting DMRG \n");
+         printf("---------------------------------------\n");
+         
+-        /* Create random start state */
+-        wf_gs = tntMpsCreateRandom(L, D);
++        tntLoadParams(loadname, 1, 0, 0, &U1symm_ground, "U1symm_ground", 0);
++        
++        /* If quantum number conservation is turned on for the ground state calculation, set the quantum numbers for the basis operator. This should ensure that any other functions create invariant operators */
++        if (U1symm_ground) {
++            
++            printf("Turning on number conservation... \n");
++            
++            /* Load array for quantum number labels, and variable for the total quantum number of the start state */
++            tntLoadArrays(loadname, 1, 0, 0, &qnums, "qnums");
++            tntLoadParams(loadname, 1, 0, 0, &qn_tot, "U1symm_num", 0);
++            
++            /* Set symmetry type for system */
++            tntSymmTypeSet("U(1)", 1);
++            
++            /* Set quanutm numbers on basis operator */
++            basisOp = tntSysBasisOpGet();
++            tntNodeSetQN(basisOp, TNT_MPS_U, &qnums, TNT_QN_OUT);
++            tntNodeSetQN(basisOp, TNT_MPS_D, &qnums, TNT_QN_IN);
++
++            /* Set quantum numbers on all the expectation value operators */
++            for (i = 0; i < ExOp.ExOpOs.sz; i++) {
++                tntNodeSetQN(ExOp.ExOpOs.vals[i], TNT_MPS_U, &qnums, TNT_QN_OUT);
++                tntNodeSetQN(ExOp.ExOpOs.vals[i], TNT_MPS_D, &qnums, TNT_QN_IN);
++            }
++            for (i = 0; i < ExOp.ExOp2nn.sz; i++) {
++                tntNodeSetQN(ExOp.ExOp2nn.vals[i], TNT_MPS_U, &qnums, TNT_QN_OUT);
++                tntNodeSetQN(ExOp.ExOp2nn.vals[i], TNT_MPS_D, &qnums, TNT_QN_IN);
++            }
++            for (i = 0; i < ExOp.ExOp2cs.sz; i++) {
++                tntNodeSetQN(ExOp.ExOp2cs.vals[i], TNT_MPS_U, &qnums, TNT_QN_OUT);
++                tntNodeSetQN(ExOp.ExOp2cs.vals[i], TNT_MPS_D, &qnums, TNT_QN_IN);
++            }
++            for (i = 0; i < ExOp.ExOp2ap.sz; i++) {
++                tntNodeSetQN(ExOp.ExOp2ap.vals[i], TNT_MPS_U, &qnums, TNT_QN_OUT);
++                tntNodeSetQN(ExOp.ExOp2ap.vals[i], TNT_MPS_D, &qnums, TNT_QN_IN);
++            }
++            
++            /* Free the quantum numbers */
++            tntIntArrayFree(&qnums);
++            
++            /* Create random start state with the correct total quantum number */
++            wf_gs = tntMpsCreateSymmRandom(L, &qn_tot);
++            
++        } else {
++            
++            /* Create a non-number conserving random start state */
++            wf_gs = tntMpsCreateRandom(L, D);
++        }
++        
++        /* Load the number of operators that make up the system Hamiltonian, and the precision required for the calculation */
++        tntLoadParams(loadname, 2, 1, 0, &numos, "h_numos_g", 0, &numnn, "h_numnn_g", 0, &precision, "precision", 0);
++        
++        /* Load operators and parameters needed for defining the system Hamiltonian if they exist */
++        if (numos) {
++            twbLoadNodeArray(loadname, numos, os, "h_opos_g", "oplabels");
++            tntLoadArrays(loadname, 0, 0, 1, osparam, "h_prmos_g");
++        } else {
++            os = NULL; 
++            osparam = NULL;
++        }
++        if (numnn) {
++            twbLoadNodeArray(loadname, numnn, nnL, "h_opnnL_g", "oplabels");
++            twbLoadNodeArray(loadname, numnn, nnR, "h_opnnR_g", "oplabels");
++            tntLoadArrays(loadname, 0, 0, 1, nnparam, "h_prmnn_g");
++        } else {
++            nnL = nnR = NULL;
++            nnparam = NULL;
++        }
+         
+         /* Create the MPO */
+         mpo = tntMpsCreateMpo(L, nnL, nnR, nnparam, os, osparam);
+         
+-        tntSaveNetwork(saveprefix,"_operators",mpo,"mpo");
++        /* Free the arrays used to create the MPO */
++        //tntNodeArrayFree(os);
++        //tntNodeArrayFree(nnL);
++        //tntNodeArrayFree(nnR);
++        //tntComplexArrayFree(osparam);
++        //tntComplexArrayFree(nnparam);
+         
+         /* Allocate memory for array to hold the energy values after each iteration */
+         E = tntDoubleArrayAlloc(2*i_max+1);
+@@ -192,8 +261,7 @@ int main(int argc, char **argv)
+             E.sz = E.numrows = 2*i+1;
+             tntSaveArrays(saveprefix,"", 0, 1, 0, &E, "E");
+             
+-            if (fabs(E.vals[2*i - 1] - E.vals[2*i]) < prec) {
+-                
++            if (fabs(E.vals[2*i - 1] - E.vals[2*i]) < precision) {
+                 break;
+             }
+         }
+@@ -201,19 +269,33 @@ int main(int argc, char **argv)
+         /* Find and output expectation values */
+         tntMpsExpecOutput(wf_gs, &ExOp, 0, 1, 1, saveprefix, 0);
+         
+-        /* Save the final network, and the energy at each iteration */
+-        tntSaveNetwork(saveprefix,"_operators",wf_gs,"wf_gs");
++        /* Save the energy at each iteration */
+         tntSaveArrays(saveprefix,"", 0, 1, 0, &E, "E");
+         
+         /*  Free all the dynamically allocated nodes and associated dynamically allocated arrays. */
+-        if (!usegsfortebd) {
++        if (!usegsfortebd && !calc_ol_gs) {
+             tntNetworkFree(&wf_gs);
+         }
+         tntNetworkFree(&mpo);
+         tntDoubleArrayFree(&E);
+         tntNodeArrayFree(&HeffL);
+         tntNodeArrayFree(&HeffR);
+-
++        if (numos) {
++            tntNodeArrayFree(os);
++            tntComplexArrayFree(osparam);
++        } else {
++            os = &oss;
++            osparam=&osparams;
++        }
++        if (numnn) {
++            tntNodeArrayFree(nnL);
++            tntNodeArrayFree(nnR);
++            tntComplexArrayFree(nnparam);
++        } else {
++            nnL = &nnLs;
++            nnR = &nnRs;
++            nnparam = &nnparams;
++        }
+     }
+     
+     /***********************************************************************************************/
+@@ -222,81 +304,265 @@ int main(int argc, char **argv)
+     
+     if (dotebd) {
+         
+-        tntTruncType("sumsquares");
++        /* Determine whether QN should be used for TEBD calculation */
++        tntLoadParams(loadname, 1, 0, 0, &U1symm_dyn, "U1symm_dyn", 0);
+         
+-        tntSysBasisOpSet(basisOp);
++        if ((U1symm_ground)&&(!U1symm_dyn)) { 
++            /* If symmetries are already enforced from GS calculation, but shouldn't be enforced for time evolution, turn symmetry conservation off */
++            printf("Turning off number conservation... \n");
++            tntSymmTypeUnset();
++        } else if ((!U1symm_ground)&&(U1symm_dyn)) {
++            /* If symmetry conservation is not already turned on, but needs to be turned on for time evolution, then turn it on */
++            printf("Turning on number conservation... \n");
++            
++            /* Load array for quantum number labels, and variable for the total quantum number of the start state */
++            tntIntArray qnums;
++            tntLoadArrays(loadname, 1, 0, 0, &qnums, "qnums");
++            
++            /* Set symmetry type for system */
++            tntSymmTypeSet("U(1)", 1);
++            
++            /* Set quantum numbers on basis operator */
++            basisOp = tntSysBasisOpGet();
++            tntNodeSetQN(basisOp, TNT_MPS_U, &qnums, TNT_QN_OUT);
++            tntNodeSetQN(basisOp, TNT_MPS_D, &qnums, TNT_QN_IN);
++            
++            /* Set quantum numbers on all the expectation value operators */
++            for (i = 0; i < ExOp.ExOpOs.sz; i++) {
++                tntNodeSetQN(ExOp.ExOpOs.vals[i], TNT_MPS_U, &qnums, TNT_QN_OUT);
++                tntNodeSetQN(ExOp.ExOpOs.vals[i], TNT_MPS_D, &qnums, TNT_QN_IN);
++            }
++            for (i = 0; i < ExOp.ExOp2nn.sz; i++) {
++                tntNodeSetQN(ExOp.ExOp2nn.vals[i], TNT_MPS_U, &qnums, TNT_QN_OUT);
++                tntNodeSetQN(ExOp.ExOp2nn.vals[i], TNT_MPS_D, &qnums, TNT_QN_IN);
++            }
++            for (i = 0; i < ExOp.ExOp2cs.sz; i++) {
++                tntNodeSetQN(ExOp.ExOp2cs.vals[i], TNT_MPS_U, &qnums, TNT_QN_OUT);
++                tntNodeSetQN(ExOp.ExOp2cs.vals[i], TNT_MPS_D, &qnums, TNT_QN_IN);
++            }
++            for (i = 0; i < ExOp.ExOp2ap.sz; i++) {
++                tntNodeSetQN(ExOp.ExOp2ap.vals[i], TNT_MPS_U, &qnums, TNT_QN_OUT);
++                tntNodeSetQN(ExOp.ExOp2ap.vals[i], TNT_MPS_D, &qnums, TNT_QN_IN);
++            }
++            
++            /* Free the quantum numbers */
++            tntIntArrayFree(&qnums);
++                
++        }
++        /* In any other case, no action needs to be taken */
++        
++        /* Load the number of time steps and time step size, overlap flag, and the state to start the evolution from. */
++        tntLoadParams(loadname, 2, 1, 0, &numsteps, "numsteps", 0, &tbigstep, "bigstep", 0, &(dtc.re), "dt", 0);
++        if (!usegsfortebd) {
++            tntLoadStrings(loadname, 1, init_config, "init_config");
++        }
++        
++        
++        tntTruncType("sumsquares");
+         
+         /* ------- Create a starting state from the initial configuration or use ground state --------- */
+         if (usegsfortebd) {
+-            wf_start = wf_gs;
++            if (calc_ol_gs) {
++                wf_start = tntNetworkCopy(wf_gs);
++            } else {
++                wf_start = wf_gs;
++            }
+         } else {
+             wf_start = tntMpsCreateConfig(L, init_config);
+         }
+-        wf_evolved = tntNetworkCopy(wf_start);
+-        
+-        /* ------- Apply modifiers to the base state --------------- */
++        /***********************************************************************************************/
++        /*                              Apply modifiers to the base state                              */
++        /***********************************************************************************************/
+         if (modifybasestate) {
+             
+             printf("---------------------------------------\n");
+             printf("Modifiying basis state before starting TEBD \n");
+             printf("---------------------------------------\n");
+             
+-            /* Load parameters specifying number of operators */
+-            tntLoadParams(loadname, 2, 0, 0, &mod_numos, "mod_numos", 0, &mod_numnn, "mod_numnn", 0);
++            /* Load parameters specifying number of system-wide operators, and wether to renormalise after applying them */
++            tntLoadParams(loadname, 2, 0, 0, &mod_num_mpo, "mod_num_mpo", 0, &mod_renorm, "mod_renorm", 0);
+             
+-            /* Load operators and parameters needed for defining the MPO to apply to the base state */
+-            if (mod_numos) {
+-                twbLoadNodeArray(loadname, mod_numos, mod_os, "mod_opos", "oplabels");
+-                tntLoadArrays(loadname, 0, 0, 1, mod_osparam, "mod_prmos");
+-            } else {
+-                mod_os = NULL;
+-                mod_osparam = NULL;
+-            }
+-            if (numnn) {
+-                twbLoadNodeArray(loadname, mod_numnn, mod_nnL, "mod_opnnL", "oplabels");
+-                twbLoadNodeArray(loadname, mod_numnn, mod_nnR, "mod_opnnR", "oplabels");
+-                tntLoadArrays(loadname, 0, 0, 1, mod_nnparam, "mod_prmnn");
+-            } else {
+-                mod_nnL = mod_nnR = NULL;
+-                mod_nnparam = NULL;
+-            }
+-            
+-            /* Create the MPO */
+-            mpo = tntMpsCreateMpo(L, mod_nnL, mod_nnR, mod_nnparam, mod_os, mod_osparam);
++            /* reset truncation error */
++            err = 0.0;
+             
+-            /* Apply the MPO to the start state, truncating down to chi */
+-            err = tntMpsMpoProduct(wf_start,mpo,chi);
+-            printf("Truncation error after applying operators to start state with chi = %d is %g.\n",chi,err);
++            /* Apply each modifier to the starting state, in each case append suffix to each variable name before loading  */
++            for (i = 1; i <= mod_num_mpo; i++) {
++                
++                /* Load number of single site oeprators in this MPO, and whether it is a product or sum MPO */
++                tntLoadParams(loadname, 2, 0, 0, &modifypmpo, "modifypmpo", i-1, &mod_num, "mod_num", i-1);
++                
++                /* Load operators for defining the MPO to apply to the base state */
++                sprintf(mod_op_label,"%s_%d", "mod_op", i);
++                twbLoadNodeArray(loadname, mod_num, mod_op, mod_op_label, "oplabels");
++                
++                /* Create the MPO */
++                if (modifypmpo) {
++                    sprintf(mod_sitenums_label,"%s_%d", "mod_sitenum", i);
++                    tntLoadArrays(loadname, 1, 0, 0, mod_sitenum, mod_sitenums_label);
++                    mpo = twbMpsCreatePmpo(L, mod_op, mod_sitenum);
++                    tntIntArrayFree(mod_sitenum);
++                } else {
++                    sprintf(mod_params_label,"%s_%d", "mod_prm", i);
++                    tntLoadArrays(loadname, 0, 0, 1, mod_param, mod_params_label);
++                    mpo = tntMpsCreateMpo(L, NULL,  NULL, NULL, mod_op, mod_param);
++                    tntComplexArrayFree(mod_param);
++                }
++                
++                tntNodeArrayFree(mod_op);
++                
++                /* Apply the MPO to the start state, truncating down to chi */
++                err += tntMpsMpoProduct(wf_start,mpo,chi);
++                
++                /* Free the MPO */
++                tntNetworkFree(&mpo);
++            }
+             
+-            /* Free the MPO */
+-            tntNetworkFree(&mpo);
++            /* save the truncation error for reference */
++            tntSaveParams(saveprefix,"", 0, 1, 0, err, "modifier_err");
+             
++            /* Renormalise the MPS if the flag is given */
++            if (mod_renorm) {
++                double normsq;
++                
++                /* First make sure the orthonormality centre is on the first site */
++                tntMpsOrth(wf_start,0);
++                
++                /* Find the norm squared */
++                normsq = tntMpsSelfProduct(wf_start,0);
++                
++                /* Scale the first node appropriately */
++                tntNodeScaleReal(tntNodeFindFirst(wf_start), 1.0/sqrt(normsq));
++            }
+         }
+         
+         
+         /* -------- Do time evolution  --------------- */
+         
+-        /* Create Suzuki Trotter second order staircase propagator */
+-        prop = tntMpsCreatePropST2sc(L, dtc, nnL, nnR, nnparam, os, osparam);
++        /* Load the number of operators that make up the system Hamiltonian */
++        tntLoadParams(loadname, 2, 0, 0, &numos, "h_numos_d", 0, &numnn, "h_numnn_d", 0);
++        
++        /* Load operators and parameters needed for defining the system Hamiltonian if they exist */
++        if (numos) {
++            printf("Loading on site operators\n");
++            twbLoadNodeArray(loadname, numos, os, "h_opos_d", "oplabels");
++            printf("Loading on site paramters\n");
++            tntLoadArrays(loadname, 0, 0, 2, osparam, "h_prmos_d", ostparam, "h_prmos_t");
++        } else {
++            os = NULL; 
++            osparam = ostparam = osparam_step = NULL;
++        }
++        if (numnn) {
++            printf("Loading nn operators\n");
++            twbLoadNodeArray(loadname, numnn, nnL, "h_opnnL_d", "oplabels"); 
++            twbLoadNodeArray(loadname, numnn, nnR, "h_opnnR_d", "oplabels");
++            printf("Loading nn paramters\n");
++            tntLoadArrays(loadname, 0, 0, 2, nnparam, "h_prmnn_d", nntparam, "h_prmnn_t");
++        } else {
++            nnL = nnR = NULL;
++            nnparam = nntparam = nnparam_step = NULL;
++        }
+         
+         printf("---------------------------------------\n");
+         printf("Starting TEBD \n");
+         printf("---------------------------------------\n");
+         
++        
++        if (calc_ol_is) {
++            /* Create copy of start state for evolution if the start state is needed for overlap calculations */
++            wf_evolved = tntNetworkCopy(wf_start);
++        } else {
++            /* Otherwise simply assign start state */
++            wf_evolved = wf_start;
++        }
++        
++        /* Calculate total number of big time steps there will be */
++        numbigsteps = numsteps/tbigstep+((numsteps%tbigstep)?2:1);
++        
+         /* Allocate memory to hold the evolved time each time the expectation value is taken */
+-        extimes = tntDoubleArrayAlloc(numsteps/tbigstep+((numsteps%tbigstep)?2:1));
+-        truncerrs = tntDoubleArrayAlloc(numsteps/tbigstep+((numsteps%tbigstep)?2:1));
++        extimes = tntDoubleArrayAlloc(numbigsteps);
++        truncerrs = tntDoubleArrayAlloc(numbigsteps);
+         
++        /* If overlap calculation is required, allocate an array to hold the values */
++        if (calc_ol_gs) {
++            overlaps_gs = tntDoubleArrayAlloc(numbigsteps);
++        }
++        if (calc_ol_is) {
++            overlaps_is = tntDoubleArrayAlloc(numbigsteps);
++        }
++            
+         /* Calculate initial expectation values */
+         tntMpsExpecOutput(wf_evolved, &ExOp, 0, 1, 1, saveprefix, bigsteps);
+         extimes.vals[0] = 0.0;
+         truncerrs.vals[0] = 0.0;
++        if (calc_ol_gs) {
++            overlaps_gs.vals[0] = tntComplexToReal(tntMpsMpsProduct(wf_gs,wf_evolved));
++        }
++        if (calc_ol_is) {
++            overlaps_is.vals[0] = tntComplexToReal(tntMpsMpsProduct(wf_start,wf_evolved));
++        }
+         
+         /* Set error to zero */
+         err = 0.0;
+         
+         /* Run the simulation for all the time steps. */
+         for (loop = 1; loop <= numsteps; loop++) {
++            
++            /* Check whether there are a new set of time dependent parameters */
++            if (1 == loop) {
++                changed_params = 1;
++                if (NULL != nnparam) {
++                    nnparams_step = tntComplexArrayAlloc(nnparam->numrows,nnparam->numcols);
++                }
++                if (NULL != osparam) {
++                    osparams_step = tntComplexArrayAlloc(osparam->numrows,osparam->numcols);
++                }
++            } else {
++                changed_params = 0;
++                if (NULL != nnparam) {
++                    for (i = 0; i < nntparam->numrows; i++) {
++                        if (nntparam->vals[i + nntparam->numrows * (loop-1)].re != nntparam->vals[i + nntparam->numrows * (loop-2)].re) {
++                            changed_params = 1;
++                            break;
++                        }
++                    }
++                }
++                if ((0 == changed_params) && NULL != osparam) {
++                    for (i = 0; i < ostparam->numrows; i++) {
++                        if (ostparam->vals[i + ostparam->numrows * (loop-1)].re != ostparam->vals[i + ostparam->numrows * (loop-2)].re) {
++                            changed_params = 1;
++                            break;
++                        }
++                    }
++                }
++            }
++            
++            if (1 == changed_params) {
++                /* reassign parameters for this time step */
++                
++                if (NULL != nnparam) {
++                    for (i = 0; i < nnparam->numrows; i++) { /* Row counter is for terms */
++                        for (j = 0; j < nnparam->numcols; j++) { /* column counter is for sites */
++                            nnparam_step->vals[i + nnparam->numrows * j].re = nnparam->vals[i + nnparam->numrows * j].re * nntparam->vals[i + nntparam->numrows * (loop-1)].re;
++                        }
++                    }
++                }
++                if (NULL != osparam) {
++                    
++                    for (i = 0; i < osparam->numrows; i++) { /* Row counter is for terms */
++                        for (j = 0; j < osparam->numcols; j++) { /* column counter is for sites */
++                            osparam_step->vals[i + osparam->numrows * j].re = osparam->vals[i + osparam->numrows * j].re * ostparam->vals[i + ostparam->numrows * (loop-1)].re;
++                        }
++                    }
++                }
++        
++            //tntComplexArrayPrint(*osparam_step);
++            //  tntComplexArrayPrint(*nnparam_step);
++                
++                
++                /* Create Suzuki Trotter second order staircase propagator */
++                prop = tntMpsCreatePropST2sc(L, dtc, nnL, nnR, nnparam_step, os, osparam_step);
++            }
++            
+             /* Sweep right to left then left to right */
+             err += tntMpsPropST2scProduct(wf_evolved, prop, chi);
+             
+@@ -306,70 +572,33 @@ int main(int argc, char **argv)
+                 extimes.vals[bigsteps] = loop*dtc.re;
+                 truncerrs.vals[bigsteps] = err;
+                 
++                printf("Completed %d out of %d steps. The truncation error is %g. \n", loop, numsteps, err);
++                if (calc_ol_gs) {
++                    overlaps_gs.vals[bigsteps] = tntComplexToReal(tntMpsMpsProduct(wf_gs,wf_evolved));
++                    tntSaveArrays(saveprefix,"", 0, 1, 0, &overlaps_gs, "overlaps_gs");
++                }
++                if (calc_ol_is) {
++                    overlaps_is.vals[bigsteps] = tntComplexToReal(tntMpsMpsProduct(wf_start,wf_evolved));
++                    tntSaveArrays(saveprefix,"", 0, 1, 0, &overlaps_is, "overlaps_is");
++                }
++                
+                 /* increment counter of number of big steps */
+                 bigsteps++;
+                 
+-                printf("Completed %d out of %d steps. The truncation error is %g. \n", loop, numsteps, err);
+                 /* Find and print expectation values, updating the counter (last argument) */
+                 tntMpsExpecOutput(wf_evolved, &ExOp, 0, (loop == numsteps), 1, saveprefix, bigsteps);
+-                
++
+             }
+         }
+         
+-        /*  Save the wave function */
+-        tntSaveNetwork(saveprefix,"_operators", wf_evolved, "wf_evolved");
+-        
+         /* Save the time at each iteration */
+         tntSaveArrays(saveprefix,"",0,2,0, &extimes, "extimes",&truncerrs,"truncerrs");
+-        
+-        /*  Free all the dynamically allocated nodes and associated dynamically allocated arrays. */
+-        tntNetworkFree(&wf_evolved);
+-        tntNetworkFree(&wf_start);
+-        tntNetworkFree(&prop);
+     }
+ 
+-    /* Free dynamically allocated arrays */
+-    tntMpsExOpFree(&ExOp);
+-
+     /* Finalise calculation */
+     tntFinalize();
+ 
+     return 0;
+ }
+ 
+-/* Put this back in when QN supported again on interface */
+-/* If quantum number conservation is turned on, set the quantum numbers for the basis operator. This should ensure that any other functions create invariant operators */
+-//if (U1symm) {
+-//    /* Load array for quantum number labels */
+-//    tntIntArray qnums;
+-//    tntLoadArrays(loadname, 1, 0, 0, &qnums, "qnums");
+-//    
+-//    /* Set symmetry type for system */
+-//    tntSymmTypeSet("U(1)", 1);
+-//    
+-//    /* Set quanutm numbers on basis operators */
+-//    tntNodeSetQN(basisOp, TNT_MPS_U, &qnums, TNT_QN_OUT);
+-//    tntNodeSetQN(basisOp, TNT_MPS_D, &qnums, TNT_QN_IN);
+-//    
+-//    /* Set quantum numbers on all the expectation value operators */
+-//    for (i = 0; i < ExOp.ExOpOs.sz; i++) {
+-//        tntNodeSetQN(ExOp.ExOpOs.vals[i], TNT_MPS_U, &qnums, TNT_QN_OUT);
+-//        tntNodeSetQN(ExOp.ExOpOs.vals[i], TNT_MPS_D, &qnums, TNT_QN_IN);
+-//    }
+-//    for (i = 0; i < ExOp.ExOp2nn.sz; i++) {
+-//        tntNodeSetQN(ExOp.ExOp2nn.vals[i], TNT_MPS_U, &qnums, TNT_QN_OUT);
+-//        tntNodeSetQN(ExOp.ExOp2nn.vals[i], TNT_MPS_D, &qnums, TNT_QN_IN);
+-//    }
+-//    for (i = 0; i < ExOp.ExOp2cs.sz; i++) {
+-//        tntNodeSetQN(ExOp.ExOp2cs.vals[i], TNT_MPS_U, &qnums, TNT_QN_OUT);
+-//        tntNodeSetQN(ExOp.ExOp2cs.vals[i], TNT_MPS_D, &qnums, TNT_QN_IN);
+-//    }
+-//    for (i = 0; i < ExOp.ExOp2ap.sz; i++) {
+-//        tntNodeSetQN(ExOp.ExOp2ap.vals[i], TNT_MPS_U, &qnums, TNT_QN_OUT);
+-//        tntNodeSetQN(ExOp.ExOp2ap.vals[i], TNT_MPS_D, &qnums, TNT_QN_IN);
+-//    }
+-//    
+-//    /* Free the quantum numbers */
+-//    tntIntArrayFree(&qnums);
+-//}

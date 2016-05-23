@@ -1,0 +1,2479 @@
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Addr8
+   fun:__kmp_external___intel_sse2_strlen
+   fun:__kmp_env_get
+   fun:_Z26__kmp_do_serial_initializev
+   fun:__kmp_get_global_thread_id_reg
+   fun:__kmpc_global_thread_num
+   fun:tensor_reshape
+   fun:tensor_fuse
+   fun:tensor_contract
+   fun:tnode_contract
+   fun:tntNodeContract
+   fun:tntMpsCreateMpo
+   fun:tntMpsProcessInitOptions
+}
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Addr8
+   fun:__kmp_external___intel_sse2_strlen
+   fun:__kmp_env_blk_init
+   fun:_Z20__kmp_env_initializePKc
+   fun:_Z26__kmp_do_serial_initializev
+   fun:__kmp_get_global_thread_id_reg
+   fun:__kmpc_global_thread_num
+   fun:tensor_reshape
+   fun:tensor_fuse
+   fun:tensor_contract
+   fun:tnode_contract
+   fun:tntNodeContract
+   fun:tntMpsCreateMpo
+}
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Addr8
+   fun:__kmp_env_blk_init
+   fun:_Z20__kmp_env_initializePKc
+   fun:_Z26__kmp_do_serial_initializev
+   fun:__kmp_get_global_thread_id_reg
+   fun:__kmpc_global_thread_num
+   fun:tensor_reshape
+   fun:tensor_fuse
+   fun:tensor_contract
+   fun:tnode_contract
+   fun:tntNodeContract
+   fun:tntMpsCreateMpo
+   fun:tntMpsProcessInitOptions
+}
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Addr8
+   fun:__kmp_external___intel_sse2_strlen
+   fun:__kmp_env_blk_init
+   fun:_Z20__kmp_env_initializePKc
+   fun:_Z26__kmp_do_serial_initializev
+   fun:__kmp_get_global_thread_id_reg
+   fun:__kmpc_global_thread_num
+   fun:tensor_reshape
+   fun:tensor_fuse
+   fun:tensor_contract
+   fun:tnode_contract
+   fun:tntNodeContract
+   fun:tntMpsCreateMpo
+}
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Addr8
+   fun:__kmp_env_blk_init
+   fun:_Z20__kmp_env_initializePKc
+   fun:_Z26__kmp_do_serial_initializev
+   fun:__kmp_get_global_thread_id_reg
+   fun:__kmpc_global_thread_num
+   fun:tensor_reshape
+   fun:tensor_fuse
+   fun:tensor_contract
+   fun:tnode_contract
+   fun:tntNodeContract
+   fun:tntMpsCreateMpo
+   fun:tntMpsProcessInitOptions
+}
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Param
+   sched_setaffinity(mask)
+   fun:syscall
+   fun:__kmp_affinity_determine_capable
+   fun:_Z20__kmp_env_initializePKc
+   fun:_Z26__kmp_do_serial_initializev
+   fun:__kmp_get_global_thread_id_reg
+   fun:__kmpc_global_thread_num
+   fun:tensor_reshape
+   fun:tensor_fuse
+   fun:tensor_contract
+   fun:tnode_contract
+   fun:tntNodeContract
+   fun:tntMpsCreateMpo
+}
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Addr8
+   fun:__kmp_external___intel_sse2_strlen
+   fun:__kmp_env_blk_init
+   fun:_Z25__kmp_asat_env_initializePKc
+   fun:_Z26__kmp_do_serial_initializev
+   fun:__kmp_get_global_thread_id_reg
+   fun:__kmpc_global_thread_num
+   fun:tensor_reshape
+   fun:tensor_fuse
+   fun:tensor_contract
+   fun:tnode_contract
+   fun:tntNodeContract
+   fun:tntMpsCreateMpo
+}
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Addr8
+   fun:__kmp_env_blk_init
+   fun:_Z25__kmp_asat_env_initializePKc
+   fun:_Z26__kmp_do_serial_initializev
+   fun:__kmp_get_global_thread_id_reg
+   fun:__kmpc_global_thread_num
+   fun:tensor_reshape
+   fun:tensor_fuse
+   fun:tensor_contract
+   fun:tnode_contract
+   fun:tntNodeContract
+   fun:tntMpsCreateMpo
+   fun:tntMpsProcessInitOptions
+}
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Addr8
+   fun:__kmp_external___intel_sse2_strlen
+   fun:__kmp_env_blk_init
+   fun:_Z25__kmp_asat_env_initializePKc
+   fun:_Z26__kmp_do_serial_initializev
+   fun:__kmp_get_global_thread_id_reg
+   fun:__kmpc_global_thread_num
+   fun:tensor_reshape
+   fun:tensor_fuse
+   fun:tensor_contract
+   fun:tnode_contract
+   fun:tntNodeContract
+   fun:tntMpsCreateMpo
+}
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Addr8
+   fun:__kmp_env_blk_init
+   fun:_Z25__kmp_asat_env_initializePKc
+   fun:_Z26__kmp_do_serial_initializev
+   fun:__kmp_get_global_thread_id_reg
+   fun:__kmpc_global_thread_num
+   fun:tensor_reshape
+   fun:tensor_fuse
+   fun:tensor_contract
+   fun:tnode_contract
+   fun:tntNodeContract
+   fun:tntMpsCreateMpo
+   fun:tntMpsProcessInitOptions
+}
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Cond
+   fun:__kmp_external___intel_sse2_strncmp
+   fun:_Z33__kmp_affinity_create_cpuinfo_mapPP11AddrUnsPairPiP11kmp_i18n_idP8_IO_FILE
+   fun:__kmp_affinity_initialize
+   fun:__kmp_fork_call
+   fun:__kmpc_fork_call
+   fun:tensor_reshape
+   fun:tensor_fuse
+   fun:tensor_contract
+   fun:tnode_contract
+   fun:tntNodeContract
+   fun:tntMpsCreateMpo
+   fun:tntMpsProcessInitOptions
+}
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Cond
+   fun:__kmp_external___intel_sse2_strncmp
+   fun:_Z33__kmp_affinity_create_cpuinfo_mapPP11AddrUnsPairPiP11kmp_i18n_idP8_IO_FILE
+   fun:__kmp_affinity_initialize
+   fun:__kmp_fork_call
+   fun:__kmpc_fork_call
+   fun:tensor_reshape
+   fun:tensor_fuse
+   fun:tensor_contract
+   fun:tnode_contract
+   fun:tntNodeContract
+   fun:tntMpsCreateMpo
+   fun:tntMpsProcessInitOptions
+}
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Cond
+   fun:__kmp_external___intel_sse2_strncmp
+   fun:_Z33__kmp_affinity_create_cpuinfo_mapPP11AddrUnsPairPiP11kmp_i18n_idP8_IO_FILE
+   fun:__kmp_affinity_initialize
+   fun:__kmp_fork_call
+   fun:__kmpc_fork_call
+   fun:tensor_reshape
+   fun:tensor_fuse
+   fun:tensor_contract
+   fun:tnode_contract
+   fun:tntNodeContract
+   fun:tntMpsCreateMpo
+   fun:tntMpsProcessInitOptions
+}
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Cond
+   fun:__kmp_external___intel_sse2_strncmp
+   fun:_Z33__kmp_affinity_create_cpuinfo_mapPP11AddrUnsPairPiP11kmp_i18n_idP8_IO_FILE
+   fun:__kmp_affinity_initialize
+   fun:__kmp_fork_call
+   fun:__kmpc_fork_call
+   fun:tensor_reshape
+   fun:tensor_fuse
+   fun:tensor_contract
+   fun:tnode_contract
+   fun:tntNodeContract
+   fun:tntMpsCreateMpo
+   fun:tntMpsProcessInitOptions
+}
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Cond
+   fun:__kmp_external___intel_sse2_strncmp
+   fun:_Z33__kmp_affinity_create_cpuinfo_mapPP11AddrUnsPairPiP11kmp_i18n_idP8_IO_FILE
+   fun:__kmp_affinity_initialize
+   fun:__kmp_fork_call
+   fun:__kmpc_fork_call
+   fun:tensor_reshape
+   fun:tensor_fuse
+   fun:tensor_contract
+   fun:tnode_contract
+   fun:tntNodeContract
+   fun:tntMpsCreateMpo
+   fun:tntMpsProcessInitOptions
+}
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Cond
+   fun:__kmp_external___intel_sse2_strncmp
+   fun:_Z33__kmp_affinity_create_cpuinfo_mapPP11AddrUnsPairPiP11kmp_i18n_idP8_IO_FILE
+   fun:__kmp_affinity_initialize
+   fun:__kmp_fork_call
+   fun:__kmpc_fork_call
+   fun:tensor_reshape
+   fun:tensor_fuse
+   fun:tensor_contract
+   fun:tnode_contract
+   fun:tntNodeContract
+   fun:tntMpsCreateMpo
+   fun:tntMpsProcessInitOptions
+}
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Cond
+   fun:__kmp_external___intel_sse2_strncmp
+   fun:_Z33__kmp_affinity_create_cpuinfo_mapPP11AddrUnsPairPiP11kmp_i18n_idP8_IO_FILE
+   fun:__kmp_affinity_initialize
+   fun:__kmp_fork_call
+   fun:__kmpc_fork_call
+   fun:tensor_reshape
+   fun:tensor_fuse
+   fun:tensor_contract
+   fun:tnode_contract
+   fun:tntNodeContract
+   fun:tntMpsCreateMpo
+   fun:tntMpsProcessInitOptions
+}
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Cond
+   fun:__kmp_external___intel_sse2_strncmp
+   fun:_Z33__kmp_affinity_create_cpuinfo_mapPP11AddrUnsPairPiP11kmp_i18n_idP8_IO_FILE
+   fun:__kmp_affinity_initialize
+   fun:__kmp_fork_call
+   fun:__kmpc_fork_call
+   fun:tensor_reshape
+   fun:tensor_fuse
+   fun:tensor_contract
+   fun:tnode_contract
+   fun:tntNodeContract
+   fun:tntMpsCreateMpo
+   fun:tntMpsProcessInitOptions
+}
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Cond
+   fun:__kmp_external___intel_sse2_strncmp
+   fun:_Z33__kmp_affinity_create_cpuinfo_mapPP11AddrUnsPairPiP11kmp_i18n_idP8_IO_FILE
+   fun:__kmp_affinity_initialize
+   fun:__kmp_fork_call
+   fun:__kmpc_fork_call
+   fun:tensor_reshape
+   fun:tensor_fuse
+   fun:tensor_contract
+   fun:tnode_contract
+   fun:tntNodeContract
+   fun:tntMpsCreateMpo
+   fun:tntMpsProcessInitOptions
+}
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Cond
+   fun:__kmp_external___intel_sse2_strncmp
+   fun:_Z33__kmp_affinity_create_cpuinfo_mapPP11AddrUnsPairPiP11kmp_i18n_idP8_IO_FILE
+   fun:__kmp_affinity_initialize
+   fun:__kmp_fork_call
+   fun:__kmpc_fork_call
+   fun:tensor_reshape
+   fun:tensor_fuse
+   fun:tensor_contract
+   fun:tnode_contract
+   fun:tntNodeContract
+   fun:tntMpsCreateMpo
+   fun:tntMpsProcessInitOptions
+}
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Cond
+   fun:__kmp_external___intel_sse2_strncmp
+   fun:_Z33__kmp_affinity_create_cpuinfo_mapPP11AddrUnsPairPiP11kmp_i18n_idP8_IO_FILE
+   fun:__kmp_affinity_initialize
+   fun:__kmp_fork_call
+   fun:__kmpc_fork_call
+   fun:tensor_reshape
+   fun:tensor_fuse
+   fun:tensor_contract
+   fun:tnode_contract
+   fun:tntNodeContract
+   fun:tntMpsCreateMpo
+   fun:tntMpsProcessInitOptions
+}
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Cond
+   fun:__kmp_external___intel_sse2_strncmp
+   fun:_Z33__kmp_affinity_create_cpuinfo_mapPP11AddrUnsPairPiP11kmp_i18n_idP8_IO_FILE
+   fun:__kmp_affinity_initialize
+   fun:__kmp_fork_call
+   fun:__kmpc_fork_call
+   fun:tensor_reshape
+   fun:tensor_fuse
+   fun:tensor_contract
+   fun:tnode_contract
+   fun:tntNodeContract
+   fun:tntMpsCreateMpo
+   fun:tntMpsProcessInitOptions
+}
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Addr8
+   fun:__kmp_external___intel_sse2_strlen
+   fun:__kmp_env_get
+   fun:_Z18__kmp_internal_endv
+   fun:__kmp_internal_end_atexit
+   fun:exit
+   fun:(below main)
+}
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Free
+   fun:free
+   fun:free_mem
+   fun:__libc_freeres
+   fun:_vgnU_freeres
+   fun:exit
+   fun:(below main)
+}
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Cond
+   fun:__kmp_external___intel_sse2_strncmp
+   fun:_Z33__kmp_affinity_create_cpuinfo_mapPP11AddrUnsPairPiP11kmp_i18n_idP8_IO_FILE
+   fun:__kmp_affinity_initialize
+   fun:__kmp_middle_initialize
+   fun:omp_get_num_procs
+   fun:MKL_get_N_Cores
+   fun:mkl_serv_get_max_threads
+   fun:mkl_lapack_zlaswp
+   fun:mkl_lapack_zgetrs
+   fun:mkl_lapack_zgesv
+   fun:ZGESV
+   fun:f04cafn_
+}
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Cond
+   fun:__kmp_external___intel_sse2_strncmp
+   fun:_Z33__kmp_affinity_create_cpuinfo_mapPP11AddrUnsPairPiP11kmp_i18n_idP8_IO_FILE
+   fun:__kmp_affinity_initialize
+   fun:__kmp_middle_initialize
+   fun:omp_get_num_procs
+   fun:MKL_get_N_Cores
+   fun:mkl_serv_get_max_threads
+   fun:mkl_lapack_zlaswp
+   fun:mkl_lapack_zgetrs
+   fun:mkl_lapack_zgesv
+   fun:ZGESV
+   fun:f04cafn_
+}
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Cond
+   fun:__kmp_external___intel_sse2_strncmp
+   fun:_Z33__kmp_affinity_create_cpuinfo_mapPP11AddrUnsPairPiP11kmp_i18n_idP8_IO_FILE
+   fun:__kmp_affinity_initialize
+   fun:__kmp_middle_initialize
+   fun:omp_get_num_procs
+   fun:MKL_get_N_Cores
+   fun:mkl_serv_get_max_threads
+   fun:mkl_lapack_zlaswp
+   fun:mkl_lapack_zgetrs
+   fun:mkl_lapack_zgesv
+   fun:ZGESV
+   fun:f04cafn_
+}
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Cond
+   fun:__kmp_external___intel_sse2_strncmp
+   fun:_Z33__kmp_affinity_create_cpuinfo_mapPP11AddrUnsPairPiP11kmp_i18n_idP8_IO_FILE
+   fun:__kmp_affinity_initialize
+   fun:__kmp_middle_initialize
+   fun:omp_get_num_procs
+   fun:MKL_get_N_Cores
+   fun:mkl_serv_get_max_threads
+   fun:mkl_lapack_zlaswp
+   fun:mkl_lapack_zgetrs
+   fun:mkl_lapack_zgesv
+   fun:ZGESV
+   fun:f04cafn_
+}
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Cond
+   fun:__kmp_external___intel_sse2_strncmp
+   fun:_Z33__kmp_affinity_create_cpuinfo_mapPP11AddrUnsPairPiP11kmp_i18n_idP8_IO_FILE
+   fun:__kmp_affinity_initialize
+   fun:__kmp_middle_initialize
+   fun:omp_get_num_procs
+   fun:MKL_get_N_Cores
+   fun:mkl_serv_get_max_threads
+   fun:mkl_lapack_zlaswp
+   fun:mkl_lapack_zgetrs
+   fun:mkl_lapack_zgesv
+   fun:ZGESV
+   fun:f04cafn_
+}
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Cond
+   fun:__kmp_external___intel_sse2_strncmp
+   fun:_Z33__kmp_affinity_create_cpuinfo_mapPP11AddrUnsPairPiP11kmp_i18n_idP8_IO_FILE
+   fun:__kmp_affinity_initialize
+   fun:__kmp_middle_initialize
+   fun:omp_get_num_procs
+   fun:MKL_get_N_Cores
+   fun:mkl_serv_get_max_threads
+   fun:mkl_lapack_zlaswp
+   fun:mkl_lapack_zgetrs
+   fun:mkl_lapack_zgesv
+   fun:ZGESV
+   fun:f04cafn_
+}
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Cond
+   fun:__kmp_external___intel_sse2_strncmp
+   fun:_Z33__kmp_affinity_create_cpuinfo_mapPP11AddrUnsPairPiP11kmp_i18n_idP8_IO_FILE
+   fun:__kmp_affinity_initialize
+   fun:__kmp_middle_initialize
+   fun:omp_get_num_procs
+   fun:MKL_get_N_Cores
+   fun:mkl_serv_get_max_threads
+   fun:mkl_lapack_zlaswp
+   fun:mkl_lapack_zgetrs
+   fun:mkl_lapack_zgesv
+   fun:ZGESV
+   fun:f04cafn_
+}
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Cond
+   fun:__kmp_external___intel_sse2_strncmp
+   fun:_Z33__kmp_affinity_create_cpuinfo_mapPP11AddrUnsPairPiP11kmp_i18n_idP8_IO_FILE
+   fun:__kmp_affinity_initialize
+   fun:__kmp_middle_initialize
+   fun:omp_get_num_procs
+   fun:MKL_get_N_Cores
+   fun:mkl_serv_get_max_threads
+   fun:mkl_lapack_zlaswp
+   fun:mkl_lapack_zgetrs
+   fun:mkl_lapack_zgesv
+   fun:ZGESV
+   fun:f04cafn_
+}
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Cond
+   fun:__kmp_external___intel_sse2_strncmp
+   fun:_Z33__kmp_affinity_create_cpuinfo_mapPP11AddrUnsPairPiP11kmp_i18n_idP8_IO_FILE
+   fun:__kmp_affinity_initialize
+   fun:__kmp_middle_initialize
+   fun:omp_get_num_procs
+   fun:MKL_get_N_Cores
+   fun:mkl_serv_get_max_threads
+   fun:mkl_lapack_zlaswp
+   fun:mkl_lapack_zgetrs
+   fun:mkl_lapack_zgesv
+   fun:ZGESV
+   fun:f04cafn_
+}
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Cond
+   fun:__kmp_external___intel_sse2_strncmp
+   fun:_Z33__kmp_affinity_create_cpuinfo_mapPP11AddrUnsPairPiP11kmp_i18n_idP8_IO_FILE
+   fun:__kmp_affinity_initialize
+   fun:__kmp_middle_initialize
+   fun:omp_get_num_procs
+   fun:MKL_get_N_Cores
+   fun:mkl_serv_get_max_threads
+   fun:mkl_lapack_zlaswp
+   fun:mkl_lapack_zgetrs
+   fun:mkl_lapack_zgesv
+   fun:ZGESV
+   fun:f04cafn_
+}
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Cond
+   fun:__kmp_external___intel_sse2_strncmp
+   fun:_Z33__kmp_affinity_create_cpuinfo_mapPP11AddrUnsPairPiP11kmp_i18n_idP8_IO_FILE
+   fun:__kmp_affinity_initialize
+   fun:__kmp_middle_initialize
+   fun:omp_get_num_procs
+   fun:MKL_get_N_Cores
+   fun:mkl_serv_get_max_threads
+   fun:mkl_lapack_zlaswp
+   fun:mkl_lapack_zgetrs
+   fun:mkl_lapack_zgesv
+   fun:ZGESV
+   fun:f04cafn_
+}
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Cond
+   fun:__kmp_external___intel_sse2_strncmp
+   fun:_Z33__kmp_affinity_create_cpuinfo_mapPP11AddrUnsPairPiP11kmp_i18n_idP8_IO_FILE
+   fun:__kmp_affinity_initialize
+   fun:__kmp_middle_initialize
+   fun:omp_get_num_procs
+   fun:MKL_get_N_Cores
+   fun:mkl_serv_get_max_threads
+   fun:mkl_lapack_zlaswp
+   fun:mkl_lapack_zgetrs
+   fun:mkl_lapack_zgesv
+   fun:ZGESV
+   fun:f04cafn_
+}
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Addr8
+   fun:__kmp_env_blk_init
+   fun:_Z25__kmp_asat_env_initializePKc
+   fun:__kmp_middle_initialize
+   fun:omp_get_num_procs
+   fun:MKL_get_N_Cores
+   fun:mkl_serv_get_max_threads
+   fun:mkl_lapack_zlaswp
+   fun:mkl_lapack_zgetrs
+   fun:mkl_lapack_zgesv
+   fun:ZGESV
+   fun:f04cafn_
+   fun:f01fcyn_
+}
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Addr8
+   fun:__kmp_external___intel_sse2_strlen
+   fun:__kmp_env_blk_init
+   fun:_Z25__kmp_asat_env_initializePKc
+   fun:__kmp_middle_initialize
+   fun:omp_get_num_procs
+   fun:MKL_get_N_Cores
+   fun:mkl_serv_get_max_threads
+   fun:mkl_lapack_zlaswp
+   fun:mkl_lapack_zgetrs
+   fun:mkl_lapack_zgesv
+   fun:ZGESV
+   fun:f04cafn_
+}
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Addr8
+   fun:__kmp_env_blk_init
+   fun:_Z25__kmp_asat_env_initializePKc
+   fun:__kmp_middle_initialize
+   fun:omp_get_num_procs
+   fun:MKL_get_N_Cores
+   fun:mkl_serv_get_max_threads
+   fun:mkl_lapack_zlaswp
+   fun:mkl_lapack_zgetrs
+   fun:mkl_lapack_zgesv
+   fun:ZGESV
+   fun:f04cafn_
+   fun:f01fcyn_
+}
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Addr8
+   fun:__kmp_external___intel_sse2_strlen
+   fun:__kmp_env_blk_init
+   fun:_Z25__kmp_asat_env_initializePKc
+   fun:__kmp_middle_initialize
+   fun:omp_get_num_procs
+   fun:MKL_get_N_Cores
+   fun:mkl_serv_get_max_threads
+   fun:mkl_lapack_zlaswp
+   fun:mkl_lapack_zgetrs
+   fun:mkl_lapack_zgesv
+   fun:ZGESV
+   fun:f04cafn_
+}
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Param
+   sched_setaffinity(mask)
+   fun:syscall
+   fun:__kmp_affinity_determine_capable
+   fun:_Z20__kmp_env_initializePKc
+   fun:__kmp_middle_initialize
+   fun:omp_get_num_procs
+   fun:MKL_get_N_Cores
+   fun:mkl_serv_get_max_threads
+   fun:mkl_lapack_zlaswp
+   fun:mkl_lapack_zgetrs
+   fun:mkl_lapack_zgesv
+   fun:ZGESV
+   fun:f04cafn_
+}
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Addr8
+   fun:__kmp_env_blk_init
+   fun:_Z20__kmp_env_initializePKc
+   fun:__kmp_middle_initialize
+   fun:omp_get_num_procs
+   fun:MKL_get_N_Cores
+   fun:mkl_serv_get_max_threads
+   fun:mkl_lapack_zlaswp
+   fun:mkl_lapack_zgetrs
+   fun:mkl_lapack_zgesv
+   fun:ZGESV
+   fun:f04cafn_
+   fun:f01fcyn_
+}
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Addr8
+   fun:__kmp_external___intel_sse2_strlen
+   fun:__kmp_env_blk_init
+   fun:_Z20__kmp_env_initializePKc
+   fun:__kmp_middle_initialize
+   fun:omp_get_num_procs
+   fun:MKL_get_N_Cores
+   fun:mkl_serv_get_max_threads
+   fun:mkl_lapack_zlaswp
+   fun:mkl_lapack_zgetrs
+   fun:mkl_lapack_zgesv
+   fun:ZGESV
+   fun:f04cafn_
+}
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Addr8
+   fun:__kmp_env_blk_init
+   fun:_Z20__kmp_env_initializePKc
+   fun:__kmp_middle_initialize
+   fun:omp_get_num_procs
+   fun:MKL_get_N_Cores
+   fun:mkl_serv_get_max_threads
+   fun:mkl_lapack_zlaswp
+   fun:mkl_lapack_zgetrs
+   fun:mkl_lapack_zgesv
+   fun:ZGESV
+   fun:f04cafn_
+   fun:f01fcyn_
+}
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Addr8
+   fun:__kmp_external___intel_sse2_strlen
+   fun:__kmp_env_blk_init
+   fun:_Z20__kmp_env_initializePKc
+   fun:__kmp_middle_initialize
+   fun:omp_get_num_procs
+   fun:MKL_get_N_Cores
+   fun:mkl_serv_get_max_threads
+   fun:mkl_lapack_zlaswp
+   fun:mkl_lapack_zgetrs
+   fun:mkl_lapack_zgesv
+   fun:ZGESV
+   fun:f04cafn_
+}
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Addr8
+   fun:__kmp_external___intel_sse2_strlen
+   fun:__kmp_env_get
+   fun:__kmp_middle_initialize
+   fun:omp_get_num_procs
+   fun:MKL_get_N_Cores
+   fun:mkl_serv_get_max_threads
+   fun:mkl_lapack_zlaswp
+   fun:mkl_lapack_zgetrs
+   fun:mkl_lapack_zgesv
+   fun:ZGESV
+   fun:f04cafn_
+   fun:f01fcyn_
+}
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Cond
+   fun:__kmp_external___intel_sse2_strncmp
+   fun:_Z33__kmp_affinity_create_cpuinfo_mapPP11AddrUnsPairPiP11kmp_i18n_idP8_IO_FILE
+   fun:__kmp_affinity_initialize
+   fun:__kmp_middle_initialize
+   fun:omp_get_num_procs
+   fun:MKL_get_N_Cores
+   fun:mkl_serv_domain_get_max_threads
+   fun:trmm_host
+   fun:mkl_blas_ztrmm
+   fun:ZTRMM
+   fun:f12aqzn_
+   fun:f12aqfn_
+}
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Cond
+   fun:__kmp_external___intel_sse2_strncmp
+   fun:_Z33__kmp_affinity_create_cpuinfo_mapPP11AddrUnsPairPiP11kmp_i18n_idP8_IO_FILE
+   fun:__kmp_affinity_initialize
+   fun:__kmp_middle_initialize
+   fun:omp_get_num_procs
+   fun:MKL_get_N_Cores
+   fun:mkl_serv_domain_get_max_threads
+   fun:trmm_host
+   fun:mkl_blas_ztrmm
+   fun:ZTRMM
+   fun:f12aqzn_
+   fun:f12aqfn_
+}
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Cond
+   fun:__kmp_external___intel_sse2_strncmp
+   fun:_Z33__kmp_affinity_create_cpuinfo_mapPP11AddrUnsPairPiP11kmp_i18n_idP8_IO_FILE
+   fun:__kmp_affinity_initialize
+   fun:__kmp_middle_initialize
+   fun:omp_get_num_procs
+   fun:MKL_get_N_Cores
+   fun:mkl_serv_domain_get_max_threads
+   fun:trmm_host
+   fun:mkl_blas_ztrmm
+   fun:ZTRMM
+   fun:f12aqzn_
+   fun:f12aqfn_
+}
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Cond
+   fun:__kmp_external___intel_sse2_strncmp
+   fun:_Z33__kmp_affinity_create_cpuinfo_mapPP11AddrUnsPairPiP11kmp_i18n_idP8_IO_FILE
+   fun:__kmp_affinity_initialize
+   fun:__kmp_middle_initialize
+   fun:omp_get_num_procs
+   fun:MKL_get_N_Cores
+   fun:mkl_serv_domain_get_max_threads
+   fun:trmm_host
+   fun:mkl_blas_ztrmm
+   fun:ZTRMM
+   fun:f12aqzn_
+   fun:f12aqfn_
+}
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Cond
+   fun:__kmp_external___intel_sse2_strncmp
+   fun:_Z33__kmp_affinity_create_cpuinfo_mapPP11AddrUnsPairPiP11kmp_i18n_idP8_IO_FILE
+   fun:__kmp_affinity_initialize
+   fun:__kmp_middle_initialize
+   fun:omp_get_num_procs
+   fun:MKL_get_N_Cores
+   fun:mkl_serv_domain_get_max_threads
+   fun:trmm_host
+   fun:mkl_blas_ztrmm
+   fun:ZTRMM
+   fun:f12aqzn_
+   fun:f12aqfn_
+}
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Cond
+   fun:__kmp_external___intel_sse2_strncmp
+   fun:_Z33__kmp_affinity_create_cpuinfo_mapPP11AddrUnsPairPiP11kmp_i18n_idP8_IO_FILE
+   fun:__kmp_affinity_initialize
+   fun:__kmp_middle_initialize
+   fun:omp_get_num_procs
+   fun:MKL_get_N_Cores
+   fun:mkl_serv_domain_get_max_threads
+   fun:trmm_host
+   fun:mkl_blas_ztrmm
+   fun:ZTRMM
+   fun:f12aqzn_
+   fun:f12aqfn_
+}
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Cond
+   fun:__kmp_external___intel_sse2_strncmp
+   fun:_Z33__kmp_affinity_create_cpuinfo_mapPP11AddrUnsPairPiP11kmp_i18n_idP8_IO_FILE
+   fun:__kmp_affinity_initialize
+   fun:__kmp_middle_initialize
+   fun:omp_get_num_procs
+   fun:MKL_get_N_Cores
+   fun:mkl_serv_domain_get_max_threads
+   fun:trmm_host
+   fun:mkl_blas_ztrmm
+   fun:ZTRMM
+   fun:f12aqzn_
+   fun:f12aqfn_
+}
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Cond
+   fun:__kmp_external___intel_sse2_strncmp
+   fun:_Z33__kmp_affinity_create_cpuinfo_mapPP11AddrUnsPairPiP11kmp_i18n_idP8_IO_FILE
+   fun:__kmp_affinity_initialize
+   fun:__kmp_middle_initialize
+   fun:omp_get_num_procs
+   fun:MKL_get_N_Cores
+   fun:mkl_serv_domain_get_max_threads
+   fun:trmm_host
+   fun:mkl_blas_ztrmm
+   fun:ZTRMM
+   fun:f12aqzn_
+   fun:f12aqfn_
+}
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Cond
+   fun:__kmp_external___intel_sse2_strncmp
+   fun:_Z33__kmp_affinity_create_cpuinfo_mapPP11AddrUnsPairPiP11kmp_i18n_idP8_IO_FILE
+   fun:__kmp_affinity_initialize
+   fun:__kmp_middle_initialize
+   fun:omp_get_num_procs
+   fun:MKL_get_N_Cores
+   fun:mkl_serv_domain_get_max_threads
+   fun:trmm_host
+   fun:mkl_blas_ztrmm
+   fun:ZTRMM
+   fun:f12aqzn_
+   fun:f12aqfn_
+}
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Cond
+   fun:__kmp_external___intel_sse2_strncmp
+   fun:_Z33__kmp_affinity_create_cpuinfo_mapPP11AddrUnsPairPiP11kmp_i18n_idP8_IO_FILE
+   fun:__kmp_affinity_initialize
+   fun:__kmp_middle_initialize
+   fun:omp_get_num_procs
+   fun:MKL_get_N_Cores
+   fun:mkl_serv_domain_get_max_threads
+   fun:trmm_host
+   fun:mkl_blas_ztrmm
+   fun:ZTRMM
+   fun:f12aqzn_
+   fun:f12aqfn_
+}
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Cond
+   fun:__kmp_external___intel_sse2_strncmp
+   fun:_Z33__kmp_affinity_create_cpuinfo_mapPP11AddrUnsPairPiP11kmp_i18n_idP8_IO_FILE
+   fun:__kmp_affinity_initialize
+   fun:__kmp_middle_initialize
+   fun:omp_get_num_procs
+   fun:MKL_get_N_Cores
+   fun:mkl_serv_domain_get_max_threads
+   fun:trmm_host
+   fun:mkl_blas_ztrmm
+   fun:ZTRMM
+   fun:f12aqzn_
+   fun:f12aqfn_
+}
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Cond
+   fun:__kmp_external___intel_sse2_strncmp
+   fun:_Z33__kmp_affinity_create_cpuinfo_mapPP11AddrUnsPairPiP11kmp_i18n_idP8_IO_FILE
+   fun:__kmp_affinity_initialize
+   fun:__kmp_middle_initialize
+   fun:omp_get_num_procs
+   fun:MKL_get_N_Cores
+   fun:mkl_serv_domain_get_max_threads
+   fun:trmm_host
+   fun:mkl_blas_ztrmm
+   fun:ZTRMM
+   fun:f12aqzn_
+   fun:f12aqfn_
+}
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Addr8
+   fun:__kmp_env_blk_init
+   fun:_Z25__kmp_asat_env_initializePKc
+   fun:__kmp_middle_initialize
+   fun:omp_get_num_procs
+   fun:MKL_get_N_Cores
+   fun:mkl_serv_domain_get_max_threads
+   fun:trmm_host
+   fun:mkl_blas_ztrmm
+   fun:ZTRMM
+   fun:f12aqzn_
+   fun:f12aqfn_
+   fun:f12aqft_
+}
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Addr8
+   fun:__kmp_external___intel_sse2_strlen
+   fun:__kmp_env_blk_init
+   fun:_Z25__kmp_asat_env_initializePKc
+   fun:__kmp_middle_initialize
+   fun:omp_get_num_procs
+   fun:MKL_get_N_Cores
+   fun:mkl_serv_domain_get_max_threads
+   fun:trmm_host
+   fun:mkl_blas_ztrmm
+   fun:ZTRMM
+   fun:f12aqzn_
+   fun:f12aqfn_
+}
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Addr8
+   fun:__kmp_env_blk_init
+   fun:_Z25__kmp_asat_env_initializePKc
+   fun:__kmp_middle_initialize
+   fun:omp_get_num_procs
+   fun:MKL_get_N_Cores
+   fun:mkl_serv_domain_get_max_threads
+   fun:trmm_host
+   fun:mkl_blas_ztrmm
+   fun:ZTRMM
+   fun:f12aqzn_
+   fun:f12aqfn_
+   fun:f12aqft_
+}
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Addr8
+   fun:__kmp_external___intel_sse2_strlen
+   fun:__kmp_env_blk_init
+   fun:_Z25__kmp_asat_env_initializePKc
+   fun:__kmp_middle_initialize
+   fun:omp_get_num_procs
+   fun:MKL_get_N_Cores
+   fun:mkl_serv_domain_get_max_threads
+   fun:trmm_host
+   fun:mkl_blas_ztrmm
+   fun:ZTRMM
+   fun:f12aqzn_
+   fun:f12aqfn_
+}
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Param
+   sched_setaffinity(mask)
+   fun:syscall
+   fun:__kmp_affinity_determine_capable
+   fun:_Z20__kmp_env_initializePKc
+   fun:__kmp_middle_initialize
+   fun:omp_get_num_procs
+   fun:MKL_get_N_Cores
+   fun:mkl_serv_domain_get_max_threads
+   fun:trmm_host
+   fun:mkl_blas_ztrmm
+   fun:ZTRMM
+   fun:f12aqzn_
+   fun:f12aqfn_
+}
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Addr8
+   fun:__kmp_env_blk_init
+   fun:_Z20__kmp_env_initializePKc
+   fun:__kmp_middle_initialize
+   fun:omp_get_num_procs
+   fun:MKL_get_N_Cores
+   fun:mkl_serv_domain_get_max_threads
+   fun:trmm_host
+   fun:mkl_blas_ztrmm
+   fun:ZTRMM
+   fun:f12aqzn_
+   fun:f12aqfn_
+   fun:f12aqft_
+}
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Addr8
+   fun:__kmp_external___intel_sse2_strlen
+   fun:__kmp_env_blk_init
+   fun:_Z20__kmp_env_initializePKc
+   fun:__kmp_middle_initialize
+   fun:omp_get_num_procs
+   fun:MKL_get_N_Cores
+   fun:mkl_serv_domain_get_max_threads
+   fun:trmm_host
+   fun:mkl_blas_ztrmm
+   fun:ZTRMM
+   fun:f12aqzn_
+   fun:f12aqfn_
+}
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Addr8
+   fun:__kmp_env_blk_init
+   fun:_Z20__kmp_env_initializePKc
+   fun:__kmp_middle_initialize
+   fun:omp_get_num_procs
+   fun:MKL_get_N_Cores
+   fun:mkl_serv_domain_get_max_threads
+   fun:trmm_host
+   fun:mkl_blas_ztrmm
+   fun:ZTRMM
+   fun:f12aqzn_
+   fun:f12aqfn_
+   fun:f12aqft_
+}
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Addr8
+   fun:__kmp_external___intel_sse2_strlen
+   fun:__kmp_env_blk_init
+   fun:_Z20__kmp_env_initializePKc
+   fun:__kmp_middle_initialize
+   fun:omp_get_num_procs
+   fun:MKL_get_N_Cores
+   fun:mkl_serv_domain_get_max_threads
+   fun:trmm_host
+   fun:mkl_blas_ztrmm
+   fun:ZTRMM
+   fun:f12aqzn_
+   fun:f12aqfn_
+}
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Addr8
+   fun:__kmp_external___intel_sse2_strlen
+   fun:__kmp_env_get
+   fun:__kmp_middle_initialize
+   fun:omp_get_num_procs
+   fun:MKL_get_N_Cores
+   fun:mkl_serv_domain_get_max_threads
+   fun:trmm_host
+   fun:mkl_blas_ztrmm
+   fun:ZTRMM
+   fun:f12aqzn_
+   fun:f12aqfn_
+   fun:f12aqft_
+}
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   fun:malloc
+   fun:p01zwy
+   fun:p01zos
+   fun:p01zyw
+   fun:p01zzxn_
+   fun:p01zzfn_
+   fun:f12anfn_
+   fun:f12anft_
+   fun:f12anf_
+   fun:matrix_eiginit
+   fun:tensor_eiginit
+   fun:tnode_eiginit
+}
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Addr8
+   fun:__kmp_external___intel_sse2_strlen
+   fun:__kmp_env_get
+   fun:__kmp_middle_initialize
+   fun:omp_get_num_procs
+   fun:MKL_get_N_Cores
+   fun:mkl_serv_get_max_threads
+   fun:mkl_lapack_dgeqrf
+   fun:mkl_lapack_ao_dgeqrf
+   fun:mkl_lapack_dgesvd
+   fun:DGESVD
+   fun:matrix_trunc_svd
+   fun:tensor_svd
+}
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Addr8
+   fun:__kmp_external___intel_sse2_strlen
+   fun:__kmp_env_blk_init
+   fun:_Z20__kmp_env_initializePKc
+   fun:__kmp_middle_initialize
+   fun:omp_get_num_procs
+   fun:MKL_get_N_Cores
+   fun:mkl_serv_get_max_threads
+   fun:mkl_lapack_dgeqrf
+   fun:mkl_lapack_ao_dgeqrf
+   fun:mkl_lapack_dgesvd
+   fun:DGESVD
+   fun:matrix_trunc_svd
+}
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Addr8
+   fun:__kmp_env_blk_init
+   fun:_Z20__kmp_env_initializePKc
+   fun:__kmp_middle_initialize
+   fun:omp_get_num_procs
+   fun:MKL_get_N_Cores
+   fun:mkl_serv_get_max_threads
+   fun:mkl_lapack_dgeqrf
+   fun:mkl_lapack_ao_dgeqrf
+   fun:mkl_lapack_dgesvd
+   fun:DGESVD
+   fun:matrix_trunc_svd
+   fun:tensor_svd
+}
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Addr8
+   fun:__kmp_external___intel_sse2_strlen
+   fun:__kmp_env_blk_init
+   fun:_Z20__kmp_env_initializePKc
+   fun:__kmp_middle_initialize
+   fun:omp_get_num_procs
+   fun:MKL_get_N_Cores
+   fun:mkl_serv_get_max_threads
+   fun:mkl_lapack_dgeqrf
+   fun:mkl_lapack_ao_dgeqrf
+   fun:mkl_lapack_dgesvd
+   fun:DGESVD
+   fun:matrix_trunc_svd
+}
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Addr8
+   fun:__kmp_env_blk_init
+   fun:_Z20__kmp_env_initializePKc
+   fun:__kmp_middle_initialize
+   fun:omp_get_num_procs
+   fun:MKL_get_N_Cores
+   fun:mkl_serv_get_max_threads
+   fun:mkl_lapack_dgeqrf
+   fun:mkl_lapack_ao_dgeqrf
+   fun:mkl_lapack_dgesvd
+   fun:DGESVD
+   fun:matrix_trunc_svd
+   fun:tensor_svd
+}
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Param
+   sched_setaffinity(mask)
+   fun:syscall
+   fun:__kmp_affinity_determine_capable
+   fun:_Z20__kmp_env_initializePKc
+   fun:__kmp_middle_initialize
+   fun:omp_get_num_procs
+   fun:MKL_get_N_Cores
+   fun:mkl_serv_get_max_threads
+   fun:mkl_lapack_dgeqrf
+   fun:mkl_lapack_ao_dgeqrf
+   fun:mkl_lapack_dgesvd
+   fun:DGESVD
+   fun:matrix_trunc_svd
+}
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Addr8
+   fun:__kmp_external___intel_sse2_strlen
+   fun:__kmp_env_blk_init
+   fun:_Z25__kmp_asat_env_initializePKc
+   fun:__kmp_middle_initialize
+   fun:omp_get_num_procs
+   fun:MKL_get_N_Cores
+   fun:mkl_serv_get_max_threads
+   fun:mkl_lapack_dgeqrf
+   fun:mkl_lapack_ao_dgeqrf
+   fun:mkl_lapack_dgesvd
+   fun:DGESVD
+   fun:matrix_trunc_svd
+}
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Addr8
+   fun:__kmp_env_blk_init
+   fun:_Z25__kmp_asat_env_initializePKc
+   fun:__kmp_middle_initialize
+   fun:omp_get_num_procs
+   fun:MKL_get_N_Cores
+   fun:mkl_serv_get_max_threads
+   fun:mkl_lapack_dgeqrf
+   fun:mkl_lapack_ao_dgeqrf
+   fun:mkl_lapack_dgesvd
+   fun:DGESVD
+   fun:matrix_trunc_svd
+   fun:tensor_svd
+}
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Addr8
+   fun:__kmp_external___intel_sse2_strlen
+   fun:__kmp_env_blk_init
+   fun:_Z25__kmp_asat_env_initializePKc
+   fun:__kmp_middle_initialize
+   fun:omp_get_num_procs
+   fun:MKL_get_N_Cores
+   fun:mkl_serv_get_max_threads
+   fun:mkl_lapack_dgeqrf
+   fun:mkl_lapack_ao_dgeqrf
+   fun:mkl_lapack_dgesvd
+   fun:DGESVD
+   fun:matrix_trunc_svd
+}
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Addr8
+   fun:__kmp_env_blk_init
+   fun:_Z25__kmp_asat_env_initializePKc
+   fun:__kmp_middle_initialize
+   fun:omp_get_num_procs
+   fun:MKL_get_N_Cores
+   fun:mkl_serv_get_max_threads
+   fun:mkl_lapack_dgeqrf
+   fun:mkl_lapack_ao_dgeqrf
+   fun:mkl_lapack_dgesvd
+   fun:DGESVD
+   fun:matrix_trunc_svd
+   fun:tensor_svd
+}
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Cond
+   fun:__kmp_external___intel_sse2_strncmp
+   fun:_Z33__kmp_affinity_create_cpuinfo_mapPP11AddrUnsPairPiP11kmp_i18n_idP8_IO_FILE
+   fun:__kmp_affinity_initialize
+   fun:__kmp_middle_initialize
+   fun:omp_get_num_procs
+   fun:MKL_get_N_Cores
+   fun:mkl_serv_get_max_threads
+   fun:mkl_lapack_dgeqrf
+   fun:mkl_lapack_ao_dgeqrf
+   fun:mkl_lapack_dgesvd
+   fun:DGESVD
+   fun:matrix_trunc_svd
+}
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Cond
+   fun:__kmp_external___intel_sse2_strncmp
+   fun:_Z33__kmp_affinity_create_cpuinfo_mapPP11AddrUnsPairPiP11kmp_i18n_idP8_IO_FILE
+   fun:__kmp_affinity_initialize
+   fun:__kmp_middle_initialize
+   fun:omp_get_num_procs
+   fun:MKL_get_N_Cores
+   fun:mkl_serv_get_max_threads
+   fun:mkl_lapack_dgeqrf
+   fun:mkl_lapack_ao_dgeqrf
+   fun:mkl_lapack_dgesvd
+   fun:DGESVD
+   fun:matrix_trunc_svd
+}
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Cond
+   fun:__kmp_external___intel_sse2_strncmp
+   fun:_Z33__kmp_affinity_create_cpuinfo_mapPP11AddrUnsPairPiP11kmp_i18n_idP8_IO_FILE
+   fun:__kmp_affinity_initialize
+   fun:__kmp_middle_initialize
+   fun:omp_get_num_procs
+   fun:MKL_get_N_Cores
+   fun:mkl_serv_get_max_threads
+   fun:mkl_lapack_dgeqrf
+   fun:mkl_lapack_ao_dgeqrf
+   fun:mkl_lapack_dgesvd
+   fun:DGESVD
+   fun:matrix_trunc_svd
+}
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Cond
+   fun:__kmp_external___intel_sse2_strncmp
+   fun:_Z33__kmp_affinity_create_cpuinfo_mapPP11AddrUnsPairPiP11kmp_i18n_idP8_IO_FILE
+   fun:__kmp_affinity_initialize
+   fun:__kmp_middle_initialize
+   fun:omp_get_num_procs
+   fun:MKL_get_N_Cores
+   fun:mkl_serv_get_max_threads
+   fun:mkl_lapack_dgeqrf
+   fun:mkl_lapack_ao_dgeqrf
+   fun:mkl_lapack_dgesvd
+   fun:DGESVD
+   fun:matrix_trunc_svd
+}
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Cond
+   fun:__kmp_external___intel_sse2_strncmp
+   fun:_Z33__kmp_affinity_create_cpuinfo_mapPP11AddrUnsPairPiP11kmp_i18n_idP8_IO_FILE
+   fun:__kmp_affinity_initialize
+   fun:__kmp_middle_initialize
+   fun:omp_get_num_procs
+   fun:MKL_get_N_Cores
+   fun:mkl_serv_get_max_threads
+   fun:mkl_lapack_dgeqrf
+   fun:mkl_lapack_ao_dgeqrf
+   fun:mkl_lapack_dgesvd
+   fun:DGESVD
+   fun:matrix_trunc_svd
+}
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Cond
+   fun:__kmp_external___intel_sse2_strncmp
+   fun:_Z33__kmp_affinity_create_cpuinfo_mapPP11AddrUnsPairPiP11kmp_i18n_idP8_IO_FILE
+   fun:__kmp_affinity_initialize
+   fun:__kmp_middle_initialize
+   fun:omp_get_num_procs
+   fun:MKL_get_N_Cores
+   fun:mkl_serv_get_max_threads
+   fun:mkl_lapack_dgeqrf
+   fun:mkl_lapack_ao_dgeqrf
+   fun:mkl_lapack_dgesvd
+   fun:DGESVD
+   fun:matrix_trunc_svd
+}
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Cond
+   fun:__kmp_external___intel_sse2_strncmp
+   fun:_Z33__kmp_affinity_create_cpuinfo_mapPP11AddrUnsPairPiP11kmp_i18n_idP8_IO_FILE
+   fun:__kmp_affinity_initialize
+   fun:__kmp_middle_initialize
+   fun:omp_get_num_procs
+   fun:MKL_get_N_Cores
+   fun:mkl_serv_get_max_threads
+   fun:mkl_lapack_dgeqrf
+   fun:mkl_lapack_ao_dgeqrf
+   fun:mkl_lapack_dgesvd
+   fun:DGESVD
+   fun:matrix_trunc_svd
+}
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Cond
+   fun:__kmp_external___intel_sse2_strncmp
+   fun:_Z33__kmp_affinity_create_cpuinfo_mapPP11AddrUnsPairPiP11kmp_i18n_idP8_IO_FILE
+   fun:__kmp_affinity_initialize
+   fun:__kmp_middle_initialize
+   fun:omp_get_num_procs
+   fun:MKL_get_N_Cores
+   fun:mkl_serv_get_max_threads
+   fun:mkl_lapack_dgeqrf
+   fun:mkl_lapack_ao_dgeqrf
+   fun:mkl_lapack_dgesvd
+   fun:DGESVD
+   fun:matrix_trunc_svd
+}
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Cond
+   fun:__kmp_external___intel_sse2_strncmp
+   fun:_Z33__kmp_affinity_create_cpuinfo_mapPP11AddrUnsPairPiP11kmp_i18n_idP8_IO_FILE
+   fun:__kmp_affinity_initialize
+   fun:__kmp_middle_initialize
+   fun:omp_get_num_procs
+   fun:MKL_get_N_Cores
+   fun:mkl_serv_get_max_threads
+   fun:mkl_lapack_dgeqrf
+   fun:mkl_lapack_ao_dgeqrf
+   fun:mkl_lapack_dgesvd
+   fun:DGESVD
+   fun:matrix_trunc_svd
+}
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Cond
+   fun:__kmp_external___intel_sse2_strncmp
+   fun:_Z33__kmp_affinity_create_cpuinfo_mapPP11AddrUnsPairPiP11kmp_i18n_idP8_IO_FILE
+   fun:__kmp_affinity_initialize
+   fun:__kmp_middle_initialize
+   fun:omp_get_num_procs
+   fun:MKL_get_N_Cores
+   fun:mkl_serv_get_max_threads
+   fun:mkl_lapack_dgeqrf
+   fun:mkl_lapack_ao_dgeqrf
+   fun:mkl_lapack_dgesvd
+   fun:DGESVD
+   fun:matrix_trunc_svd
+}
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Addr8
+   fun:__kmp_external___intel_sse2_strlen
+   fun:__kmp_env_get
+   fun:_Z18__kmp_internal_endv
+   fun:__kmp_internal_end_atexit
+   fun:exit
+   fun:(below main)
+}
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Free
+   fun:free
+   fun:free_mem
+   fun:__libc_freeres
+   fun:_vgnU_freeres
+   fun:exit
+   fun:(below main)
+}
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   fun:malloc
+   fun:p01zwy
+   fun:p01zos
+   fun:p01zyw
+   fun:p01zzxn_
+   fun:p01zzfn_
+   fun:f12aafn_
+   fun:f12aaft_
+   fun:f12aaf_
+   fun:matrix_eiginit
+   fun:tensor_eiginit
+   fun:tnode_eiginit
+}
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Addr8
+   fun:__kmp_external___intel_sse2_strlen
+   fun:__kmp_env_get
+   fun:__kmp_middle_initialize
+   fun:omp_get_num_procs
+   fun:MKL_get_N_Cores
+   fun:mkl_serv_domain_get_max_threads
+   fun:gemm_host
+   fun:mkl_blas_dgemm
+   fun:DGEMM
+   fun:matrix_multiply
+   fun:tensor_contract
+   fun:tnode_contract
+}
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Addr8
+   fun:__kmp_external___intel_sse2_strlen
+   fun:__kmp_env_blk_init
+   fun:_Z20__kmp_env_initializePKc
+   fun:__kmp_middle_initialize
+   fun:omp_get_num_procs
+   fun:MKL_get_N_Cores
+   fun:mkl_serv_domain_get_max_threads
+   fun:gemm_host
+   fun:mkl_blas_dgemm
+   fun:DGEMM
+   fun:matrix_multiply
+   fun:tensor_contract
+}
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Addr8
+   fun:__kmp_env_blk_init
+   fun:_Z20__kmp_env_initializePKc
+   fun:__kmp_middle_initialize
+   fun:omp_get_num_procs
+   fun:MKL_get_N_Cores
+   fun:mkl_serv_domain_get_max_threads
+   fun:gemm_host
+   fun:mkl_blas_dgemm
+   fun:DGEMM
+   fun:matrix_multiply
+   fun:tensor_contract
+   fun:tnode_contract
+}
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Addr8
+   fun:__kmp_external___intel_sse2_strlen
+   fun:__kmp_env_blk_init
+   fun:_Z20__kmp_env_initializePKc
+   fun:__kmp_middle_initialize
+   fun:omp_get_num_procs
+   fun:MKL_get_N_Cores
+   fun:mkl_serv_domain_get_max_threads
+   fun:gemm_host
+   fun:mkl_blas_dgemm
+   fun:DGEMM
+   fun:matrix_multiply
+   fun:tensor_contract
+}
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Addr8
+   fun:__kmp_env_blk_init
+   fun:_Z20__kmp_env_initializePKc
+   fun:__kmp_middle_initialize
+   fun:omp_get_num_procs
+   fun:MKL_get_N_Cores
+   fun:mkl_serv_domain_get_max_threads
+   fun:gemm_host
+   fun:mkl_blas_dgemm
+   fun:DGEMM
+   fun:matrix_multiply
+   fun:tensor_contract
+   fun:tnode_contract
+}
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Param
+   sched_setaffinity(mask)
+   fun:syscall
+   fun:__kmp_affinity_determine_capable
+   fun:_Z20__kmp_env_initializePKc
+   fun:__kmp_middle_initialize
+   fun:omp_get_num_procs
+   fun:MKL_get_N_Cores
+   fun:mkl_serv_domain_get_max_threads
+   fun:gemm_host
+   fun:mkl_blas_dgemm
+   fun:DGEMM
+   fun:matrix_multiply
+   fun:tensor_contract
+}
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Addr8
+   fun:__kmp_external___intel_sse2_strlen
+   fun:__kmp_env_blk_init
+   fun:_Z25__kmp_asat_env_initializePKc
+   fun:__kmp_middle_initialize
+   fun:omp_get_num_procs
+   fun:MKL_get_N_Cores
+   fun:mkl_serv_domain_get_max_threads
+   fun:gemm_host
+   fun:mkl_blas_dgemm
+   fun:DGEMM
+   fun:matrix_multiply
+   fun:tensor_contract
+}
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Addr8
+   fun:__kmp_env_blk_init
+   fun:_Z25__kmp_asat_env_initializePKc
+   fun:__kmp_middle_initialize
+   fun:omp_get_num_procs
+   fun:MKL_get_N_Cores
+   fun:mkl_serv_domain_get_max_threads
+   fun:gemm_host
+   fun:mkl_blas_dgemm
+   fun:DGEMM
+   fun:matrix_multiply
+   fun:tensor_contract
+   fun:tnode_contract
+}
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Addr8
+   fun:__kmp_external___intel_sse2_strlen
+   fun:__kmp_env_blk_init
+   fun:_Z25__kmp_asat_env_initializePKc
+   fun:__kmp_middle_initialize
+   fun:omp_get_num_procs
+   fun:MKL_get_N_Cores
+   fun:mkl_serv_domain_get_max_threads
+   fun:gemm_host
+   fun:mkl_blas_dgemm
+   fun:DGEMM
+   fun:matrix_multiply
+   fun:tensor_contract
+}
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Addr8
+   fun:__kmp_env_blk_init
+   fun:_Z25__kmp_asat_env_initializePKc
+   fun:__kmp_middle_initialize
+   fun:omp_get_num_procs
+   fun:MKL_get_N_Cores
+   fun:mkl_serv_domain_get_max_threads
+   fun:gemm_host
+   fun:mkl_blas_dgemm
+   fun:DGEMM
+   fun:matrix_multiply
+   fun:tensor_contract
+   fun:tnode_contract
+}
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Cond
+   fun:__kmp_external___intel_sse2_strncmp
+   fun:_Z33__kmp_affinity_create_cpuinfo_mapPP11AddrUnsPairPiP11kmp_i18n_idP8_IO_FILE
+   fun:__kmp_affinity_initialize
+   fun:__kmp_middle_initialize
+   fun:omp_get_num_procs
+   fun:MKL_get_N_Cores
+   fun:mkl_serv_domain_get_max_threads
+   fun:gemm_host
+   fun:mkl_blas_dgemm
+   fun:DGEMM
+   fun:matrix_multiply
+   fun:tensor_contract
+}
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Cond
+   fun:__kmp_external___intel_sse2_strncmp
+   fun:_Z33__kmp_affinity_create_cpuinfo_mapPP11AddrUnsPairPiP11kmp_i18n_idP8_IO_FILE
+   fun:__kmp_affinity_initialize
+   fun:__kmp_middle_initialize
+   fun:omp_get_num_procs
+   fun:MKL_get_N_Cores
+   fun:mkl_serv_domain_get_max_threads
+   fun:gemm_host
+   fun:mkl_blas_dgemm
+   fun:DGEMM
+   fun:matrix_multiply
+   fun:tensor_contract
+}
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Cond
+   fun:__kmp_external___intel_sse2_strncmp
+   fun:_Z33__kmp_affinity_create_cpuinfo_mapPP11AddrUnsPairPiP11kmp_i18n_idP8_IO_FILE
+   fun:__kmp_affinity_initialize
+   fun:__kmp_middle_initialize
+   fun:omp_get_num_procs
+   fun:MKL_get_N_Cores
+   fun:mkl_serv_domain_get_max_threads
+   fun:gemm_host
+   fun:mkl_blas_dgemm
+   fun:DGEMM
+   fun:matrix_multiply
+   fun:tensor_contract
+}
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Cond
+   fun:__kmp_external___intel_sse2_strncmp
+   fun:_Z33__kmp_affinity_create_cpuinfo_mapPP11AddrUnsPairPiP11kmp_i18n_idP8_IO_FILE
+   fun:__kmp_affinity_initialize
+   fun:__kmp_middle_initialize
+   fun:omp_get_num_procs
+   fun:MKL_get_N_Cores
+   fun:mkl_serv_domain_get_max_threads
+   fun:gemm_host
+   fun:mkl_blas_dgemm
+   fun:DGEMM
+   fun:matrix_multiply
+   fun:tensor_contract
+}
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Cond
+   fun:__kmp_external___intel_sse2_strncmp
+   fun:_Z33__kmp_affinity_create_cpuinfo_mapPP11AddrUnsPairPiP11kmp_i18n_idP8_IO_FILE
+   fun:__kmp_affinity_initialize
+   fun:__kmp_middle_initialize
+   fun:omp_get_num_procs
+   fun:MKL_get_N_Cores
+   fun:mkl_serv_domain_get_max_threads
+   fun:gemm_host
+   fun:mkl_blas_dgemm
+   fun:DGEMM
+   fun:matrix_multiply
+   fun:tensor_contract
+}
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Cond
+   fun:__kmp_external___intel_sse2_strncmp
+   fun:_Z33__kmp_affinity_create_cpuinfo_mapPP11AddrUnsPairPiP11kmp_i18n_idP8_IO_FILE
+   fun:__kmp_affinity_initialize
+   fun:__kmp_middle_initialize
+   fun:omp_get_num_procs
+   fun:MKL_get_N_Cores
+   fun:mkl_serv_domain_get_max_threads
+   fun:gemm_host
+   fun:mkl_blas_dgemm
+   fun:DGEMM
+   fun:matrix_multiply
+   fun:tensor_contract
+}
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Cond
+   fun:__kmp_external___intel_sse2_strncmp
+   fun:_Z33__kmp_affinity_create_cpuinfo_mapPP11AddrUnsPairPiP11kmp_i18n_idP8_IO_FILE
+   fun:__kmp_affinity_initialize
+   fun:__kmp_middle_initialize
+   fun:omp_get_num_procs
+   fun:MKL_get_N_Cores
+   fun:mkl_serv_domain_get_max_threads
+   fun:gemm_host
+   fun:mkl_blas_dgemm
+   fun:DGEMM
+   fun:matrix_multiply
+   fun:tensor_contract
+}
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Cond
+   fun:__kmp_external___intel_sse2_strncmp
+   fun:_Z33__kmp_affinity_create_cpuinfo_mapPP11AddrUnsPairPiP11kmp_i18n_idP8_IO_FILE
+   fun:__kmp_affinity_initialize
+   fun:__kmp_middle_initialize
+   fun:omp_get_num_procs
+   fun:MKL_get_N_Cores
+   fun:mkl_serv_domain_get_max_threads
+   fun:gemm_host
+   fun:mkl_blas_dgemm
+   fun:DGEMM
+   fun:matrix_multiply
+   fun:tensor_contract
+}
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Cond
+   fun:__kmp_external___intel_sse2_strncmp
+   fun:_Z33__kmp_affinity_create_cpuinfo_mapPP11AddrUnsPairPiP11kmp_i18n_idP8_IO_FILE
+   fun:__kmp_affinity_initialize
+   fun:__kmp_middle_initialize
+   fun:omp_get_num_procs
+   fun:MKL_get_N_Cores
+   fun:mkl_serv_domain_get_max_threads
+   fun:gemm_host
+   fun:mkl_blas_dgemm
+   fun:DGEMM
+   fun:matrix_multiply
+   fun:tensor_contract
+}
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Cond
+   fun:__kmp_get_load_balance
+   fun:__kmp_fork_call
+   fun:__kmpc_fork_call
+   fun:gemm_host
+   fun:mkl_blas_dgemm
+   fun:DGEMM
+   fun:matrix_multiply
+   fun:tensor_contract
+   fun:tnode_contract
+   fun:tntNodeContract
+   fun:tntMpsExpecSing
+   fun:tntMpsExpecOutput
+}
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Cond
+   fun:__kmp_str_buf_cat
+   fun:__kmp_get_load_balance
+   fun:__kmp_fork_call
+   fun:__kmpc_fork_call
+   fun:gemm_host
+   fun:mkl_blas_dgemm
+   fun:DGEMM
+   fun:matrix_multiply
+   fun:tensor_contract
+   fun:tnode_contract
+   fun:tntNodeContract
+   fun:tntMpsExpecSing
+}
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Cond
+   fun:__kmp_external___intel_ssse3_rep_memcpy
+   fun:__kmp_external__intel_fast_memcpy.P
+   fun:__kmp_str_buf_cat
+   fun:__kmp_get_load_balance
+   fun:__kmp_fork_call
+   fun:__kmpc_fork_call
+   fun:gemm_host
+   fun:mkl_blas_dgemm
+   fun:DGEMM
+   fun:matrix_multiply
+   fun:tensor_contract
+   fun:tnode_contract
+}
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Value8
+   fun:__kmp_external___intel_ssse3_rep_memcpy
+   fun:__kmp_external__intel_fast_memcpy.P
+   fun:__kmp_str_buf_cat
+   fun:__kmp_get_load_balance
+   fun:__kmp_fork_call
+   fun:__kmpc_fork_call
+   fun:gemm_host
+   fun:mkl_blas_dgemm
+   fun:DGEMM
+   fun:matrix_multiply
+   fun:tensor_contract
+   fun:tnode_contract
+}
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Value8
+   fun:__kmp_str_buf_cat
+   fun:__kmp_get_load_balance
+   fun:__kmp_fork_call
+   fun:__kmpc_fork_call
+   fun:gemm_host
+   fun:mkl_blas_dgemm
+   fun:DGEMM
+   fun:matrix_multiply
+   fun:tensor_contract
+   fun:tnode_contract
+   fun:tntNodeContract
+   fun:tntMpsExpecSing
+}
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Cond
+   fun:__kmp_str_buf_cat
+   fun:__kmp_get_load_balance
+   fun:__kmp_fork_call
+   fun:__kmpc_fork_call
+   fun:gemm_host
+   fun:mkl_blas_dgemm
+   fun:DGEMM
+   fun:matrix_multiply
+   fun:tensor_contract
+   fun:tnode_contract
+   fun:tntNodeContract
+   fun:tntMpsExpecSing
+}
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Cond
+   fun:__kmp_external___intel_ssse3_rep_memcpy
+   fun:__kmp_external__intel_fast_memcpy.P
+   fun:__kmp_str_buf_cat
+   fun:__kmp_get_load_balance
+   fun:__kmp_fork_call
+   fun:__kmpc_fork_call
+   fun:gemm_host
+   fun:mkl_blas_dgemm
+   fun:DGEMM
+   fun:matrix_multiply
+   fun:tensor_contract
+   fun:tnode_contract
+}
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Value8
+   fun:__kmp_external___intel_ssse3_rep_memcpy
+   fun:__kmp_external__intel_fast_memcpy.P
+   fun:__kmp_str_buf_cat
+   fun:__kmp_get_load_balance
+   fun:__kmp_fork_call
+   fun:__kmpc_fork_call
+   fun:gemm_host
+   fun:mkl_blas_dgemm
+   fun:DGEMM
+   fun:matrix_multiply
+   fun:tensor_contract
+   fun:tnode_contract
+}
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Value8
+   fun:__kmp_str_buf_cat
+   fun:__kmp_get_load_balance
+   fun:__kmp_fork_call
+   fun:__kmpc_fork_call
+   fun:gemm_host
+   fun:mkl_blas_dgemm
+   fun:DGEMM
+   fun:matrix_multiply
+   fun:tensor_contract
+   fun:tnode_contract
+   fun:tntNodeContract
+   fun:tntMpsExpecSing
+}
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Cond
+   fun:__kmp_str_buf_clear
+   fun:__kmp_get_load_balance
+   fun:__kmp_fork_call
+   fun:__kmpc_fork_call
+   fun:gemm_host
+   fun:mkl_blas_dgemm
+   fun:DGEMM
+   fun:matrix_multiply
+   fun:tensor_contract
+   fun:tnode_contract
+   fun:tntNodeContract
+   fun:tntMpsExpecSing
+}
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Value8
+   fun:__kmp_external___intel_ssse3_rep_memcpy
+   fun:__kmp_external__intel_fast_memcpy.P
+   fun:__kmp_str_buf_cat
+   fun:__kmp_get_load_balance
+   fun:__kmp_fork_call
+   fun:__kmpc_fork_call
+   fun:gemm_host
+   fun:mkl_blas_dgemm
+   fun:DGEMM
+   fun:matrix_multiply
+   fun:tensor_contract
+   fun:tnode_contract
+}
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Value8
+   fun:__kmp_external___intel_ssse3_rep_memcpy
+   fun:__kmp_external__intel_fast_memcpy.P
+   fun:__kmp_str_buf_cat
+   fun:__kmp_get_load_balance
+   fun:__kmp_fork_call
+   fun:__kmpc_fork_call
+   fun:gemm_host
+   fun:mkl_blas_dgemm
+   fun:DGEMM
+   fun:matrix_multiply
+   fun:tensor_contract
+   fun:tnode_contract
+}
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Value8
+   fun:__kmp_external___intel_ssse3_rep_memcpy
+   fun:__kmp_external__intel_fast_memcpy.P
+   fun:__kmp_str_buf_cat
+   fun:__kmp_get_load_balance
+   fun:__kmp_fork_call
+   fun:__kmpc_fork_call
+   fun:gemm_host
+   fun:mkl_blas_dgemm
+   fun:DGEMM
+   fun:matrix_multiply
+   fun:tensor_contract
+   fun:tnode_contract
+}
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Cond
+   fun:__kmp_external___intel_sse2_strlen
+   fun:__kmp_get_load_balance
+   fun:__kmp_fork_call
+   fun:__kmpc_fork_call
+   fun:gemm_host
+   fun:mkl_blas_dgemm
+   fun:DGEMM
+   fun:matrix_multiply
+   fun:tensor_contract
+   fun:tnode_contract
+   fun:tntNodeContract
+   fun:tntMpsExpecSing
+}
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Value8
+   fun:__kmp_external___intel_ssse3_rep_memcpy
+   fun:__kmp_external__intel_fast_memcpy.P
+   fun:__kmp_str_buf_cat
+   fun:__kmp_get_load_balance
+   fun:__kmp_fork_call
+   fun:__kmpc_fork_call
+   fun:gemm_host
+   fun:mkl_blas_dgemm
+   fun:DGEMM
+   fun:matrix_multiply
+   fun:tensor_contract
+   fun:tnode_contract
+}
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Value8
+   fun:__kmp_external___intel_ssse3_rep_memcpy
+   fun:__kmp_external__intel_fast_memcpy.P
+   fun:__kmp_str_buf_cat
+   fun:__kmp_get_load_balance
+   fun:__kmp_fork_call
+   fun:__kmpc_fork_call
+   fun:gemm_host
+   fun:mkl_blas_dgemm
+   fun:DGEMM
+   fun:matrix_multiply
+   fun:tensor_contract
+   fun:tnode_contract
+}
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Cond
+   fun:__kmp_external___intel_sse2_strlen
+   fun:__kmp_get_load_balance
+   fun:__kmp_fork_call
+   fun:__kmpc_fork_call
+   fun:gemm_host
+   fun:mkl_blas_dgemm
+   fun:DGEMM
+   fun:matrix_multiply
+   fun:tensor_contract
+   fun:tnode_contract
+   fun:tntNodeContract
+   fun:tntMpsExpecSing
+}
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Cond
+   fun:__kmp_str_buf_cat
+   fun:__kmp_get_load_balance
+   fun:__kmp_fork_call
+   fun:__kmpc_fork_call
+   fun:gemm_host
+   fun:mkl_blas_dgemm
+   fun:DGEMM
+   fun:matrix_multiply
+   fun:tensor_contract
+   fun:tnode_contract
+   fun:tntNodeContract
+   fun:tntMpsExpecSing
+}
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Cond
+   fun:__kmp_external___intel_ssse3_rep_memcpy
+   fun:__kmp_external__intel_fast_memcpy.P
+   fun:__kmp_str_buf_cat
+   fun:__kmp_get_load_balance
+   fun:__kmp_fork_call
+   fun:__kmpc_fork_call
+   fun:gemm_host
+   fun:mkl_blas_dgemm
+   fun:DGEMM
+   fun:matrix_multiply
+   fun:tensor_contract
+   fun:tnode_contract
+}
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Value8
+   fun:__kmp_external___intel_ssse3_rep_memcpy
+   fun:__kmp_external__intel_fast_memcpy.P
+   fun:__kmp_str_buf_cat
+   fun:__kmp_get_load_balance
+   fun:__kmp_fork_call
+   fun:__kmpc_fork_call
+   fun:gemm_host
+   fun:mkl_blas_dgemm
+   fun:DGEMM
+   fun:matrix_multiply
+   fun:tensor_contract
+   fun:tnode_contract
+}
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Value8
+   fun:__kmp_str_buf_cat
+   fun:__kmp_get_load_balance
+   fun:__kmp_fork_call
+   fun:__kmpc_fork_call
+   fun:gemm_host
+   fun:mkl_blas_dgemm
+   fun:DGEMM
+   fun:matrix_multiply
+   fun:tensor_contract
+   fun:tnode_contract
+   fun:tntNodeContract
+   fun:tntMpsExpecSing
+}
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Cond
+   fun:__kmp_str_buf_cat
+   fun:__kmp_get_load_balance
+   fun:__kmp_fork_call
+   fun:__kmpc_fork_call
+   fun:gemm_host
+   fun:mkl_blas_dgemm
+   fun:DGEMM
+   fun:matrix_multiply
+   fun:tensor_contract
+   fun:tnode_contract
+   fun:tntNodeContract
+   fun:tntMpsExpecSing
+}
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Cond
+   fun:__kmp_external___intel_ssse3_rep_memcpy
+   fun:__kmp_external__intel_fast_memcpy.P
+   fun:__kmp_str_buf_cat
+   fun:__kmp_get_load_balance
+   fun:__kmp_fork_call
+   fun:__kmpc_fork_call
+   fun:gemm_host
+   fun:mkl_blas_dgemm
+   fun:DGEMM
+   fun:matrix_multiply
+   fun:tensor_contract
+   fun:tnode_contract
+}
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Value8
+   fun:__kmp_external___intel_ssse3_rep_memcpy
+   fun:__kmp_external__intel_fast_memcpy.P
+   fun:__kmp_str_buf_cat
+   fun:__kmp_get_load_balance
+   fun:__kmp_fork_call
+   fun:__kmpc_fork_call
+   fun:gemm_host
+   fun:mkl_blas_dgemm
+   fun:DGEMM
+   fun:matrix_multiply
+   fun:tensor_contract
+   fun:tnode_contract
+}
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Value8
+   fun:__kmp_str_buf_cat
+   fun:__kmp_get_load_balance
+   fun:__kmp_fork_call
+   fun:__kmpc_fork_call
+   fun:gemm_host
+   fun:mkl_blas_dgemm
+   fun:DGEMM
+   fun:matrix_multiply
+   fun:tensor_contract
+   fun:tnode_contract
+   fun:tntNodeContract
+   fun:tntMpsExpecSing
+}
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Cond
+   fun:__kmp_str_buf_cat
+   fun:__kmp_get_load_balance
+   fun:__kmp_fork_call
+   fun:__kmpc_fork_call
+   fun:gemm_host
+   fun:mkl_blas_dgemm
+   fun:DGEMM
+   fun:matrix_multiply
+   fun:tensor_contract
+   fun:tnode_contract
+   fun:tntNodeContract
+   fun:tntMpsExpecSing
+}
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Cond
+   fun:__kmp_external___intel_ssse3_rep_memcpy
+   fun:__kmp_external__intel_fast_memcpy.P
+   fun:__kmp_str_buf_cat
+   fun:__kmp_get_load_balance
+   fun:__kmp_fork_call
+   fun:__kmpc_fork_call
+   fun:gemm_host
+   fun:mkl_blas_dgemm
+   fun:DGEMM
+   fun:matrix_multiply
+   fun:tensor_contract
+   fun:tnode_contract
+}
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Value8
+   fun:__kmp_external___intel_ssse3_rep_memcpy
+   fun:__kmp_external__intel_fast_memcpy.P
+   fun:__kmp_str_buf_cat
+   fun:__kmp_get_load_balance
+   fun:__kmp_fork_call
+   fun:__kmpc_fork_call
+   fun:gemm_host
+   fun:mkl_blas_dgemm
+   fun:DGEMM
+   fun:matrix_multiply
+   fun:tensor_contract
+   fun:tnode_contract
+}
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Value8
+   fun:__kmp_str_buf_cat
+   fun:__kmp_get_load_balance
+   fun:__kmp_fork_call
+   fun:__kmpc_fork_call
+   fun:gemm_host
+   fun:mkl_blas_dgemm
+   fun:DGEMM
+   fun:matrix_multiply
+   fun:tensor_contract
+   fun:tnode_contract
+   fun:tntNodeContract
+   fun:tntMpsExpecSing
+}
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Cond
+   fun:__kmp_str_buf_cat
+   fun:__kmp_get_load_balance
+   fun:__kmp_fork_call
+   fun:__kmpc_fork_call
+   fun:gemm_host
+   fun:mkl_blas_dgemm
+   fun:DGEMM
+   fun:matrix_multiply
+   fun:tensor_contract
+   fun:tnode_contract
+   fun:tntNodeContract
+   fun:tntMpsExpecSing
+}
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Cond
+   fun:__kmp_external___intel_ssse3_rep_memcpy
+   fun:__kmp_external__intel_fast_memcpy.P
+   fun:__kmp_str_buf_cat
+   fun:__kmp_get_load_balance
+   fun:__kmp_fork_call
+   fun:__kmpc_fork_call
+   fun:gemm_host
+   fun:mkl_blas_dgemm
+   fun:DGEMM
+   fun:matrix_multiply
+   fun:tensor_contract
+   fun:tnode_contract
+}
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Value8
+   fun:__kmp_external___intel_ssse3_rep_memcpy
+   fun:__kmp_external__intel_fast_memcpy.P
+   fun:__kmp_str_buf_cat
+   fun:__kmp_get_load_balance
+   fun:__kmp_fork_call
+   fun:__kmpc_fork_call
+   fun:gemm_host
+   fun:mkl_blas_dgemm
+   fun:DGEMM
+   fun:matrix_multiply
+   fun:tensor_contract
+   fun:tnode_contract
+}
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Cond
+   fun:__kmp_external___intel_ssse3_rep_memcpy
+   fun:__kmp_external__intel_fast_memcpy.P
+   fun:__kmp_str_buf_cat
+   fun:__kmp_get_load_balance
+   fun:__kmp_fork_call
+   fun:__kmpc_fork_call
+   fun:gemm_host
+   fun:mkl_blas_dgemm
+   fun:DGEMM
+   fun:matrix_multiply
+   fun:tensor_contract
+   fun:tnode_contract
+}
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Value8
+   fun:__kmp_str_buf_cat
+   fun:__kmp_get_load_balance
+   fun:__kmp_fork_call
+   fun:__kmpc_fork_call
+   fun:gemm_host
+   fun:mkl_blas_dgemm
+   fun:DGEMM
+   fun:matrix_multiply
+   fun:tensor_contract
+   fun:tnode_contract
+   fun:tntNodeContract
+   fun:tntMpsExpecSing
+}
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Value8
+   fun:__kmp_external___intel_ssse3_rep_memcpy
+   fun:__kmp_external__intel_fast_memcpy.P
+   fun:__kmp_str_buf_cat
+   fun:__kmp_get_load_balance
+   fun:__kmp_fork_call
+   fun:__kmpc_fork_call
+   fun:gemm_host
+   fun:mkl_blas_dgemm
+   fun:DGEMM
+   fun:matrix_multiply
+   fun:tensor_contract
+   fun:tnode_contract
+}
+
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Cond
+   fun:__kmp_external___intel_ssse3_rep_memcpy
+   fun:__kmp_external__intel_fast_memcpy.P
+   fun:__kmp_str_buf_cat
+   fun:__kmp_get_load_balance
+   fun:__kmp_fork_call
+   fun:__kmpc_fork_call
+   fun:gemm_host
+   fun:mkl_blas_dgemm
+   fun:DGEMM
+   fun:matrix_multiply
+   fun:tensor_contract
+   fun:tnode_contract
+}

@@ -34,5 +34,17 @@ if (state_id == 4)
     end
 end
 
+if (state_id == 5)
+    for loop=1:L
+        configstr=[configstr,'1'];
+    end
+end
+
+if (state_id == 6)
+    for loop=1:L
+        configstr=[configstr,'0'];
+    end
+end
+
 end
 

@@ -6,6 +6,6 @@ A = params(2);
 k = params(3);
 phi = params(4);
 
-prms = A_0 + A*sin(k*(1:N) + phi);
+prms = A_0 + A*sin(k*((1:N) - 1) + phi);
 
 end
