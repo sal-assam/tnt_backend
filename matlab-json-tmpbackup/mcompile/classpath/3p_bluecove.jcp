@@ -1,4 +1,0 @@
-# Java classpath entries for 3p/bluecove
-$matlabroot/java/jarext/bluecove-bluez.jar
-$matlabroot/java/jarext/bluecove-emu.jar
-$matlabroot/java/jarext/bluecove.jar

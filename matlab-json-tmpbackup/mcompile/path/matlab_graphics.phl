@@ -1,8 +1,0 @@
-% MATLAB path entries for matlab_graphics
-toolbox/matlab/graph2d
-toolbox/matlab/graph3d
-toolbox/matlab/graphics
-toolbox/matlab/plottools
-toolbox/matlab/scribe
-toolbox/matlab/specgraph
-toolbox/matlab/uitools

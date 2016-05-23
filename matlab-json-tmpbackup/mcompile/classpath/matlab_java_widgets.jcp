@@ -1,6 +1,0 @@
-# Java classpath entries for matlab_java_widgets
-$matlabroot/java/jar/mlwidgets.jar
-$matlabroot/java/jar/hg.jar
-$matlabroot/java/jar/ide.jar
-$matlabroot/java/jar/toolbox/matlab/guide.jar
-$matlabroot/java/jar/page.jar

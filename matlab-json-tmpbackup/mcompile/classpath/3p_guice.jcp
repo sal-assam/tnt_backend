@@ -1,4 +1,0 @@
-# Java classpath entries for 3p/guice
-$matlabroot/java/jarext/guice/aopalliance.jar
-$matlabroot/java/jarext/guice/guice.jar
-$matlabroot/java/jarext/guice/guice-assistedinject.jar

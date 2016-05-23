@@ -1,8 +1,8 @@
 
-function prms = tnt_step(params,N)
+function prms = tnt_step(params,N,step_mult)
 
 A = params(1);
-j_s = params(2);
+j_s = round(params(2)/step_mult);
 
 prms = zeros(1,N);
 

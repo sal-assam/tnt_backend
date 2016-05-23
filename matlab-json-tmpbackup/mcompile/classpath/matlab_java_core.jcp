@@ -1,9 +1,0 @@
-# Java classpath entries for matlab_java_core
-$matlabroot/java/jar/matlab.jar
-$matlabroot/java/jar/jmi.jar
-$matlabroot/java/jar/services.jar
-$matlabroot/java/jar/widgets.jar
-$matlabroot/java/jar/mlservices.jar
-$matlabroot/java/jar/timer.jar
-$matlabroot/java/jar/fatalexit.jar
-$matlabroot/java/jar/mvm.jar

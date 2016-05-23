@@ -1,4 +1,0 @@
-# Java classpath entries for web_connectivity
-$matlabroot/java/jar/mlwebservices.jar
-$matlabroot/java/jar/net.jar
-$matlabroot/java/jar/webproxy.jar

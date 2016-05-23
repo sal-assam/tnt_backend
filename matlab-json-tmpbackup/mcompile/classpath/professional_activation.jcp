@@ -1,4 +1,0 @@
-# Java classpath entries for professional_activation
-$matlabroot/java/jar/activationclient.jar
-$matlabroot/java/jar/deactivation.jar
-$matlabroot/java/jar/vrd.jar

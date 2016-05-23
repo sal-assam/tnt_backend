@@ -1,8 +1,8 @@
 
-function prms = tnt_delta(params,N)
+function prms = tnt_delta(params,N,step_mult)
 
 A = params(1);
-j_c = params(2);
+j_c = round(params(2)/step_mult);
 
 prms = zeros(1,N);
 
