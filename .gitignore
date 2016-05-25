@@ -16,3 +16,4 @@ shellscripts/sge_output*
 shellscripts/errors/*.err
 shellscripts/logs/*.log
 shellscripts/core*
+*.svn*
