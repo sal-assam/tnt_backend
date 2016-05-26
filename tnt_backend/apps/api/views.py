@@ -12,6 +12,7 @@ import glob
 from tnt_backend.settings import \
     BASE_DIR, \
     MEDIA_ROOT, \
+    run_scripts_dir, \
     json_input_save_dir, \
     mat_input_save_dir, \
     json_output_save_dir, \
@@ -117,15 +118,26 @@ def results_of_calculation(request, calculation_id):
 
         # Now we want to construct the URL at which these results can be found
         this_calculation_mat_results_URL = 'http://bose.physics.ox.ac.uk:8080/media/' + calculation_id + '.mat'
+        
+        # We also want to return the location of the CSV files for download...
+        # First we need to copy the results MAT file to the MEDIA directory
+        calculation_csv_results_file_path = BASE_DIR + mat_output_save_dir + calculation_id + '.tar.gz'
+
+        calculation_csv_results_media_root_filename = MEDIA_ROOT + calculation_id + '.tar.gz'
+
+        copyfile(calculation_csv_results_file_path, calculation_csv_results_media_root_filename)
+
+        # Now we want to construct the URL at which these results can be found
+        this_calculation_csv_results_URL = 'http://bose.physics.ox.ac.uk:8080/media/' + calculation_id + '.tar.gz'
 
         # Now also the time at which the calculation finished running
         finish_time = os.path.getmtime(calculation_results_json_path)
-
 
         response = Response({ \
             'results': results, \
             'expectation_value_plots': this_calculation_relative_filenames, \
             'mat_results_URL': this_calculation_mat_results_URL, \
+            'csv_results_URL': this_calculation_csv_results_URL, \
             'finish_time': int(finish_time)
         }, status=status.HTTP_200_OK)    # R1gt
 
@@ -279,7 +291,7 @@ def rename_calculation(request):
 
     # Change into the appropriate directory
     try:
-        os.chdir('shellscripts/')
+        os.chdir(run_scripts_dir)
         Popen(run_script_str.split(' '))
     except:
         os.chdir(saved_path)

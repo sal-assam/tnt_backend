@@ -107,6 +107,7 @@ mat_input_save_dir = '/matlab-json/matlab_input/'
 json_output_save_dir = '/matlab-json/json_output/'
 mat_output_save_dir = '/matlab-json/matlab_output/'
 
-error_log_dir = '/shellscripts/errors/'
+run_scripts_dir = '/../tntgo_engine/run_scripts/'
+error_log_dir = '/../tntgo_engine/run_scripts/errors/'
 
 my_own_base_media_URL = 'http://bose.physics.ox.ac.uk:8080/media/'
